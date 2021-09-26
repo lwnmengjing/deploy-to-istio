@@ -67,7 +67,7 @@ export class AppService extends Construct {
         const port = props.port || 8000;
         const containerPort = props.port || 8000;
         const version = (props.labels && props.labels['version']) ? props.labels['version'] : 'v1';
-        const app = (props.labels && props.labels['app']) ? props.labels['app'] : 'app';
+        const app = (props.labels && props.labels['app']) ? props.labels['app'] : id;
         const service = app;
         const serviceLabels = { app, service };
         const replicas = props.replicas ?? 1;

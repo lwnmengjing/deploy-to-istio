@@ -14,15 +14,15 @@ export class AppChart extends Chart {
       throw new Error('ENV IMAGE_NAME Undefined');
     }
 
-    if (!process.env.IMAGE_TAG) {
-      throw new Error('ENV IMAGE_TAG Undefined');
-    }
-
     if (!process.env.APP_NAME) {
       throw new Error('ENV APP_NAME Undefined');
     }
 
-    const image = process.env.IMAGE_NAME.toString() + ':' + process.env.IMAGE_TAG.toString()
+    let image =  process.env.IMAGE_NAME.toString()
+
+    if (process.env.IMAGE_TAG) {
+      image = image + ':' + process.env.IMAGE_TAG.toString()
+    }
 
     const app = process.env.APP_NAME.toString()
 
