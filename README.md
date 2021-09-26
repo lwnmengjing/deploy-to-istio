@@ -8,9 +8,11 @@ MICRO_APP_NAME|yes||micro service name
 MICRO_APP_VERSION|no|v1|micro service version
 IMAGE_NAME|yes||micro service ci's image name
 IMAGE_TAG|no|latest|micro service ci's image tag
+PORT_NUMBER|no|8000|micro service expose port
+PORT_NAME|no|http|micro service port name(include protocol e.g. auth-http, auth-grpc)
 
 ### github actions集成
-> 在项目secret中配置MATRIX_CD_SSH_KEY自己的ssh公钥(e.g. cat ~/.ssh/id_rsa)
+> 在项目secret中配置MATRIX_CD_SSH_KEY自己的ssh私钥(e.g. cat ~/.ssh/id_rsa)
 ```yaml
       - name: Checkout cd-template
         uses: actions/checkout@v2

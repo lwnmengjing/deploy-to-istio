@@ -6,7 +6,7 @@ export class AppChart extends Chart {
   constructor(scope: Construct, id: string, props: ChartProps = {}) {
     super(scope, id, props);
 
-    const port = process.env.PORT ? Number(process.env.PORT.toString()) : 8000
+    const port = process.env.PORT_NUMBER ? Number(process.env.PORT_NUMBER.toString()) : 8000
     const portName = process.env.PORT_NAME ? process.env.PORT_NAME : 'http'
     const version = process.env.MICRO_APP_VERSION ? process.env.MICRO_APP_VERSION : 'v1'
 
