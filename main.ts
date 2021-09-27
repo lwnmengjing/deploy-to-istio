@@ -18,13 +18,16 @@ export class AppChart extends Chart {
       throw new Error('ENV APP_NAME Undefined');
     }
 
-    let image =  process.env.IMAGE_NAME.toString()
+    let image =  process.env.IMAGE_NAME.toString();
 
     if (process.env.IMAGE_TAG) {
-      image = image + ':' + process.env.IMAGE_TAG.toString()
+      image = image + ':' + process.env.IMAGE_TAG.toString();
     }
 
-    const app = process.env.APP_NAME.toString()
+    const commitSha = process.env.COMMIT_SHA && process.env.COMMIT_SHA.toString();
+
+
+    const app = process.env.APP_NAME.toString();
 
     new AppService(this, id, { 
       app,
@@ -33,7 +36,8 @@ export class AppChart extends Chart {
       replicas: 1, 
       portName,
       port,
-      labels: {version}
+      commitSha,
+      labels: {version, app: id}
     });
   }
 }

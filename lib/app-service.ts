@@ -53,6 +53,8 @@ export interface AppServiceProps {
      * User run as user
      */
     readonly user?: number;
+
+    readonly commitSha?: string;
 }
 
 export interface ConfigProps {
@@ -76,6 +78,7 @@ export class AppService extends Construct {
         const serviceAccountName = props.app + '-' + id;
         const volumes:Volume[] = []
         let volumneMounts: VolumeMount[] = []
+        const sha = props.commitSha ? props.commitSha : '';
         
         if (props.configData) {
             let data: { [key: string]: string } = {}
@@ -135,7 +138,7 @@ export class AppService extends Construct {
                     matchLabels: props.labels
                 },
                 template: {
-                    metadata: { labels: { app, version} },
+                    metadata: { labels: { app, version, sha} },
                     spec: {
                         serviceAccountName,
                         containers: [
