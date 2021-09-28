@@ -1,6 +1,5 @@
 import { Construct } from 'constructs';
-import { KubeDeployment, KubeService, KubeConfigMap, KubeServiceAccount, Volume, VolumeMount  } from '../imports/k8s';
-import { DestinationRule, VirtualService } from '../imports/networking.istio.io';
+import { KubeDeployment, KubeService, KubeConfigMap, Volume, VolumeMount, EnvVar  } from '../imports/k8s';
 
 export interface AppServiceProps {
     /**
@@ -55,6 +54,8 @@ export interface AppServiceProps {
     readonly user?: number;
 
     readonly commitSha?: string;
+
+    readonly env?: EnvVar[];
 }
 
 export interface ConfigProps {
@@ -79,6 +80,7 @@ export class AppService extends Construct {
         const volumes:Volume[] = []
         let volumneMounts: VolumeMount[] = []
         const sha = props.commitSha ? props.commitSha : '';
+        const env = props.env;
         
         if (props.configData) {
             let data: { [key: string]: string } = {}
@@ -103,15 +105,6 @@ export class AppService extends Construct {
                 data,
             })
         }
-
-        new KubeServiceAccount(this, 'serviceAccount', {
-            metadata: {
-                name: serviceAccountName,
-                labels: {
-                    account: app,
-                }
-            }
-        })
 
         new KubeService(this, 'service', {
             metadata: {
@@ -147,7 +140,8 @@ export class AppService extends Construct {
                                 image: props.image,
                                 ports: [{ containerPort }],
                                 securityContext,
-                                volumeMounts: volumneMounts
+                                volumeMounts: volumneMounts,
+                                env
                             },
                         ],
                         volumes
@@ -155,45 +149,5 @@ export class AppService extends Construct {
                 }
             }
         });
-
-        new DestinationRule(this, 'destinationRule', {
-            metadata: {
-                name: app,
-                namespace
-            },
-            spec: {
-                host: app,
-                subsets: [
-                    {
-                        name: version,
-                        labels: {
-                            version: version
-                        }
-                    }
-                ]
-            }
-        })
-
-        new VirtualService(this, 'virtualService', {
-            metadata: {
-                name: app,
-                namespace
-            },
-            spec: {
-                hosts: [app],
-                http: [
-                    {
-                        route: [
-                            {
-                                destination: {
-                                    host: app,
-                                    subset: version
-                                }
-                            }
-                        ]
-                    }
-                ]
-            }
-        })
     }
 }
