@@ -1,5 +1,5 @@
 import { Construct } from 'constructs';
-import { KubeDeployment, KubeService, KubeConfigMap, Volume, VolumeMount, EnvVar  } from '../imports/k8s';
+import { KubeDeployment, KubeService, KubeConfigMap, Volume, VolumeMount, KubeServiceAccount, EnvVar  } from '../imports/k8s';
 
 export interface AppServiceProps {
     /**
@@ -58,6 +58,21 @@ export interface AppServiceProps {
     readonly env?: EnvVar[];
 }
 
+export interface AppServiceMetricsProps {
+    /**
+     * default false
+     */
+    readonly scrape: boolean;
+    /**
+     * default /metrics
+     */
+    readonly path?: string;
+    /**
+     * default 5000
+     */
+    readonly port?: string;
+}
+
 export interface ConfigProps {
     readonly path: string;
     readonly data: { [ key:string ]:string }
@@ -106,6 +121,15 @@ export class AppService extends Construct {
             })
         }
 
+        new KubeServiceAccount(this, 'serviceAccount', {
+            metadata: {
+                name: serviceAccountName,
+                labels: {
+                    account: app,
+                }
+            }
+        })
+
         new KubeService(this, 'service', {
             metadata: {
                 name: app,
@@ -131,7 +155,9 @@ export class AppService extends Construct {
                     matchLabels: props.labels
                 },
                 template: {
-                    metadata: { labels: { app, version, sha} },
+                    metadata: { 
+                        labels: { app, version, sha}
+                    },
                     spec: {
                         serviceAccountName,
                         containers: [

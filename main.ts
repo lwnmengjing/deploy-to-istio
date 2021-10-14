@@ -38,12 +38,6 @@ export class AppChart extends Chart {
       port,
       commitSha,
       labels: {version, app: id},
-      env: [
-        {
-          name: 'xx',
-          value: 'xxx'
-        }
-      ]
     });
   }
 }

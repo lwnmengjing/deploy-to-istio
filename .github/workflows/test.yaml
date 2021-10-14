@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
+        node-version: [12.x, 14.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -31,7 +31,7 @@ jobs:
           npm run test
       env: 
           APP_NAME: matrixworld
-          MICRO_APP_NAME: account
+          MICRO_APP_NAME: cicd-template
           MICRO_APP_VERSION: v1
-          IMAGE_NAME: busy
+          IMAGE_NAME: 043446723194.dkr.ecr.ap-northeast-1.amazonaws.com/matrix-cloud-cicd-template
           IMAGE_TAG: latest
