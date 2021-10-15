@@ -38,6 +38,9 @@ export class AppChart extends Chart {
       port,
       commitSha,
       labels: {version, app: id},
+      metrics: {
+        scrape: true
+      }
     });
   }
 }

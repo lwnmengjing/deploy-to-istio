@@ -56,6 +56,8 @@ export interface AppServiceProps {
     readonly commitSha?: string;
 
     readonly env?: EnvVar[];
+
+    readonly metrics?: AppServiceMetricsProps;
 }
 
 export interface AppServiceMetricsProps {
@@ -70,7 +72,7 @@ export interface AppServiceMetricsProps {
     /**
      * default 5000
      */
-    readonly port?: string;
+    readonly port?: number;
 }
 
 export interface ConfigProps {
@@ -83,7 +85,7 @@ export class AppService extends Construct {
         super(scope, id);
 
         const port = props.port || 8000;
-        const containerPort = props.port || 8000;
+        let ports = [{containerPort: port}];
         const version = (props.labels && props.labels['version']) ? props.labels['version'] : 'v1';
         const app = (props.labels && props.labels['app']) ? props.labels['app'] : id;
         const service = app;
@@ -96,6 +98,16 @@ export class AppService extends Construct {
         let volumneMounts: VolumeMount[] = []
         const sha = props.commitSha ? props.commitSha : '';
         const env = props.env;
+        let templateAnnotations:{[key: string]: string} = {};
+
+        if (props.metrics && props.metrics.scrape) {
+            templateAnnotations['prometheus.io/scrape'] = 'true'
+            templateAnnotations['prometheus.io/path'] = props.metrics.path || '/metrics'
+            templateAnnotations['prometheus.io/port'] = props.metrics.port ? props.metrics.port.toString() : port.toString()
+            if (props.metrics.port && props.metrics.port != port) {
+                ports.push({containerPort: props.metrics.port})
+            }
+        }
         
         if (props.configData) {
             let data: { [key: string]: string } = {}
@@ -156,7 +168,8 @@ export class AppService extends Construct {
                 },
                 template: {
                     metadata: { 
-                        labels: { app, version, sha}
+                        labels: { app, version, sha},
+                        annotations: templateAnnotations
                     },
                     spec: {
                         serviceAccountName,
@@ -164,7 +177,7 @@ export class AppService extends Construct {
                             {
                                 name: app,
                                 image: props.image,
-                                ports: [{ containerPort }],
+                                ports,
                                 securityContext,
                                 volumeMounts: volumneMounts,
                                 env
