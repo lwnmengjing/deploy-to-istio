@@ -1,33 +1,33 @@
 import { Construct } from 'constructs';
 import { App, Chart, ChartProps } from 'cdk8s';
 import { AppService } from './lib/app-service';
+import config from './config';
 
 export class AppChart extends Chart {
   constructor(scope: Construct, id: string, props: ChartProps = {}) {
     super(scope, id, props);
 
-    const port = process.env.PORT_NUMBER ? Number(process.env.PORT_NUMBER.toString()) : 8000
-    const portName = process.env.PORT_NAME ? process.env.PORT_NAME : 'http'
-    const version = process.env.MICRO_APP_VERSION ? process.env.MICRO_APP_VERSION : 'v1'
+    const cfg = config();
 
-    if (!process.env.IMAGE_NAME) {
+    const port = cfg.port;
+    const portName = cfg.portName;
+    const version = cfg.version;
+
+    if (cfg.imageName == '') {
       throw new Error('ENV IMAGE_NAME Undefined');
     }
 
-    if (!process.env.APP_NAME) {
+    if (cfg.app == '') {
       throw new Error('ENV APP_NAME Undefined');
     }
 
-    let image =  process.env.IMAGE_NAME.toString();
+    let image =  cfg.imageName;
 
-    if (process.env.IMAGE_TAG) {
-      image = image + ':' + process.env.IMAGE_TAG.toString();
+    if (cfg.imageTag) {
+      image = image + ':' + cfg.imageTag;
     }
 
-    const commitSha = process.env.COMMIT_SHA && process.env.COMMIT_SHA.toString();
-
-
-    const app = process.env.APP_NAME.toString();
+    const app = cfg.app;
 
     new AppService(this, id, { 
       app,
@@ -36,7 +36,6 @@ export class AppChart extends Chart {
       replicas: 1, 
       portName,
       port,
-      commitSha,
       labels: {version, app: id},
       metrics: {
         scrape: true
@@ -45,13 +44,9 @@ export class AppChart extends Chart {
   }
 }
 
-const currentNamespace = process.env.DEPLOY_NAMESPACE ? process.env.DEPLOY_NAMESPACE.toString() : 'default';
 
-if (!process.env.MICRO_APP_NAME) {
-  throw new Error('ENV MICRO_APP_NAME Undefined');
-}
-const microApp = process.env.MICRO_APP_NAME.toString()
+const cfg = config();
 
 const app = new App();
-new AppChart(app, microApp, {namespace: currentNamespace});
+new AppChart(app, cfg.service, {namespace: cfg.namespace});
 app.synth();

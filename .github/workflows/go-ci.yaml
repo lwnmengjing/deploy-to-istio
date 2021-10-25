@@ -1,0 +1,131 @@
+on:
+  workflow_call:
+    inputs:
+      app:
+        description: 'application name'
+        required: true
+        default: 'matrixworld'
+        type: string
+      service:
+        description: 'service name'
+        required: true
+        default: 'account'
+        type: string
+      event_name:
+        description: 'event_name'
+        required: false
+        type: string
+      cluster_name:
+        description: 'cluster name'
+        required: true
+        type: string
+      namespace:
+        description: 'deploy namespace'
+        required: true
+        type: string
+
+    secrets:
+      aws_account:
+        required: true
+        description: aws account
+      aws_region:
+        required: true
+        description: aws region
+      aws_access_key_id:
+        required: true
+        description: aws access key id
+      aws_secret_access_key:
+        required: true
+        description: aws secret access key
+env:
+  IMAGE_NAME: ${{ secrets.aws_account }}.dkr.ecr.${{ secrets.aws_region }}.amazonaws.com/matrix-cloud-${{ inputs.service }}
+  IMAGE_TAG: ${{ github.sha }}
+
+jobs:
+  test:
+    runs-on: [self-hosted, dind]
+    if: ${{  inputs.event_name == 'pull_request' }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.17'
+      - name: Test
+        run: go test -v ./...
+
+  build:
+    runs-on: [self-hosted, dind]
+    if: ${{  inputs.event_name == 'push' || inputs.event_name == 'workflow_dispatch' }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.17'
+      - name: Build
+        run: go build -o ${{ inputs.service }}
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.aws_access_key_id }}
+          aws-secret-access-key: ${{ secrets.aws_secret_access_key }}
+          aws-region: ${{ secrets.aws_region }}
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: docker-build-${{ inputs.service }}
+        run: |
+          docker build  . --tag ${IMAGE_NAME}:${IMAGE_TAG}
+          docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_NAME}:latest
+      - name: docker-push-${{ inputs.service }}
+        run: |
+          docker push ${IMAGE_NAME}:${IMAGE_TAG}
+          docker push ${IMAGE_NAME}:latest
+
+  deploy:
+    needs: build
+    runs-on: [self-hosted, dind]
+    env:
+      DEPLOY_NAMESPACE: ${{ inputs.namespace }}
+      APP_NAME: ${{ inputs.app }}
+      MICRO_APP_NAME: ${{ inputs.service }}
+      MICRO_APP_VERSION: ${{ inputs.version }}
+      AWS_REGION: ${{ secrets.aws_region }}
+      EKS_CLUSTER_NAME: ${{ inputs.cluster_name }}
+    steps:
+      - name: Checkout cd-template
+        uses: actions/checkout@v2
+        with:
+          repository: WhiteMatrixTech/matrix-cd-template
+          path: cdk8s
+          ssh-key: ${{ secrets.MATRIX_CD_SSH_KEY }}
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: 'cdk8s/**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: Build Cdk8s
+        run: |
+          cd cdk8s
+          npm install
+          npm run build
+      - name: Deploy
+        uses: cancue/eks-action@v0.0.2
+        env:
+          aws_access_key_id: ${{ secrets.aws_access_key_id }}
+          aws_secret_access_key: ${{ secrets.aws_secret_access_key }}
+          aws_region: ${{ secrets.aws_region }}
+          cluster_name: ${{ inputs.cluster_name }}
+        with:
+          args: |
+            cd cdk8s
+            kubectl apply -f dist/services

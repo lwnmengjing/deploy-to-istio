@@ -1,0 +1,69 @@
+on:
+  workflow_call:
+    inputs:
+      service:
+        description: 'deploy service name'
+        required: true
+        default: 'account'
+        type: string
+      environment:
+        description: 'deploy environment'
+        required: true
+        default: 'beta'
+        type: string
+      cluster_name:
+        description: 'deploy cluster name'
+        type: string
+        required: true
+      namespace:
+        description: 'deploy namespace'
+        required: false
+        default: 'default'
+        type: string
+    secrets:
+      aws_region:
+        required: true
+        description: aws region
+      aws_access_key_id:
+        required: true
+        description: aws access key id
+      aws_secret_access_key:
+        required: true
+        description: aws secret access key
+
+env:
+  COMMIT_SHA: ${{ github.sha }}
+  DEPLOY_NAMESPACE: ${{ inputs.namespace }}
+  IMAGE_NAME: 043446723194.dkr.ecr.${{ secrets.aws_region }}.amazonaws.com/matrix-cloud-${{ inputs.service }}
+  IMAGE_TAG: ${{ github.sha }}
+  STAGE: ${{ inputs.environment }}
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, dind]
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        with:
+          path: 'cdk8s/**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: |
+          cd cdk8s
+          npm install
+          npm run build:${{ inputs.service }}
+      - name: Deploy
+        uses: cancue/eks-action@v0.0.2
+        env:
+          aws_access_key_id: ${{ secrets.aws_access_key_id }}
+          aws_secret_access_key: ${{ secrets.aws_secret_access_key }}
+          aws_region: ${{ secrets.aws_region }}
+          cluster_name: ${{ inputs.cluster_name }}
+        with:
+          args: |
+            cd cdk8s
+            kubectl apply -f dist/services --record

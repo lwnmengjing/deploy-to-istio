@@ -1,0 +1,113 @@
+on:
+  workflow_call:
+    inputs:
+      service:
+        description: 'service name'
+        required: true
+        default: 'account'
+        type: string
+      event_name:
+        description: 'event_name'
+        required: false
+        type: string
+    secrets:
+      aws_account:
+        required: true
+        description: aws account
+      aws_region:
+        required: true
+        description: aws region
+      aws_access_key_id:
+        required: true
+        description: aws access key id
+      aws_secret_access_key:
+        required: true
+        description: aws secret access key
+env:
+  IMAGE_NAME: ${{ secrets.aws_account }}.dkr.ecr.${{ secrets.aws_region }}.amazonaws.com/matrix-cloud-${{ inputs.service }}
+  IMAGE_TAG: ${{ github.sha }}
+
+jobs:
+  test:
+    runs-on: [self-hosted, dind]
+    if: ${{  inputs.event_name == 'pull_request' }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '8'
+          cache: 'maven'
+      - name: Build with Maven
+        run: mvnw clean && mvnw package --file pom.xml -Dmaven.test.skip=false
+        shell: bash
+
+  build:
+    runs-on: [self-hosted, dind]
+    if: ${{  inputs.event_name == 'push' || inputs.event_name == 'workflow_dispatch' }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '8'
+          cache: 'maven'
+      - name: Build with Maven
+        run: mvnw clean && mvnw package --file pom.xml -Dmaven.test.skip=true
+        shell: bash
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.aws_access_key_id }}
+          aws-secret-access-key: ${{ secrets.aws_secret_access_key }}
+          aws-region: ${{ secrets.aws_region }}
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: docker-build-${{ inputs.service }}
+        run: |
+          docker build  ./matrix-cloud-${{ inputs.service }} --file ./matrix-cloud-${{ inputs.service }}/Dockerfile --tag ${IMAGE_NAME}:${IMAGE_TAG}
+          docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_NAME}:latest
+      - name: docker-push-${{ inputs.service }}
+        run: |
+          docker push ${IMAGE_NAME}:${IMAGE_TAG}
+          docker push ${IMAGE_NAME}:latest
+
+  deploy:
+    needs: build
+    runs-on: [self-hosted, dind]
+    env:
+      DEPLOY_NAMESPACE: default
+      STAGE: beta
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        with:
+          path: 'cdk8s/**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: |
+          echo $STAGE
+          cd cdk8s
+          npm install
+          npm run build:${{ inputs.service }}
+      - name: Deploy
+        uses: cancue/eks-action@v0.0.2
+        env:
+          aws_access_key_id: ${{ secrets.aws_access_key_id }}
+          aws_secret_access_key: ${{ secrets.aws_secret_access_key }}
+          aws_region: ${{ secrets.aws_region }}
+          cluster_name: metaverse-beta
+        with:
+          args: |
+            cd cdk8s
+            kubectl apply -f dist/services

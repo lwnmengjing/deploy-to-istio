@@ -30,8 +30,12 @@ jobs:
           npm i
           npm run test
       env: 
-          APP_NAME: matrixworld
-          MICRO_APP_NAME: cicd-template
-          MICRO_APP_VERSION: v1
-          IMAGE_NAME: 043446723194.dkr.ecr.ap-northeast-1.amazonaws.com/matrix-cloud-cicd-template
-          IMAGE_TAG: latest
+        STAGE: beta
+        IMPORT_ENV_NAMES: STAGE
+        APP: matrixworld
+        SERVICE: account
+        PORT: '8000'
+        VERSION: v1
+        IMAGE_NAME: image
+        IMAGE_TAG: latest
+        DEPLOY_NAMESPACE: default

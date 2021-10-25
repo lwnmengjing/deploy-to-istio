@@ -53,8 +53,6 @@ export interface AppServiceProps {
      */
     readonly user?: number;
 
-    readonly commitSha?: string;
-
     readonly env?: EnvVar[];
 
     readonly metrics?: AppServiceMetricsProps;
@@ -96,7 +94,6 @@ export class AppService extends Construct {
         const serviceAccountName = props.app + '-' + id;
         const volumes:Volume[] = []
         let volumneMounts: VolumeMount[] = []
-        const sha = props.commitSha ? props.commitSha : '';
         const env = props.env;
         let templateAnnotations:{[key: string]: string} = {};
 
@@ -168,7 +165,7 @@ export class AppService extends Construct {
                 },
                 template: {
                     metadata: { 
-                        labels: { app, version, sha},
+                        labels: { app, version },
                         annotations: templateAnnotations
                     },
                     spec: {
