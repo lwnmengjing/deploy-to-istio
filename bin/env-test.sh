@@ -9,3 +9,6 @@ export VERSION=v1
 export IMAGE_NAME=image
 export IMAGE_TAG=latest
 export DEPLOY_NAMESPACE=default
+export METRICS_SCRAPE=true
+export METRICS_PATH=/metrics1
+export METRICS_PORT=8888

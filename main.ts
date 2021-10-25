@@ -37,9 +37,7 @@ export class AppChart extends Chart {
       portName,
       port,
       labels: {version, app: id},
-      metrics: {
-        scrape: true
-      }
+      metrics: cfg.metrics
     });
   }
 }
