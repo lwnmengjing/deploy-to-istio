@@ -2,7 +2,6 @@
 import { ApiObject, ApiObjectMetadata, GroupVersionKind } from 'cdk8s';
 import { Construct } from 'constructs';
 
-
 /**
  *
  *
@@ -14,8 +13,8 @@ export class Telemetry extends ApiObject {
    */
   public static readonly GVK: GroupVersionKind = {
     apiVersion: 'telemetry.istio.io/v1alpha1',
-    kind: 'Telemetry',
-  }
+    kind: 'Telemetry'
+  };
 
   /**
    * Renders a Kubernetes manifest for "Telemetry".
@@ -27,7 +26,7 @@ export class Telemetry extends ApiObject {
   public static manifest(props: TelemetryProps = {}): any {
     return {
       ...Telemetry.GVK,
-      ...toJson_TelemetryProps(props),
+      ...toJson_TelemetryProps(props)
     };
   }
 
@@ -40,7 +39,7 @@ export class Telemetry extends ApiObject {
   public constructor(scope: Construct, id: string, props: TelemetryProps = {}) {
     super(scope, id, {
       ...Telemetry.GVK,
-      ...props,
+      ...props
     });
   }
 
@@ -52,7 +51,7 @@ export class Telemetry extends ApiObject {
 
     return {
       ...Telemetry.GVK,
-      ...toJson_TelemetryProps(resolved),
+      ...toJson_TelemetryProps(resolved)
     };
   }
 }
@@ -72,7 +71,6 @@ export interface TelemetryProps {
    * @schema Telemetry#metadata
    */
   readonly metadata?: ApiObjectMetadata;
-
 }
 
 /**
@@ -80,13 +78,15 @@ export interface TelemetryProps {
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_TelemetryProps(obj: TelemetryProps | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'spec': toJson_TelemetrySpec(obj.spec),
-    'metadata': obj.metadata,
+    spec: toJson_TelemetrySpec(obj.spec),
+    metadata: obj.metadata
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -123,7 +123,6 @@ export interface TelemetrySpec {
    * @schema TelemetrySpec#tracing
    */
   readonly tracing?: TelemetrySpecTracing[];
-
 }
 
 /**
@@ -131,15 +130,17 @@ export interface TelemetrySpec {
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_TelemetrySpec(obj: TelemetrySpec | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'accessLogging': obj.accessLogging?.map(y => toJson_TelemetrySpecAccessLogging(y)),
-    'metrics': obj.metrics?.map(y => toJson_TelemetrySpecMetrics(y)),
-    'selector': toJson_TelemetrySpecSelector(obj.selector),
-    'tracing': obj.tracing?.map(y => toJson_TelemetrySpecTracing(y)),
+    accessLogging: obj.accessLogging?.map((y) => toJson_TelemetrySpecAccessLogging(y)),
+    metrics: obj.metrics?.map((y) => toJson_TelemetrySpecMetrics(y)),
+    selector: toJson_TelemetrySpecSelector(obj.selector),
+    tracing: obj.tracing?.map((y) => toJson_TelemetrySpecTracing(y))
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -160,21 +161,24 @@ export interface TelemetrySpecAccessLogging {
    * @schema TelemetrySpecAccessLogging#providers
    */
   readonly providers?: TelemetrySpecAccessLoggingProviders[];
-
 }
 
 /**
  * Converts an object of type 'TelemetrySpecAccessLogging' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_TelemetrySpecAccessLogging(obj: TelemetrySpecAccessLogging | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_TelemetrySpecAccessLogging(
+  obj: TelemetrySpecAccessLogging | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'disabled': obj.disabled,
-    'providers': obj.providers?.map(y => toJson_TelemetrySpecAccessLoggingProviders(y)),
+    disabled: obj.disabled,
+    providers: obj.providers?.map((y) => toJson_TelemetrySpecAccessLoggingProviders(y))
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -195,7 +199,6 @@ export interface TelemetrySpecMetrics {
    * @schema TelemetrySpecMetrics#providers
    */
   readonly providers?: TelemetrySpecMetricsProviders[];
-
 }
 
 /**
@@ -203,13 +206,15 @@ export interface TelemetrySpecMetrics {
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_TelemetrySpecMetrics(obj: TelemetrySpecMetrics | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'overrides': obj.overrides?.map(y => toJson_TelemetrySpecMetricsOverrides(y)),
-    'providers': obj.providers?.map(y => toJson_TelemetrySpecMetricsProviders(y)),
+    overrides: obj.overrides?.map((y) => toJson_TelemetrySpecMetricsOverrides(y)),
+    providers: obj.providers?.map((y) => toJson_TelemetrySpecMetricsProviders(y))
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -223,7 +228,6 @@ export interface TelemetrySpecSelector {
    * @schema TelemetrySpecSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
@@ -231,12 +235,17 @@ export interface TelemetrySpecSelector {
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_TelemetrySpecSelector(obj: TelemetrySpecSelector | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    matchLabels:
+      obj.matchLabels === undefined
+        ? undefined
+        : Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {})
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -269,7 +278,6 @@ export interface TelemetrySpecTracing {
    * @schema TelemetrySpecTracing#randomSamplingPercentage
    */
   readonly randomSamplingPercentage?: number;
-
 }
 
 /**
@@ -277,15 +285,23 @@ export interface TelemetrySpecTracing {
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_TelemetrySpecTracing(obj: TelemetrySpecTracing | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'customTags': ((obj.customTags) === undefined) ? undefined : (Object.entries(obj.customTags).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_TelemetrySpecTracingCustomTags(i[1]) }), {})),
-    'disableSpanReporting': obj.disableSpanReporting,
-    'providers': obj.providers?.map(y => toJson_TelemetrySpecTracingProviders(y)),
-    'randomSamplingPercentage': obj.randomSamplingPercentage,
+    customTags:
+      obj.customTags === undefined
+        ? undefined
+        : Object.entries(obj.customTags).reduce(
+            (r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: toJson_TelemetrySpecTracingCustomTags(i[1]) }),
+            {}
+          ),
+    disableSpanReporting: obj.disableSpanReporting,
+    providers: obj.providers?.map((y) => toJson_TelemetrySpecTracingProviders(y)),
+    randomSamplingPercentage: obj.randomSamplingPercentage
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -299,20 +315,23 @@ export interface TelemetrySpecAccessLoggingProviders {
    * @schema TelemetrySpecAccessLoggingProviders#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'TelemetrySpecAccessLoggingProviders' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_TelemetrySpecAccessLoggingProviders(obj: TelemetrySpecAccessLoggingProviders | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_TelemetrySpecAccessLoggingProviders(
+  obj: TelemetrySpecAccessLoggingProviders | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'name': obj.name,
+    name: obj.name
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -340,22 +359,32 @@ export interface TelemetrySpecMetricsOverrides {
    * @schema TelemetrySpecMetricsOverrides#tagOverrides
    */
   readonly tagOverrides?: { [key: string]: TelemetrySpecMetricsOverridesTagOverrides };
-
 }
 
 /**
  * Converts an object of type 'TelemetrySpecMetricsOverrides' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_TelemetrySpecMetricsOverrides(obj: TelemetrySpecMetricsOverrides | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_TelemetrySpecMetricsOverrides(
+  obj: TelemetrySpecMetricsOverrides | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'disabled': obj.disabled,
-    'match': toJson_TelemetrySpecMetricsOverridesMatch(obj.match),
-    'tagOverrides': ((obj.tagOverrides) === undefined) ? undefined : (Object.entries(obj.tagOverrides).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_TelemetrySpecMetricsOverridesTagOverrides(i[1]) }), {})),
+    disabled: obj.disabled,
+    match: toJson_TelemetrySpecMetricsOverridesMatch(obj.match),
+    tagOverrides:
+      obj.tagOverrides === undefined
+        ? undefined
+        : Object.entries(obj.tagOverrides).reduce(
+            (r, i) =>
+              i[1] === undefined ? r : { ...r, [i[0]]: toJson_TelemetrySpecMetricsOverridesTagOverrides(i[1]) },
+            {}
+          )
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -369,20 +398,23 @@ export interface TelemetrySpecMetricsProviders {
    * @schema TelemetrySpecMetricsProviders#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'TelemetrySpecMetricsProviders' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_TelemetrySpecMetricsProviders(obj: TelemetrySpecMetricsProviders | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_TelemetrySpecMetricsProviders(
+  obj: TelemetrySpecMetricsProviders | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'name': obj.name,
+    name: obj.name
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -410,22 +442,25 @@ export interface TelemetrySpecTracingCustomTags {
    * @schema TelemetrySpecTracingCustomTags#literal
    */
   readonly literal?: TelemetrySpecTracingCustomTagsLiteral;
-
 }
 
 /**
  * Converts an object of type 'TelemetrySpecTracingCustomTags' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_TelemetrySpecTracingCustomTags(obj: TelemetrySpecTracingCustomTags | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_TelemetrySpecTracingCustomTags(
+  obj: TelemetrySpecTracingCustomTags | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'environment': toJson_TelemetrySpecTracingCustomTagsEnvironment(obj.environment),
-    'header': toJson_TelemetrySpecTracingCustomTagsHeader(obj.header),
-    'literal': toJson_TelemetrySpecTracingCustomTagsLiteral(obj.literal),
+    environment: toJson_TelemetrySpecTracingCustomTagsEnvironment(obj.environment),
+    header: toJson_TelemetrySpecTracingCustomTagsHeader(obj.header),
+    literal: toJson_TelemetrySpecTracingCustomTagsLiteral(obj.literal)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -439,20 +474,23 @@ export interface TelemetrySpecTracingProviders {
    * @schema TelemetrySpecTracingProviders#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'TelemetrySpecTracingProviders' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_TelemetrySpecTracingProviders(obj: TelemetrySpecTracingProviders | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_TelemetrySpecTracingProviders(
+  obj: TelemetrySpecTracingProviders | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'name': obj.name,
+    name: obj.name
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -482,22 +520,25 @@ export interface TelemetrySpecMetricsOverridesMatch {
    * @schema TelemetrySpecMetricsOverridesMatch#mode
    */
   readonly mode?: TelemetrySpecMetricsOverridesMatchMode;
-
 }
 
 /**
  * Converts an object of type 'TelemetrySpecMetricsOverridesMatch' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_TelemetrySpecMetricsOverridesMatch(obj: TelemetrySpecMetricsOverridesMatch | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_TelemetrySpecMetricsOverridesMatch(
+  obj: TelemetrySpecMetricsOverridesMatch | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'customMetric': obj.customMetric,
-    'metric': obj.metric,
-    'mode': obj.mode,
+    customMetric: obj.customMetric,
+    metric: obj.metric,
+    mode: obj.mode
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -518,21 +559,24 @@ export interface TelemetrySpecMetricsOverridesTagOverrides {
    * @schema TelemetrySpecMetricsOverridesTagOverrides#value
    */
   readonly value?: string;
-
 }
 
 /**
  * Converts an object of type 'TelemetrySpecMetricsOverridesTagOverrides' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_TelemetrySpecMetricsOverridesTagOverrides(obj: TelemetrySpecMetricsOverridesTagOverrides | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_TelemetrySpecMetricsOverridesTagOverrides(
+  obj: TelemetrySpecMetricsOverridesTagOverrides | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'operation': obj.operation,
-    'value': obj.value,
+    operation: obj.operation,
+    value: obj.value
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -555,21 +599,24 @@ export interface TelemetrySpecTracingCustomTagsEnvironment {
    * @schema TelemetrySpecTracingCustomTagsEnvironment#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'TelemetrySpecTracingCustomTagsEnvironment' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_TelemetrySpecTracingCustomTagsEnvironment(obj: TelemetrySpecTracingCustomTagsEnvironment | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_TelemetrySpecTracingCustomTagsEnvironment(
+  obj: TelemetrySpecTracingCustomTagsEnvironment | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'defaultValue': obj.defaultValue,
-    'name': obj.name,
+    defaultValue: obj.defaultValue,
+    name: obj.name
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -592,21 +639,24 @@ export interface TelemetrySpecTracingCustomTagsHeader {
    * @schema TelemetrySpecTracingCustomTagsHeader#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'TelemetrySpecTracingCustomTagsHeader' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_TelemetrySpecTracingCustomTagsHeader(obj: TelemetrySpecTracingCustomTagsHeader | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_TelemetrySpecTracingCustomTagsHeader(
+  obj: TelemetrySpecTracingCustomTagsHeader | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'defaultValue': obj.defaultValue,
-    'name': obj.name,
+    defaultValue: obj.defaultValue,
+    name: obj.name
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -622,20 +672,23 @@ export interface TelemetrySpecTracingCustomTagsLiteral {
    * @schema TelemetrySpecTracingCustomTagsLiteral#value
    */
   readonly value?: string;
-
 }
 
 /**
  * Converts an object of type 'TelemetrySpecTracingCustomTagsLiteral' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_TelemetrySpecTracingCustomTagsLiteral(obj: TelemetrySpecTracingCustomTagsLiteral | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_TelemetrySpecTracingCustomTagsLiteral(
+  obj: TelemetrySpecTracingCustomTagsLiteral | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'value': obj.value,
+    value: obj.value
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -666,7 +719,7 @@ export enum TelemetrySpecMetricsOverridesMatchMetric {
   /** GRPC_REQUEST_MESSAGES */
   GRPC_REQUEST_MESSAGES = 'GRPC_REQUEST_MESSAGES',
   /** GRPC_RESPONSE_MESSAGES */
-  GRPC_RESPONSE_MESSAGES = 'GRPC_RESPONSE_MESSAGES',
+  GRPC_RESPONSE_MESSAGES = 'GRPC_RESPONSE_MESSAGES'
 }
 
 /**
@@ -680,7 +733,7 @@ export enum TelemetrySpecMetricsOverridesMatchMode {
   /** CLIENT */
   CLIENT = 'CLIENT',
   /** SERVER */
-  SERVER = 'SERVER',
+  SERVER = 'SERVER'
 }
 
 /**
@@ -692,6 +745,5 @@ export enum TelemetrySpecMetricsOverridesTagOverridesOperation {
   /** UPSERT */
   UPSERT = 'UPSERT',
   /** REMOVE */
-  REMOVE = 'REMOVE',
+  REMOVE = 'REMOVE'
 }
-

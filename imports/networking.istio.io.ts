@@ -2,7 +2,6 @@
 import { ApiObject, ApiObjectMetadata, GroupVersionKind } from 'cdk8s';
 import { Construct } from 'constructs';
 
-
 /**
  *
  *
@@ -14,8 +13,8 @@ export class DestinationRule extends ApiObject {
    */
   public static readonly GVK: GroupVersionKind = {
     apiVersion: 'networking.istio.io/v1alpha3',
-    kind: 'DestinationRule',
-  }
+    kind: 'DestinationRule'
+  };
 
   /**
    * Renders a Kubernetes manifest for "DestinationRule".
@@ -27,7 +26,7 @@ export class DestinationRule extends ApiObject {
   public static manifest(props: DestinationRuleProps = {}): any {
     return {
       ...DestinationRule.GVK,
-      ...toJson_DestinationRuleProps(props),
+      ...toJson_DestinationRuleProps(props)
     };
   }
 
@@ -40,7 +39,7 @@ export class DestinationRule extends ApiObject {
   public constructor(scope: Construct, id: string, props: DestinationRuleProps = {}) {
     super(scope, id, {
       ...DestinationRule.GVK,
-      ...props,
+      ...props
     });
   }
 
@@ -52,7 +51,7 @@ export class DestinationRule extends ApiObject {
 
     return {
       ...DestinationRule.GVK,
-      ...toJson_DestinationRuleProps(resolved),
+      ...toJson_DestinationRuleProps(resolved)
     };
   }
 }
@@ -72,7 +71,6 @@ export interface DestinationRuleProps {
    * @schema DestinationRule#metadata
    */
   readonly metadata?: ApiObjectMetadata;
-
 }
 
 /**
@@ -80,13 +78,15 @@ export interface DestinationRuleProps {
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_DestinationRuleProps(obj: DestinationRuleProps | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'spec': toJson_DestinationRuleSpec(obj.spec),
-    'metadata': obj.metadata,
+    spec: toJson_DestinationRuleSpec(obj.spec),
+    metadata: obj.metadata
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -119,7 +119,6 @@ export interface DestinationRuleSpec {
    * @schema DestinationRuleSpec#trafficPolicy
    */
   readonly trafficPolicy?: DestinationRuleSpecTrafficPolicy;
-
 }
 
 /**
@@ -127,15 +126,17 @@ export interface DestinationRuleSpec {
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_DestinationRuleSpec(obj: DestinationRuleSpec | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'exportTo': obj.exportTo?.map(y => y),
-    'host': obj.host,
-    'subsets': obj.subsets?.map(y => toJson_DestinationRuleSpecSubsets(y)),
-    'trafficPolicy': toJson_DestinationRuleSpecTrafficPolicy(obj.trafficPolicy),
+    exportTo: obj.exportTo?.map((y) => y),
+    host: obj.host,
+    subsets: obj.subsets?.map((y) => toJson_DestinationRuleSpecSubsets(y)),
+    trafficPolicy: toJson_DestinationRuleSpecTrafficPolicy(obj.trafficPolicy)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -161,22 +162,28 @@ export interface DestinationRuleSpecSubsets {
    * @schema DestinationRuleSpecSubsets#trafficPolicy
    */
   readonly trafficPolicy?: DestinationRuleSpecSubsetsTrafficPolicy;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecSubsets' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecSubsets(obj: DestinationRuleSpecSubsets | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecSubsets(
+  obj: DestinationRuleSpecSubsets | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
-    'name': obj.name,
-    'trafficPolicy': toJson_DestinationRuleSpecSubsetsTrafficPolicy(obj.trafficPolicy),
+    labels:
+      obj.labels === undefined
+        ? undefined
+        : Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {}),
+    name: obj.name,
+    trafficPolicy: toJson_DestinationRuleSpecSubsetsTrafficPolicy(obj.trafficPolicy)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -214,24 +221,27 @@ export interface DestinationRuleSpecTrafficPolicy {
    * @schema DestinationRuleSpecTrafficPolicy#tls
    */
   readonly tls?: DestinationRuleSpecTrafficPolicyTls;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecTrafficPolicy' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecTrafficPolicy(obj: DestinationRuleSpecTrafficPolicy | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecTrafficPolicy(
+  obj: DestinationRuleSpecTrafficPolicy | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'connectionPool': toJson_DestinationRuleSpecTrafficPolicyConnectionPool(obj.connectionPool),
-    'loadBalancer': toJson_DestinationRuleSpecTrafficPolicyLoadBalancer(obj.loadBalancer),
-    'outlierDetection': toJson_DestinationRuleSpecTrafficPolicyOutlierDetection(obj.outlierDetection),
-    'portLevelSettings': obj.portLevelSettings?.map(y => toJson_DestinationRuleSpecTrafficPolicyPortLevelSettings(y)),
-    'tls': toJson_DestinationRuleSpecTrafficPolicyTls(obj.tls),
+    connectionPool: toJson_DestinationRuleSpecTrafficPolicyConnectionPool(obj.connectionPool),
+    loadBalancer: toJson_DestinationRuleSpecTrafficPolicyLoadBalancer(obj.loadBalancer),
+    outlierDetection: toJson_DestinationRuleSpecTrafficPolicyOutlierDetection(obj.outlierDetection),
+    portLevelSettings: obj.portLevelSettings?.map((y) => toJson_DestinationRuleSpecTrafficPolicyPortLevelSettings(y)),
+    tls: toJson_DestinationRuleSpecTrafficPolicyTls(obj.tls)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -271,24 +281,29 @@ export interface DestinationRuleSpecSubsetsTrafficPolicy {
    * @schema DestinationRuleSpecSubsetsTrafficPolicy#tls
    */
   readonly tls?: DestinationRuleSpecSubsetsTrafficPolicyTls;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecSubsetsTrafficPolicy' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecSubsetsTrafficPolicy(obj: DestinationRuleSpecSubsetsTrafficPolicy | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecSubsetsTrafficPolicy(
+  obj: DestinationRuleSpecSubsetsTrafficPolicy | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'connectionPool': toJson_DestinationRuleSpecSubsetsTrafficPolicyConnectionPool(obj.connectionPool),
-    'loadBalancer': toJson_DestinationRuleSpecSubsetsTrafficPolicyLoadBalancer(obj.loadBalancer),
-    'outlierDetection': toJson_DestinationRuleSpecSubsetsTrafficPolicyOutlierDetection(obj.outlierDetection),
-    'portLevelSettings': obj.portLevelSettings?.map(y => toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettings(y)),
-    'tls': toJson_DestinationRuleSpecSubsetsTrafficPolicyTls(obj.tls),
+    connectionPool: toJson_DestinationRuleSpecSubsetsTrafficPolicyConnectionPool(obj.connectionPool),
+    loadBalancer: toJson_DestinationRuleSpecSubsetsTrafficPolicyLoadBalancer(obj.loadBalancer),
+    outlierDetection: toJson_DestinationRuleSpecSubsetsTrafficPolicyOutlierDetection(obj.outlierDetection),
+    portLevelSettings: obj.portLevelSettings?.map((y) =>
+      toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettings(y)
+    ),
+    tls: toJson_DestinationRuleSpecSubsetsTrafficPolicyTls(obj.tls)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -309,21 +324,24 @@ export interface DestinationRuleSpecTrafficPolicyConnectionPool {
    * @schema DestinationRuleSpecTrafficPolicyConnectionPool#tcp
    */
   readonly tcp?: DestinationRuleSpecTrafficPolicyConnectionPoolTcp;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecTrafficPolicyConnectionPool' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecTrafficPolicyConnectionPool(obj: DestinationRuleSpecTrafficPolicyConnectionPool | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecTrafficPolicyConnectionPool(
+  obj: DestinationRuleSpecTrafficPolicyConnectionPool | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'http': toJson_DestinationRuleSpecTrafficPolicyConnectionPoolHttp(obj.http),
-    'tcp': toJson_DestinationRuleSpecTrafficPolicyConnectionPoolTcp(obj.tcp),
+    http: toJson_DestinationRuleSpecTrafficPolicyConnectionPoolHttp(obj.http),
+    tcp: toJson_DestinationRuleSpecTrafficPolicyConnectionPoolTcp(obj.tcp)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -347,22 +365,25 @@ export interface DestinationRuleSpecTrafficPolicyLoadBalancer {
    * @schema DestinationRuleSpecTrafficPolicyLoadBalancer#simple
    */
   readonly simple?: DestinationRuleSpecTrafficPolicyLoadBalancerSimple;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecTrafficPolicyLoadBalancer' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecTrafficPolicyLoadBalancer(obj: DestinationRuleSpecTrafficPolicyLoadBalancer | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecTrafficPolicyLoadBalancer(
+  obj: DestinationRuleSpecTrafficPolicyLoadBalancer | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'consistentHash': toJson_DestinationRuleSpecTrafficPolicyLoadBalancerConsistentHash(obj.consistentHash),
-    'localityLbSetting': toJson_DestinationRuleSpecTrafficPolicyLoadBalancerLocalityLbSetting(obj.localityLbSetting),
-    'simple': obj.simple,
+    consistentHash: toJson_DestinationRuleSpecTrafficPolicyLoadBalancerConsistentHash(obj.consistentHash),
+    localityLbSetting: toJson_DestinationRuleSpecTrafficPolicyLoadBalancerLocalityLbSetting(obj.localityLbSetting),
+    simple: obj.simple
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -424,28 +445,31 @@ export interface DestinationRuleSpecTrafficPolicyOutlierDetection {
    * @schema DestinationRuleSpecTrafficPolicyOutlierDetection#splitExternalLocalOriginErrors
    */
   readonly splitExternalLocalOriginErrors?: boolean;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecTrafficPolicyOutlierDetection' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecTrafficPolicyOutlierDetection(obj: DestinationRuleSpecTrafficPolicyOutlierDetection | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecTrafficPolicyOutlierDetection(
+  obj: DestinationRuleSpecTrafficPolicyOutlierDetection | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'baseEjectionTime': obj.baseEjectionTime,
-    'consecutive5xxErrors': obj.consecutive5XxErrors,
-    'consecutiveErrors': obj.consecutiveErrors,
-    'consecutiveGatewayErrors': obj.consecutiveGatewayErrors,
-    'consecutiveLocalOriginFailures': obj.consecutiveLocalOriginFailures,
-    'interval': obj.interval,
-    'maxEjectionPercent': obj.maxEjectionPercent,
-    'minHealthPercent': obj.minHealthPercent,
-    'splitExternalLocalOriginErrors': obj.splitExternalLocalOriginErrors,
+    baseEjectionTime: obj.baseEjectionTime,
+    consecutive5xxErrors: obj.consecutive5XxErrors,
+    consecutiveErrors: obj.consecutiveErrors,
+    consecutiveGatewayErrors: obj.consecutiveGatewayErrors,
+    consecutiveLocalOriginFailures: obj.consecutiveLocalOriginFailures,
+    interval: obj.interval,
+    maxEjectionPercent: obj.maxEjectionPercent,
+    minHealthPercent: obj.minHealthPercent,
+    splitExternalLocalOriginErrors: obj.splitExternalLocalOriginErrors
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -481,24 +505,27 @@ export interface DestinationRuleSpecTrafficPolicyPortLevelSettings {
    * @schema DestinationRuleSpecTrafficPolicyPortLevelSettings#tls
    */
   readonly tls?: DestinationRuleSpecTrafficPolicyPortLevelSettingsTls;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecTrafficPolicyPortLevelSettings' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecTrafficPolicyPortLevelSettings(obj: DestinationRuleSpecTrafficPolicyPortLevelSettings | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecTrafficPolicyPortLevelSettings(
+  obj: DestinationRuleSpecTrafficPolicyPortLevelSettings | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'connectionPool': toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPool(obj.connectionPool),
-    'loadBalancer': toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancer(obj.loadBalancer),
-    'outlierDetection': toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsOutlierDetection(obj.outlierDetection),
-    'port': toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsPort(obj.port),
-    'tls': toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsTls(obj.tls),
+    connectionPool: toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPool(obj.connectionPool),
+    loadBalancer: toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancer(obj.loadBalancer),
+    outlierDetection: toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsOutlierDetection(obj.outlierDetection),
+    port: toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsPort(obj.port),
+    tls: toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsTls(obj.tls)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -548,26 +575,29 @@ export interface DestinationRuleSpecTrafficPolicyTls {
    * @schema DestinationRuleSpecTrafficPolicyTls#subjectAltNames
    */
   readonly subjectAltNames?: string[];
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecTrafficPolicyTls' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecTrafficPolicyTls(obj: DestinationRuleSpecTrafficPolicyTls | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecTrafficPolicyTls(
+  obj: DestinationRuleSpecTrafficPolicyTls | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'caCertificates': obj.caCertificates,
-    'clientCertificate': obj.clientCertificate,
-    'credentialName': obj.credentialName,
-    'mode': obj.mode,
-    'privateKey': obj.privateKey,
-    'sni': obj.sni,
-    'subjectAltNames': obj.subjectAltNames?.map(y => y),
+    caCertificates: obj.caCertificates,
+    clientCertificate: obj.clientCertificate,
+    credentialName: obj.credentialName,
+    mode: obj.mode,
+    privateKey: obj.privateKey,
+    sni: obj.sni,
+    subjectAltNames: obj.subjectAltNames?.map((y) => y)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -588,21 +618,24 @@ export interface DestinationRuleSpecSubsetsTrafficPolicyConnectionPool {
    * @schema DestinationRuleSpecSubsetsTrafficPolicyConnectionPool#tcp
    */
   readonly tcp?: DestinationRuleSpecSubsetsTrafficPolicyConnectionPoolTcp;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecSubsetsTrafficPolicyConnectionPool' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecSubsetsTrafficPolicyConnectionPool(obj: DestinationRuleSpecSubsetsTrafficPolicyConnectionPool | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecSubsetsTrafficPolicyConnectionPool(
+  obj: DestinationRuleSpecSubsetsTrafficPolicyConnectionPool | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'http': toJson_DestinationRuleSpecSubsetsTrafficPolicyConnectionPoolHttp(obj.http),
-    'tcp': toJson_DestinationRuleSpecSubsetsTrafficPolicyConnectionPoolTcp(obj.tcp),
+    http: toJson_DestinationRuleSpecSubsetsTrafficPolicyConnectionPoolHttp(obj.http),
+    tcp: toJson_DestinationRuleSpecSubsetsTrafficPolicyConnectionPoolTcp(obj.tcp)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -626,22 +659,27 @@ export interface DestinationRuleSpecSubsetsTrafficPolicyLoadBalancer {
    * @schema DestinationRuleSpecSubsetsTrafficPolicyLoadBalancer#simple
    */
   readonly simple?: DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerSimple;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecSubsetsTrafficPolicyLoadBalancer' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecSubsetsTrafficPolicyLoadBalancer(obj: DestinationRuleSpecSubsetsTrafficPolicyLoadBalancer | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecSubsetsTrafficPolicyLoadBalancer(
+  obj: DestinationRuleSpecSubsetsTrafficPolicyLoadBalancer | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'consistentHash': toJson_DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerConsistentHash(obj.consistentHash),
-    'localityLbSetting': toJson_DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerLocalityLbSetting(obj.localityLbSetting),
-    'simple': obj.simple,
+    consistentHash: toJson_DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerConsistentHash(obj.consistentHash),
+    localityLbSetting: toJson_DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerLocalityLbSetting(
+      obj.localityLbSetting
+    ),
+    simple: obj.simple
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -703,28 +741,31 @@ export interface DestinationRuleSpecSubsetsTrafficPolicyOutlierDetection {
    * @schema DestinationRuleSpecSubsetsTrafficPolicyOutlierDetection#splitExternalLocalOriginErrors
    */
   readonly splitExternalLocalOriginErrors?: boolean;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecSubsetsTrafficPolicyOutlierDetection' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecSubsetsTrafficPolicyOutlierDetection(obj: DestinationRuleSpecSubsetsTrafficPolicyOutlierDetection | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecSubsetsTrafficPolicyOutlierDetection(
+  obj: DestinationRuleSpecSubsetsTrafficPolicyOutlierDetection | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'baseEjectionTime': obj.baseEjectionTime,
-    'consecutive5xxErrors': obj.consecutive5XxErrors,
-    'consecutiveErrors': obj.consecutiveErrors,
-    'consecutiveGatewayErrors': obj.consecutiveGatewayErrors,
-    'consecutiveLocalOriginFailures': obj.consecutiveLocalOriginFailures,
-    'interval': obj.interval,
-    'maxEjectionPercent': obj.maxEjectionPercent,
-    'minHealthPercent': obj.minHealthPercent,
-    'splitExternalLocalOriginErrors': obj.splitExternalLocalOriginErrors,
+    baseEjectionTime: obj.baseEjectionTime,
+    consecutive5xxErrors: obj.consecutive5XxErrors,
+    consecutiveErrors: obj.consecutiveErrors,
+    consecutiveGatewayErrors: obj.consecutiveGatewayErrors,
+    consecutiveLocalOriginFailures: obj.consecutiveLocalOriginFailures,
+    interval: obj.interval,
+    maxEjectionPercent: obj.maxEjectionPercent,
+    minHealthPercent: obj.minHealthPercent,
+    splitExternalLocalOriginErrors: obj.splitExternalLocalOriginErrors
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -760,24 +801,29 @@ export interface DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettings {
    * @schema DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettings#tls
    */
   readonly tls?: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsTls;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettings' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettings(obj: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettings | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettings(
+  obj: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettings | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'connectionPool': toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPool(obj.connectionPool),
-    'loadBalancer': toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancer(obj.loadBalancer),
-    'outlierDetection': toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsOutlierDetection(obj.outlierDetection),
-    'port': toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsPort(obj.port),
-    'tls': toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsTls(obj.tls),
+    connectionPool: toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPool(obj.connectionPool),
+    loadBalancer: toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancer(obj.loadBalancer),
+    outlierDetection: toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsOutlierDetection(
+      obj.outlierDetection
+    ),
+    port: toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsPort(obj.port),
+    tls: toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsTls(obj.tls)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -827,26 +873,29 @@ export interface DestinationRuleSpecSubsetsTrafficPolicyTls {
    * @schema DestinationRuleSpecSubsetsTrafficPolicyTls#subjectAltNames
    */
   readonly subjectAltNames?: string[];
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecSubsetsTrafficPolicyTls' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecSubsetsTrafficPolicyTls(obj: DestinationRuleSpecSubsetsTrafficPolicyTls | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecSubsetsTrafficPolicyTls(
+  obj: DestinationRuleSpecSubsetsTrafficPolicyTls | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'caCertificates': obj.caCertificates,
-    'clientCertificate': obj.clientCertificate,
-    'credentialName': obj.credentialName,
-    'mode': obj.mode,
-    'privateKey': obj.privateKey,
-    'sni': obj.sni,
-    'subjectAltNames': obj.subjectAltNames?.map(y => y),
+    caCertificates: obj.caCertificates,
+    clientCertificate: obj.clientCertificate,
+    credentialName: obj.credentialName,
+    mode: obj.mode,
+    privateKey: obj.privateKey,
+    sni: obj.sni,
+    subjectAltNames: obj.subjectAltNames?.map((y) => y)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -902,26 +951,29 @@ export interface DestinationRuleSpecTrafficPolicyConnectionPoolHttp {
    * @schema DestinationRuleSpecTrafficPolicyConnectionPoolHttp#useClientProtocol
    */
   readonly useClientProtocol?: boolean;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecTrafficPolicyConnectionPoolHttp' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecTrafficPolicyConnectionPoolHttp(obj: DestinationRuleSpecTrafficPolicyConnectionPoolHttp | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecTrafficPolicyConnectionPoolHttp(
+  obj: DestinationRuleSpecTrafficPolicyConnectionPoolHttp | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'h2UpgradePolicy': obj.h2UpgradePolicy,
-    'http1MaxPendingRequests': obj.http1MaxPendingRequests,
-    'http2MaxRequests': obj.http2MaxRequests,
-    'idleTimeout': obj.idleTimeout,
-    'maxRequestsPerConnection': obj.maxRequestsPerConnection,
-    'maxRetries': obj.maxRetries,
-    'useClientProtocol': obj.useClientProtocol,
+    h2UpgradePolicy: obj.h2UpgradePolicy,
+    http1MaxPendingRequests: obj.http1MaxPendingRequests,
+    http2MaxRequests: obj.http2MaxRequests,
+    idleTimeout: obj.idleTimeout,
+    maxRequestsPerConnection: obj.maxRequestsPerConnection,
+    maxRetries: obj.maxRetries,
+    useClientProtocol: obj.useClientProtocol
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -951,22 +1003,25 @@ export interface DestinationRuleSpecTrafficPolicyConnectionPoolTcp {
    * @schema DestinationRuleSpecTrafficPolicyConnectionPoolTcp#tcpKeepalive
    */
   readonly tcpKeepalive?: DestinationRuleSpecTrafficPolicyConnectionPoolTcpTcpKeepalive;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecTrafficPolicyConnectionPoolTcp' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecTrafficPolicyConnectionPoolTcp(obj: DestinationRuleSpecTrafficPolicyConnectionPoolTcp | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecTrafficPolicyConnectionPoolTcp(
+  obj: DestinationRuleSpecTrafficPolicyConnectionPoolTcp | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'connectTimeout': obj.connectTimeout,
-    'maxConnections': obj.maxConnections,
-    'tcpKeepalive': toJson_DestinationRuleSpecTrafficPolicyConnectionPoolTcpTcpKeepalive(obj.tcpKeepalive),
+    connectTimeout: obj.connectTimeout,
+    maxConnections: obj.maxConnections,
+    tcpKeepalive: toJson_DestinationRuleSpecTrafficPolicyConnectionPoolTcpTcpKeepalive(obj.tcpKeepalive)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -1006,24 +1061,27 @@ export interface DestinationRuleSpecTrafficPolicyLoadBalancerConsistentHash {
    * @schema DestinationRuleSpecTrafficPolicyLoadBalancerConsistentHash#useSourceIp
    */
   readonly useSourceIp?: boolean;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecTrafficPolicyLoadBalancerConsistentHash' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecTrafficPolicyLoadBalancerConsistentHash(obj: DestinationRuleSpecTrafficPolicyLoadBalancerConsistentHash | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecTrafficPolicyLoadBalancerConsistentHash(
+  obj: DestinationRuleSpecTrafficPolicyLoadBalancerConsistentHash | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'httpCookie': toJson_DestinationRuleSpecTrafficPolicyLoadBalancerConsistentHashHttpCookie(obj.httpCookie),
-    'httpHeaderName': obj.httpHeaderName,
-    'httpQueryParameterName': obj.httpQueryParameterName,
-    'minimumRingSize': obj.minimumRingSize,
-    'useSourceIp': obj.useSourceIp,
+    httpCookie: toJson_DestinationRuleSpecTrafficPolicyLoadBalancerConsistentHashHttpCookie(obj.httpCookie),
+    httpHeaderName: obj.httpHeaderName,
+    httpQueryParameterName: obj.httpQueryParameterName,
+    minimumRingSize: obj.minimumRingSize,
+    useSourceIp: obj.useSourceIp
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -1051,22 +1109,27 @@ export interface DestinationRuleSpecTrafficPolicyLoadBalancerLocalityLbSetting {
    * @schema DestinationRuleSpecTrafficPolicyLoadBalancerLocalityLbSetting#failover
    */
   readonly failover?: DestinationRuleSpecTrafficPolicyLoadBalancerLocalityLbSettingFailover[];
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecTrafficPolicyLoadBalancerLocalityLbSetting' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecTrafficPolicyLoadBalancerLocalityLbSetting(obj: DestinationRuleSpecTrafficPolicyLoadBalancerLocalityLbSetting | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecTrafficPolicyLoadBalancerLocalityLbSetting(
+  obj: DestinationRuleSpecTrafficPolicyLoadBalancerLocalityLbSetting | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'distribute': obj.distribute?.map(y => toJson_DestinationRuleSpecTrafficPolicyLoadBalancerLocalityLbSettingDistribute(y)),
-    'enabled': obj.enabled,
-    'failover': obj.failover?.map(y => toJson_DestinationRuleSpecTrafficPolicyLoadBalancerLocalityLbSettingFailover(y)),
+    distribute: obj.distribute?.map((y) =>
+      toJson_DestinationRuleSpecTrafficPolicyLoadBalancerLocalityLbSettingDistribute(y)
+    ),
+    enabled: obj.enabled,
+    failover: obj.failover?.map((y) => toJson_DestinationRuleSpecTrafficPolicyLoadBalancerLocalityLbSettingFailover(y))
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -1081,7 +1144,7 @@ export enum DestinationRuleSpecTrafficPolicyLoadBalancerSimple {
   /** RANDOM */
   RANDOM = 'RANDOM',
   /** PASSTHROUGH */
-  PASSTHROUGH = 'PASSTHROUGH',
+  PASSTHROUGH = 'PASSTHROUGH'
 }
 
 /**
@@ -1101,21 +1164,24 @@ export interface DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPool
    * @schema DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPool#tcp
    */
   readonly tcp?: DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPoolTcp;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPool' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPool(obj: DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPool | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPool(
+  obj: DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPool | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'http': toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPoolHttp(obj.http),
-    'tcp': toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPoolTcp(obj.tcp),
+    http: toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPoolHttp(obj.http),
+    tcp: toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPoolTcp(obj.tcp)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -1139,22 +1205,29 @@ export interface DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancer {
    * @schema DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancer#simple
    */
   readonly simple?: DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerSimple;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancer' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancer(obj: DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancer | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancer(
+  obj: DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancer | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'consistentHash': toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerConsistentHash(obj.consistentHash),
-    'localityLbSetting': toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSetting(obj.localityLbSetting),
-    'simple': obj.simple,
+    consistentHash: toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerConsistentHash(
+      obj.consistentHash
+    ),
+    localityLbSetting: toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSetting(
+      obj.localityLbSetting
+    ),
+    simple: obj.simple
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -1216,28 +1289,31 @@ export interface DestinationRuleSpecTrafficPolicyPortLevelSettingsOutlierDetecti
    * @schema DestinationRuleSpecTrafficPolicyPortLevelSettingsOutlierDetection#splitExternalLocalOriginErrors
    */
   readonly splitExternalLocalOriginErrors?: boolean;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecTrafficPolicyPortLevelSettingsOutlierDetection' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsOutlierDetection(obj: DestinationRuleSpecTrafficPolicyPortLevelSettingsOutlierDetection | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsOutlierDetection(
+  obj: DestinationRuleSpecTrafficPolicyPortLevelSettingsOutlierDetection | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'baseEjectionTime': obj.baseEjectionTime,
-    'consecutive5xxErrors': obj.consecutive5XxErrors,
-    'consecutiveErrors': obj.consecutiveErrors,
-    'consecutiveGatewayErrors': obj.consecutiveGatewayErrors,
-    'consecutiveLocalOriginFailures': obj.consecutiveLocalOriginFailures,
-    'interval': obj.interval,
-    'maxEjectionPercent': obj.maxEjectionPercent,
-    'minHealthPercent': obj.minHealthPercent,
-    'splitExternalLocalOriginErrors': obj.splitExternalLocalOriginErrors,
+    baseEjectionTime: obj.baseEjectionTime,
+    consecutive5xxErrors: obj.consecutive5XxErrors,
+    consecutiveErrors: obj.consecutiveErrors,
+    consecutiveGatewayErrors: obj.consecutiveGatewayErrors,
+    consecutiveLocalOriginFailures: obj.consecutiveLocalOriginFailures,
+    interval: obj.interval,
+    maxEjectionPercent: obj.maxEjectionPercent,
+    minHealthPercent: obj.minHealthPercent,
+    splitExternalLocalOriginErrors: obj.splitExternalLocalOriginErrors
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -1249,20 +1325,23 @@ export interface DestinationRuleSpecTrafficPolicyPortLevelSettingsPort {
    * @schema DestinationRuleSpecTrafficPolicyPortLevelSettingsPort#number
    */
   readonly number?: number;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecTrafficPolicyPortLevelSettingsPort' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsPort(obj: DestinationRuleSpecTrafficPolicyPortLevelSettingsPort | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsPort(
+  obj: DestinationRuleSpecTrafficPolicyPortLevelSettingsPort | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'number': obj.number,
+    number: obj.number
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -1312,26 +1391,29 @@ export interface DestinationRuleSpecTrafficPolicyPortLevelSettingsTls {
    * @schema DestinationRuleSpecTrafficPolicyPortLevelSettingsTls#subjectAltNames
    */
   readonly subjectAltNames?: string[];
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecTrafficPolicyPortLevelSettingsTls' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsTls(obj: DestinationRuleSpecTrafficPolicyPortLevelSettingsTls | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsTls(
+  obj: DestinationRuleSpecTrafficPolicyPortLevelSettingsTls | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'caCertificates': obj.caCertificates,
-    'clientCertificate': obj.clientCertificate,
-    'credentialName': obj.credentialName,
-    'mode': obj.mode,
-    'privateKey': obj.privateKey,
-    'sni': obj.sni,
-    'subjectAltNames': obj.subjectAltNames?.map(y => y),
+    caCertificates: obj.caCertificates,
+    clientCertificate: obj.clientCertificate,
+    credentialName: obj.credentialName,
+    mode: obj.mode,
+    privateKey: obj.privateKey,
+    sni: obj.sni,
+    subjectAltNames: obj.subjectAltNames?.map((y) => y)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -1346,7 +1428,7 @@ export enum DestinationRuleSpecTrafficPolicyTlsMode {
   /** MUTUAL */
   MUTUAL = 'MUTUAL',
   /** ISTIO_MUTUAL */
-  ISTIO_MUTUAL = 'ISTIO_MUTUAL',
+  ISTIO_MUTUAL = 'ISTIO_MUTUAL'
 }
 
 /**
@@ -1401,26 +1483,29 @@ export interface DestinationRuleSpecSubsetsTrafficPolicyConnectionPoolHttp {
    * @schema DestinationRuleSpecSubsetsTrafficPolicyConnectionPoolHttp#useClientProtocol
    */
   readonly useClientProtocol?: boolean;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecSubsetsTrafficPolicyConnectionPoolHttp' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecSubsetsTrafficPolicyConnectionPoolHttp(obj: DestinationRuleSpecSubsetsTrafficPolicyConnectionPoolHttp | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecSubsetsTrafficPolicyConnectionPoolHttp(
+  obj: DestinationRuleSpecSubsetsTrafficPolicyConnectionPoolHttp | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'h2UpgradePolicy': obj.h2UpgradePolicy,
-    'http1MaxPendingRequests': obj.http1MaxPendingRequests,
-    'http2MaxRequests': obj.http2MaxRequests,
-    'idleTimeout': obj.idleTimeout,
-    'maxRequestsPerConnection': obj.maxRequestsPerConnection,
-    'maxRetries': obj.maxRetries,
-    'useClientProtocol': obj.useClientProtocol,
+    h2UpgradePolicy: obj.h2UpgradePolicy,
+    http1MaxPendingRequests: obj.http1MaxPendingRequests,
+    http2MaxRequests: obj.http2MaxRequests,
+    idleTimeout: obj.idleTimeout,
+    maxRequestsPerConnection: obj.maxRequestsPerConnection,
+    maxRetries: obj.maxRetries,
+    useClientProtocol: obj.useClientProtocol
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -1450,22 +1535,25 @@ export interface DestinationRuleSpecSubsetsTrafficPolicyConnectionPoolTcp {
    * @schema DestinationRuleSpecSubsetsTrafficPolicyConnectionPoolTcp#tcpKeepalive
    */
   readonly tcpKeepalive?: DestinationRuleSpecSubsetsTrafficPolicyConnectionPoolTcpTcpKeepalive;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecSubsetsTrafficPolicyConnectionPoolTcp' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecSubsetsTrafficPolicyConnectionPoolTcp(obj: DestinationRuleSpecSubsetsTrafficPolicyConnectionPoolTcp | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecSubsetsTrafficPolicyConnectionPoolTcp(
+  obj: DestinationRuleSpecSubsetsTrafficPolicyConnectionPoolTcp | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'connectTimeout': obj.connectTimeout,
-    'maxConnections': obj.maxConnections,
-    'tcpKeepalive': toJson_DestinationRuleSpecSubsetsTrafficPolicyConnectionPoolTcpTcpKeepalive(obj.tcpKeepalive),
+    connectTimeout: obj.connectTimeout,
+    maxConnections: obj.maxConnections,
+    tcpKeepalive: toJson_DestinationRuleSpecSubsetsTrafficPolicyConnectionPoolTcpTcpKeepalive(obj.tcpKeepalive)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -1505,24 +1593,27 @@ export interface DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerConsistentHa
    * @schema DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerConsistentHash#useSourceIp
    */
   readonly useSourceIp?: boolean;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerConsistentHash' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerConsistentHash(obj: DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerConsistentHash | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerConsistentHash(
+  obj: DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerConsistentHash | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'httpCookie': toJson_DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerConsistentHashHttpCookie(obj.httpCookie),
-    'httpHeaderName': obj.httpHeaderName,
-    'httpQueryParameterName': obj.httpQueryParameterName,
-    'minimumRingSize': obj.minimumRingSize,
-    'useSourceIp': obj.useSourceIp,
+    httpCookie: toJson_DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerConsistentHashHttpCookie(obj.httpCookie),
+    httpHeaderName: obj.httpHeaderName,
+    httpQueryParameterName: obj.httpQueryParameterName,
+    minimumRingSize: obj.minimumRingSize,
+    useSourceIp: obj.useSourceIp
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -1550,22 +1641,29 @@ export interface DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerLocalityLbSe
    * @schema DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerLocalityLbSetting#failover
    */
   readonly failover?: DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerLocalityLbSettingFailover[];
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerLocalityLbSetting' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerLocalityLbSetting(obj: DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerLocalityLbSetting | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerLocalityLbSetting(
+  obj: DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerLocalityLbSetting | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'distribute': obj.distribute?.map(y => toJson_DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerLocalityLbSettingDistribute(y)),
-    'enabled': obj.enabled,
-    'failover': obj.failover?.map(y => toJson_DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerLocalityLbSettingFailover(y)),
+    distribute: obj.distribute?.map((y) =>
+      toJson_DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerLocalityLbSettingDistribute(y)
+    ),
+    enabled: obj.enabled,
+    failover: obj.failover?.map((y) =>
+      toJson_DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerLocalityLbSettingFailover(y)
+    )
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -1580,7 +1678,7 @@ export enum DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerSimple {
   /** RANDOM */
   RANDOM = 'RANDOM',
   /** PASSTHROUGH */
-  PASSTHROUGH = 'PASSTHROUGH',
+  PASSTHROUGH = 'PASSTHROUGH'
 }
 
 /**
@@ -1600,21 +1698,24 @@ export interface DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnect
    * @schema DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPool#tcp
    */
   readonly tcp?: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPoolTcp;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPool' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPool(obj: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPool | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPool(
+  obj: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPool | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'http': toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPoolHttp(obj.http),
-    'tcp': toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPoolTcp(obj.tcp),
+    http: toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPoolHttp(obj.http),
+    tcp: toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPoolTcp(obj.tcp)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -1638,22 +1739,29 @@ export interface DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBal
    * @schema DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancer#simple
    */
   readonly simple?: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerSimple;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancer' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancer(obj: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancer | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancer(
+  obj: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancer | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'consistentHash': toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerConsistentHash(obj.consistentHash),
-    'localityLbSetting': toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSetting(obj.localityLbSetting),
-    'simple': obj.simple,
+    consistentHash: toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerConsistentHash(
+      obj.consistentHash
+    ),
+    localityLbSetting: toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSetting(
+      obj.localityLbSetting
+    ),
+    simple: obj.simple
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -1715,28 +1823,31 @@ export interface DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsOutlier
    * @schema DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsOutlierDetection#splitExternalLocalOriginErrors
    */
   readonly splitExternalLocalOriginErrors?: boolean;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsOutlierDetection' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsOutlierDetection(obj: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsOutlierDetection | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsOutlierDetection(
+  obj: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsOutlierDetection | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'baseEjectionTime': obj.baseEjectionTime,
-    'consecutive5xxErrors': obj.consecutive5XxErrors,
-    'consecutiveErrors': obj.consecutiveErrors,
-    'consecutiveGatewayErrors': obj.consecutiveGatewayErrors,
-    'consecutiveLocalOriginFailures': obj.consecutiveLocalOriginFailures,
-    'interval': obj.interval,
-    'maxEjectionPercent': obj.maxEjectionPercent,
-    'minHealthPercent': obj.minHealthPercent,
-    'splitExternalLocalOriginErrors': obj.splitExternalLocalOriginErrors,
+    baseEjectionTime: obj.baseEjectionTime,
+    consecutive5xxErrors: obj.consecutive5XxErrors,
+    consecutiveErrors: obj.consecutiveErrors,
+    consecutiveGatewayErrors: obj.consecutiveGatewayErrors,
+    consecutiveLocalOriginFailures: obj.consecutiveLocalOriginFailures,
+    interval: obj.interval,
+    maxEjectionPercent: obj.maxEjectionPercent,
+    minHealthPercent: obj.minHealthPercent,
+    splitExternalLocalOriginErrors: obj.splitExternalLocalOriginErrors
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -1748,20 +1859,23 @@ export interface DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsPort {
    * @schema DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsPort#number
    */
   readonly number?: number;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsPort' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsPort(obj: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsPort | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsPort(
+  obj: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsPort | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'number': obj.number,
+    number: obj.number
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -1811,26 +1925,29 @@ export interface DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsTls {
    * @schema DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsTls#subjectAltNames
    */
   readonly subjectAltNames?: string[];
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsTls' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsTls(obj: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsTls | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsTls(
+  obj: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsTls | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'caCertificates': obj.caCertificates,
-    'clientCertificate': obj.clientCertificate,
-    'credentialName': obj.credentialName,
-    'mode': obj.mode,
-    'privateKey': obj.privateKey,
-    'sni': obj.sni,
-    'subjectAltNames': obj.subjectAltNames?.map(y => y),
+    caCertificates: obj.caCertificates,
+    clientCertificate: obj.clientCertificate,
+    credentialName: obj.credentialName,
+    mode: obj.mode,
+    privateKey: obj.privateKey,
+    sni: obj.sni,
+    subjectAltNames: obj.subjectAltNames?.map((y) => y)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -1845,7 +1962,7 @@ export enum DestinationRuleSpecSubsetsTrafficPolicyTlsMode {
   /** MUTUAL */
   MUTUAL = 'MUTUAL',
   /** ISTIO_MUTUAL */
-  ISTIO_MUTUAL = 'ISTIO_MUTUAL',
+  ISTIO_MUTUAL = 'ISTIO_MUTUAL'
 }
 
 /**
@@ -1859,7 +1976,7 @@ export enum DestinationRuleSpecTrafficPolicyConnectionPoolHttpH2UpgradePolicy {
   /** DO_NOT_UPGRADE */
   DO_NOT_UPGRADE = 'DO_NOT_UPGRADE',
   /** UPGRADE */
-  UPGRADE = 'UPGRADE',
+  UPGRADE = 'UPGRADE'
 }
 
 /**
@@ -1884,22 +2001,25 @@ export interface DestinationRuleSpecTrafficPolicyConnectionPoolTcpTcpKeepalive {
    * @schema DestinationRuleSpecTrafficPolicyConnectionPoolTcpTcpKeepalive#time
    */
   readonly time?: string;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecTrafficPolicyConnectionPoolTcpTcpKeepalive' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecTrafficPolicyConnectionPoolTcpTcpKeepalive(obj: DestinationRuleSpecTrafficPolicyConnectionPoolTcpTcpKeepalive | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecTrafficPolicyConnectionPoolTcpTcpKeepalive(
+  obj: DestinationRuleSpecTrafficPolicyConnectionPoolTcpTcpKeepalive | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'interval': obj.interval,
-    'probes': obj.probes,
-    'time': obj.time,
+    interval: obj.interval,
+    probes: obj.probes,
+    time: obj.time
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -1929,22 +2049,25 @@ export interface DestinationRuleSpecTrafficPolicyLoadBalancerConsistentHashHttpC
    * @schema DestinationRuleSpecTrafficPolicyLoadBalancerConsistentHashHttpCookie#ttl
    */
   readonly ttl?: string;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecTrafficPolicyLoadBalancerConsistentHashHttpCookie' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecTrafficPolicyLoadBalancerConsistentHashHttpCookie(obj: DestinationRuleSpecTrafficPolicyLoadBalancerConsistentHashHttpCookie | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecTrafficPolicyLoadBalancerConsistentHashHttpCookie(
+  obj: DestinationRuleSpecTrafficPolicyLoadBalancerConsistentHashHttpCookie | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'name': obj.name,
-    'path': obj.path,
-    'ttl': obj.ttl,
+    name: obj.name,
+    path: obj.path,
+    ttl: obj.ttl
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -1965,21 +2088,27 @@ export interface DestinationRuleSpecTrafficPolicyLoadBalancerLocalityLbSettingDi
    * @schema DestinationRuleSpecTrafficPolicyLoadBalancerLocalityLbSettingDistribute#to
    */
   readonly to?: { [key: string]: number };
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecTrafficPolicyLoadBalancerLocalityLbSettingDistribute' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecTrafficPolicyLoadBalancerLocalityLbSettingDistribute(obj: DestinationRuleSpecTrafficPolicyLoadBalancerLocalityLbSettingDistribute | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecTrafficPolicyLoadBalancerLocalityLbSettingDistribute(
+  obj: DestinationRuleSpecTrafficPolicyLoadBalancerLocalityLbSettingDistribute | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'from': obj.from,
-    'to': ((obj.to) === undefined) ? undefined : (Object.entries(obj.to).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    from: obj.from,
+    to:
+      obj.to === undefined
+        ? undefined
+        : Object.entries(obj.to).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {})
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -1998,21 +2127,24 @@ export interface DestinationRuleSpecTrafficPolicyLoadBalancerLocalityLbSettingFa
    * @schema DestinationRuleSpecTrafficPolicyLoadBalancerLocalityLbSettingFailover#to
    */
   readonly to?: string;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecTrafficPolicyLoadBalancerLocalityLbSettingFailover' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecTrafficPolicyLoadBalancerLocalityLbSettingFailover(obj: DestinationRuleSpecTrafficPolicyLoadBalancerLocalityLbSettingFailover | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecTrafficPolicyLoadBalancerLocalityLbSettingFailover(
+  obj: DestinationRuleSpecTrafficPolicyLoadBalancerLocalityLbSettingFailover | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'from': obj.from,
-    'to': obj.to,
+    from: obj.from,
+    to: obj.to
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -2068,26 +2200,29 @@ export interface DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPool
    * @schema DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPoolHttp#useClientProtocol
    */
   readonly useClientProtocol?: boolean;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPoolHttp' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPoolHttp(obj: DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPoolHttp | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPoolHttp(
+  obj: DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPoolHttp | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'h2UpgradePolicy': obj.h2UpgradePolicy,
-    'http1MaxPendingRequests': obj.http1MaxPendingRequests,
-    'http2MaxRequests': obj.http2MaxRequests,
-    'idleTimeout': obj.idleTimeout,
-    'maxRequestsPerConnection': obj.maxRequestsPerConnection,
-    'maxRetries': obj.maxRetries,
-    'useClientProtocol': obj.useClientProtocol,
+    h2UpgradePolicy: obj.h2UpgradePolicy,
+    http1MaxPendingRequests: obj.http1MaxPendingRequests,
+    http2MaxRequests: obj.http2MaxRequests,
+    idleTimeout: obj.idleTimeout,
+    maxRequestsPerConnection: obj.maxRequestsPerConnection,
+    maxRetries: obj.maxRetries,
+    useClientProtocol: obj.useClientProtocol
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -2117,22 +2252,27 @@ export interface DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPool
    * @schema DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPoolTcp#tcpKeepalive
    */
   readonly tcpKeepalive?: DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPoolTcpTcpKeepalive;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPoolTcp' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPoolTcp(obj: DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPoolTcp | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPoolTcp(
+  obj: DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPoolTcp | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'connectTimeout': obj.connectTimeout,
-    'maxConnections': obj.maxConnections,
-    'tcpKeepalive': toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPoolTcpTcpKeepalive(obj.tcpKeepalive),
+    connectTimeout: obj.connectTimeout,
+    maxConnections: obj.maxConnections,
+    tcpKeepalive: toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPoolTcpTcpKeepalive(
+      obj.tcpKeepalive
+    )
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -2172,24 +2312,29 @@ export interface DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerCo
    * @schema DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerConsistentHash#useSourceIp
    */
   readonly useSourceIp?: boolean;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerConsistentHash' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerConsistentHash(obj: DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerConsistentHash | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerConsistentHash(
+  obj: DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerConsistentHash | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'httpCookie': toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerConsistentHashHttpCookie(obj.httpCookie),
-    'httpHeaderName': obj.httpHeaderName,
-    'httpQueryParameterName': obj.httpQueryParameterName,
-    'minimumRingSize': obj.minimumRingSize,
-    'useSourceIp': obj.useSourceIp,
+    httpCookie: toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerConsistentHashHttpCookie(
+      obj.httpCookie
+    ),
+    httpHeaderName: obj.httpHeaderName,
+    httpQueryParameterName: obj.httpQueryParameterName,
+    minimumRingSize: obj.minimumRingSize,
+    useSourceIp: obj.useSourceIp
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -2217,22 +2362,29 @@ export interface DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerLo
    * @schema DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSetting#failover
    */
   readonly failover?: DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingFailover[];
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSetting' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSetting(obj: DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSetting | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSetting(
+  obj: DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSetting | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'distribute': obj.distribute?.map(y => toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingDistribute(y)),
-    'enabled': obj.enabled,
-    'failover': obj.failover?.map(y => toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingFailover(y)),
+    distribute: obj.distribute?.map((y) =>
+      toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingDistribute(y)
+    ),
+    enabled: obj.enabled,
+    failover: obj.failover?.map((y) =>
+      toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingFailover(y)
+    )
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -2247,7 +2399,7 @@ export enum DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerSimple 
   /** RANDOM */
   RANDOM = 'RANDOM',
   /** PASSTHROUGH */
-  PASSTHROUGH = 'PASSTHROUGH',
+  PASSTHROUGH = 'PASSTHROUGH'
 }
 
 /**
@@ -2261,7 +2413,7 @@ export enum DestinationRuleSpecTrafficPolicyPortLevelSettingsTlsMode {
   /** MUTUAL */
   MUTUAL = 'MUTUAL',
   /** ISTIO_MUTUAL */
-  ISTIO_MUTUAL = 'ISTIO_MUTUAL',
+  ISTIO_MUTUAL = 'ISTIO_MUTUAL'
 }
 
 /**
@@ -2275,7 +2427,7 @@ export enum DestinationRuleSpecSubsetsTrafficPolicyConnectionPoolHttpH2UpgradePo
   /** DO_NOT_UPGRADE */
   DO_NOT_UPGRADE = 'DO_NOT_UPGRADE',
   /** UPGRADE */
-  UPGRADE = 'UPGRADE',
+  UPGRADE = 'UPGRADE'
 }
 
 /**
@@ -2300,22 +2452,25 @@ export interface DestinationRuleSpecSubsetsTrafficPolicyConnectionPoolTcpTcpKeep
    * @schema DestinationRuleSpecSubsetsTrafficPolicyConnectionPoolTcpTcpKeepalive#time
    */
   readonly time?: string;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecSubsetsTrafficPolicyConnectionPoolTcpTcpKeepalive' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecSubsetsTrafficPolicyConnectionPoolTcpTcpKeepalive(obj: DestinationRuleSpecSubsetsTrafficPolicyConnectionPoolTcpTcpKeepalive | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecSubsetsTrafficPolicyConnectionPoolTcpTcpKeepalive(
+  obj: DestinationRuleSpecSubsetsTrafficPolicyConnectionPoolTcpTcpKeepalive | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'interval': obj.interval,
-    'probes': obj.probes,
-    'time': obj.time,
+    interval: obj.interval,
+    probes: obj.probes,
+    time: obj.time
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -2345,22 +2500,25 @@ export interface DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerConsistentHa
    * @schema DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerConsistentHashHttpCookie#ttl
    */
   readonly ttl?: string;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerConsistentHashHttpCookie' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerConsistentHashHttpCookie(obj: DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerConsistentHashHttpCookie | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerConsistentHashHttpCookie(
+  obj: DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerConsistentHashHttpCookie | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'name': obj.name,
-    'path': obj.path,
-    'ttl': obj.ttl,
+    name: obj.name,
+    path: obj.path,
+    ttl: obj.ttl
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -2381,21 +2539,27 @@ export interface DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerLocalityLbSe
    * @schema DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerLocalityLbSettingDistribute#to
    */
   readonly to?: { [key: string]: number };
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerLocalityLbSettingDistribute' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerLocalityLbSettingDistribute(obj: DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerLocalityLbSettingDistribute | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerLocalityLbSettingDistribute(
+  obj: DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerLocalityLbSettingDistribute | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'from': obj.from,
-    'to': ((obj.to) === undefined) ? undefined : (Object.entries(obj.to).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    from: obj.from,
+    to:
+      obj.to === undefined
+        ? undefined
+        : Object.entries(obj.to).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {})
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -2414,21 +2578,24 @@ export interface DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerLocalityLbSe
    * @schema DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerLocalityLbSettingFailover#to
    */
   readonly to?: string;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerLocalityLbSettingFailover' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerLocalityLbSettingFailover(obj: DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerLocalityLbSettingFailover | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerLocalityLbSettingFailover(
+  obj: DestinationRuleSpecSubsetsTrafficPolicyLoadBalancerLocalityLbSettingFailover | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'from': obj.from,
-    'to': obj.to,
+    from: obj.from,
+    to: obj.to
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -2484,26 +2651,29 @@ export interface DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnect
    * @schema DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPoolHttp#useClientProtocol
    */
   readonly useClientProtocol?: boolean;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPoolHttp' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPoolHttp(obj: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPoolHttp | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPoolHttp(
+  obj: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPoolHttp | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'h2UpgradePolicy': obj.h2UpgradePolicy,
-    'http1MaxPendingRequests': obj.http1MaxPendingRequests,
-    'http2MaxRequests': obj.http2MaxRequests,
-    'idleTimeout': obj.idleTimeout,
-    'maxRequestsPerConnection': obj.maxRequestsPerConnection,
-    'maxRetries': obj.maxRetries,
-    'useClientProtocol': obj.useClientProtocol,
+    h2UpgradePolicy: obj.h2UpgradePolicy,
+    http1MaxPendingRequests: obj.http1MaxPendingRequests,
+    http2MaxRequests: obj.http2MaxRequests,
+    idleTimeout: obj.idleTimeout,
+    maxRequestsPerConnection: obj.maxRequestsPerConnection,
+    maxRetries: obj.maxRetries,
+    useClientProtocol: obj.useClientProtocol
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -2533,22 +2703,27 @@ export interface DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnect
    * @schema DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPoolTcp#tcpKeepalive
    */
   readonly tcpKeepalive?: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPoolTcpTcpKeepalive;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPoolTcp' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPoolTcp(obj: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPoolTcp | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPoolTcp(
+  obj: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPoolTcp | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'connectTimeout': obj.connectTimeout,
-    'maxConnections': obj.maxConnections,
-    'tcpKeepalive': toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPoolTcpTcpKeepalive(obj.tcpKeepalive),
+    connectTimeout: obj.connectTimeout,
+    maxConnections: obj.maxConnections,
+    tcpKeepalive: toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPoolTcpTcpKeepalive(
+      obj.tcpKeepalive
+    )
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -2588,24 +2763,29 @@ export interface DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBal
    * @schema DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerConsistentHash#useSourceIp
    */
   readonly useSourceIp?: boolean;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerConsistentHash' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerConsistentHash(obj: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerConsistentHash | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerConsistentHash(
+  obj: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerConsistentHash | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'httpCookie': toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerConsistentHashHttpCookie(obj.httpCookie),
-    'httpHeaderName': obj.httpHeaderName,
-    'httpQueryParameterName': obj.httpQueryParameterName,
-    'minimumRingSize': obj.minimumRingSize,
-    'useSourceIp': obj.useSourceIp,
+    httpCookie: toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerConsistentHashHttpCookie(
+      obj.httpCookie
+    ),
+    httpHeaderName: obj.httpHeaderName,
+    httpQueryParameterName: obj.httpQueryParameterName,
+    minimumRingSize: obj.minimumRingSize,
+    useSourceIp: obj.useSourceIp
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -2633,22 +2813,29 @@ export interface DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBal
    * @schema DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSetting#failover
    */
   readonly failover?: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingFailover[];
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSetting' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSetting(obj: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSetting | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSetting(
+  obj: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSetting | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'distribute': obj.distribute?.map(y => toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingDistribute(y)),
-    'enabled': obj.enabled,
-    'failover': obj.failover?.map(y => toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingFailover(y)),
+    distribute: obj.distribute?.map((y) =>
+      toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingDistribute(y)
+    ),
+    enabled: obj.enabled,
+    failover: obj.failover?.map((y) =>
+      toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingFailover(y)
+    )
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -2663,7 +2850,7 @@ export enum DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancer
   /** RANDOM */
   RANDOM = 'RANDOM',
   /** PASSTHROUGH */
-  PASSTHROUGH = 'PASSTHROUGH',
+  PASSTHROUGH = 'PASSTHROUGH'
 }
 
 /**
@@ -2677,7 +2864,7 @@ export enum DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsTlsMode {
   /** MUTUAL */
   MUTUAL = 'MUTUAL',
   /** ISTIO_MUTUAL */
-  ISTIO_MUTUAL = 'ISTIO_MUTUAL',
+  ISTIO_MUTUAL = 'ISTIO_MUTUAL'
 }
 
 /**
@@ -2691,7 +2878,7 @@ export enum DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPoolHttpH
   /** DO_NOT_UPGRADE */
   DO_NOT_UPGRADE = 'DO_NOT_UPGRADE',
   /** UPGRADE */
-  UPGRADE = 'UPGRADE',
+  UPGRADE = 'UPGRADE'
 }
 
 /**
@@ -2716,22 +2903,25 @@ export interface DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPool
    * @schema DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPoolTcpTcpKeepalive#time
    */
   readonly time?: string;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPoolTcpTcpKeepalive' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPoolTcpTcpKeepalive(obj: DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPoolTcpTcpKeepalive | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPoolTcpTcpKeepalive(
+  obj: DestinationRuleSpecTrafficPolicyPortLevelSettingsConnectionPoolTcpTcpKeepalive | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'interval': obj.interval,
-    'probes': obj.probes,
-    'time': obj.time,
+    interval: obj.interval,
+    probes: obj.probes,
+    time: obj.time
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -2761,22 +2951,25 @@ export interface DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerCo
    * @schema DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerConsistentHashHttpCookie#ttl
    */
   readonly ttl?: string;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerConsistentHashHttpCookie' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerConsistentHashHttpCookie(obj: DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerConsistentHashHttpCookie | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerConsistentHashHttpCookie(
+  obj: DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerConsistentHashHttpCookie | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'name': obj.name,
-    'path': obj.path,
-    'ttl': obj.ttl,
+    name: obj.name,
+    path: obj.path,
+    ttl: obj.ttl
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -2797,21 +2990,27 @@ export interface DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerLo
    * @schema DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingDistribute#to
    */
   readonly to?: { [key: string]: number };
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingDistribute' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingDistribute(obj: DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingDistribute | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingDistribute(
+  obj: DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingDistribute | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'from': obj.from,
-    'to': ((obj.to) === undefined) ? undefined : (Object.entries(obj.to).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    from: obj.from,
+    to:
+      obj.to === undefined
+        ? undefined
+        : Object.entries(obj.to).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {})
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -2830,21 +3029,24 @@ export interface DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerLo
    * @schema DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingFailover#to
    */
   readonly to?: string;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingFailover' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingFailover(obj: DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingFailover | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingFailover(
+  obj: DestinationRuleSpecTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingFailover | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'from': obj.from,
-    'to': obj.to,
+    from: obj.from,
+    to: obj.to
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -2859,7 +3061,7 @@ export enum DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPo
   /** DO_NOT_UPGRADE */
   DO_NOT_UPGRADE = 'DO_NOT_UPGRADE',
   /** UPGRADE */
-  UPGRADE = 'UPGRADE',
+  UPGRADE = 'UPGRADE'
 }
 
 /**
@@ -2884,22 +3086,25 @@ export interface DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnect
    * @schema DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPoolTcpTcpKeepalive#time
    */
   readonly time?: string;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPoolTcpTcpKeepalive' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPoolTcpTcpKeepalive(obj: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPoolTcpTcpKeepalive | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPoolTcpTcpKeepalive(
+  obj: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsConnectionPoolTcpTcpKeepalive | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'interval': obj.interval,
-    'probes': obj.probes,
-    'time': obj.time,
+    interval: obj.interval,
+    probes: obj.probes,
+    time: obj.time
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -2929,22 +3134,25 @@ export interface DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBal
    * @schema DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerConsistentHashHttpCookie#ttl
    */
   readonly ttl?: string;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerConsistentHashHttpCookie' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerConsistentHashHttpCookie(obj: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerConsistentHashHttpCookie | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerConsistentHashHttpCookie(
+  obj: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerConsistentHashHttpCookie | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'name': obj.name,
-    'path': obj.path,
-    'ttl': obj.ttl,
+    name: obj.name,
+    path: obj.path,
+    ttl: obj.ttl
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -2965,21 +3173,27 @@ export interface DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBal
    * @schema DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingDistribute#to
    */
   readonly to?: { [key: string]: number };
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingDistribute' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingDistribute(obj: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingDistribute | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingDistribute(
+  obj: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingDistribute | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'from': obj.from,
-    'to': ((obj.to) === undefined) ? undefined : (Object.entries(obj.to).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    from: obj.from,
+    to:
+      obj.to === undefined
+        ? undefined
+        : Object.entries(obj.to).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {})
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -2998,24 +3212,26 @@ export interface DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBal
    * @schema DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingFailover#to
    */
   readonly to?: string;
-
 }
 
 /**
  * Converts an object of type 'DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingFailover' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingFailover(obj: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingFailover | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingFailover(
+  obj: DestinationRuleSpecSubsetsTrafficPolicyPortLevelSettingsLoadBalancerLocalityLbSettingFailover | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'from': obj.from,
-    'to': obj.to,
+    from: obj.from,
+    to: obj.to
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
-
 
 /**
  *
@@ -3028,8 +3244,8 @@ export class EnvoyFilter extends ApiObject {
    */
   public static readonly GVK: GroupVersionKind = {
     apiVersion: 'networking.istio.io/v1alpha3',
-    kind: 'EnvoyFilter',
-  }
+    kind: 'EnvoyFilter'
+  };
 
   /**
    * Renders a Kubernetes manifest for "EnvoyFilter".
@@ -3041,7 +3257,7 @@ export class EnvoyFilter extends ApiObject {
   public static manifest(props: EnvoyFilterProps = {}): any {
     return {
       ...EnvoyFilter.GVK,
-      ...toJson_EnvoyFilterProps(props),
+      ...toJson_EnvoyFilterProps(props)
     };
   }
 
@@ -3054,7 +3270,7 @@ export class EnvoyFilter extends ApiObject {
   public constructor(scope: Construct, id: string, props: EnvoyFilterProps = {}) {
     super(scope, id, {
       ...EnvoyFilter.GVK,
-      ...props,
+      ...props
     });
   }
 
@@ -3066,7 +3282,7 @@ export class EnvoyFilter extends ApiObject {
 
     return {
       ...EnvoyFilter.GVK,
-      ...toJson_EnvoyFilterProps(resolved),
+      ...toJson_EnvoyFilterProps(resolved)
     };
   }
 }
@@ -3086,7 +3302,6 @@ export interface EnvoyFilterProps {
    * @schema EnvoyFilter#metadata
    */
   readonly metadata?: ApiObjectMetadata;
-
 }
 
 /**
@@ -3094,13 +3309,15 @@ export interface EnvoyFilterProps {
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_EnvoyFilterProps(obj: EnvoyFilterProps | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'spec': toJson_EnvoyFilterSpec(obj.spec),
-    'metadata': obj.metadata,
+    spec: toJson_EnvoyFilterSpec(obj.spec),
+    metadata: obj.metadata
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -3128,7 +3345,6 @@ export interface EnvoyFilterSpec {
    * @schema EnvoyFilterSpec#workloadSelector
    */
   readonly workloadSelector?: EnvoyFilterSpecWorkloadSelector;
-
 }
 
 /**
@@ -3136,14 +3352,16 @@ export interface EnvoyFilterSpec {
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_EnvoyFilterSpec(obj: EnvoyFilterSpec | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'configPatches': obj.configPatches?.map(y => toJson_EnvoyFilterSpecConfigPatches(y)),
-    'priority': obj.priority,
-    'workloadSelector': toJson_EnvoyFilterSpecWorkloadSelector(obj.workloadSelector),
+    configPatches: obj.configPatches?.map((y) => toJson_EnvoyFilterSpecConfigPatches(y)),
+    priority: obj.priority,
+    workloadSelector: toJson_EnvoyFilterSpecWorkloadSelector(obj.workloadSelector)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -3169,22 +3387,25 @@ export interface EnvoyFilterSpecConfigPatches {
    * @schema EnvoyFilterSpecConfigPatches#patch
    */
   readonly patch?: EnvoyFilterSpecConfigPatchesPatch;
-
 }
 
 /**
  * Converts an object of type 'EnvoyFilterSpecConfigPatches' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_EnvoyFilterSpecConfigPatches(obj: EnvoyFilterSpecConfigPatches | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_EnvoyFilterSpecConfigPatches(
+  obj: EnvoyFilterSpecConfigPatches | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'applyTo': obj.applyTo,
-    'match': toJson_EnvoyFilterSpecConfigPatchesMatch(obj.match),
-    'patch': toJson_EnvoyFilterSpecConfigPatchesPatch(obj.patch),
+    applyTo: obj.applyTo,
+    match: toJson_EnvoyFilterSpecConfigPatchesMatch(obj.match),
+    patch: toJson_EnvoyFilterSpecConfigPatchesPatch(obj.patch)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -3196,20 +3417,26 @@ export interface EnvoyFilterSpecWorkloadSelector {
    * @schema EnvoyFilterSpecWorkloadSelector#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'EnvoyFilterSpecWorkloadSelector' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_EnvoyFilterSpecWorkloadSelector(obj: EnvoyFilterSpecWorkloadSelector | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_EnvoyFilterSpecWorkloadSelector(
+  obj: EnvoyFilterSpecWorkloadSelector | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    labels:
+      obj.labels === undefined
+        ? undefined
+        : Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {})
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -3238,7 +3465,7 @@ export enum EnvoyFilterSpecConfigPatchesApplyTo {
   /** EXTENSION_CONFIG */
   EXTENSION_CONFIG = 'EXTENSION_CONFIG',
   /** BOOTSTRAP */
-  BOOTSTRAP = 'BOOTSTRAP',
+  BOOTSTRAP = 'BOOTSTRAP'
 }
 
 /**
@@ -3281,24 +3508,27 @@ export interface EnvoyFilterSpecConfigPatchesMatch {
    * @schema EnvoyFilterSpecConfigPatchesMatch#routeConfiguration
    */
   readonly routeConfiguration?: EnvoyFilterSpecConfigPatchesMatchRouteConfiguration;
-
 }
 
 /**
  * Converts an object of type 'EnvoyFilterSpecConfigPatchesMatch' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_EnvoyFilterSpecConfigPatchesMatch(obj: EnvoyFilterSpecConfigPatchesMatch | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_EnvoyFilterSpecConfigPatchesMatch(
+  obj: EnvoyFilterSpecConfigPatchesMatch | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'cluster': toJson_EnvoyFilterSpecConfigPatchesMatchCluster(obj.cluster),
-    'context': obj.context,
-    'listener': toJson_EnvoyFilterSpecConfigPatchesMatchListener(obj.listener),
-    'proxy': toJson_EnvoyFilterSpecConfigPatchesMatchProxy(obj.proxy),
-    'routeConfiguration': toJson_EnvoyFilterSpecConfigPatchesMatchRouteConfiguration(obj.routeConfiguration),
+    cluster: toJson_EnvoyFilterSpecConfigPatchesMatchCluster(obj.cluster),
+    context: obj.context,
+    listener: toJson_EnvoyFilterSpecConfigPatchesMatchListener(obj.listener),
+    proxy: toJson_EnvoyFilterSpecConfigPatchesMatchProxy(obj.proxy),
+    routeConfiguration: toJson_EnvoyFilterSpecConfigPatchesMatchRouteConfiguration(obj.routeConfiguration)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -3328,22 +3558,25 @@ export interface EnvoyFilterSpecConfigPatchesPatch {
    * @schema EnvoyFilterSpecConfigPatchesPatch#value
    */
   readonly value?: any;
-
 }
 
 /**
  * Converts an object of type 'EnvoyFilterSpecConfigPatchesPatch' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_EnvoyFilterSpecConfigPatchesPatch(obj: EnvoyFilterSpecConfigPatchesPatch | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_EnvoyFilterSpecConfigPatchesPatch(
+  obj: EnvoyFilterSpecConfigPatchesPatch | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'filterClass': obj.filterClass,
-    'operation': obj.operation,
-    'value': obj.value,
+    filterClass: obj.filterClass,
+    operation: obj.operation,
+    value: obj.value
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -3380,23 +3613,26 @@ export interface EnvoyFilterSpecConfigPatchesMatchCluster {
    * @schema EnvoyFilterSpecConfigPatchesMatchCluster#subset
    */
   readonly subset?: string;
-
 }
 
 /**
  * Converts an object of type 'EnvoyFilterSpecConfigPatchesMatchCluster' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_EnvoyFilterSpecConfigPatchesMatchCluster(obj: EnvoyFilterSpecConfigPatchesMatchCluster | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_EnvoyFilterSpecConfigPatchesMatchCluster(
+  obj: EnvoyFilterSpecConfigPatchesMatchCluster | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'name': obj.name,
-    'portNumber': obj.portNumber,
-    'service': obj.service,
-    'subset': obj.subset,
+    name: obj.name,
+    portNumber: obj.portNumber,
+    service: obj.service,
+    subset: obj.subset
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -3413,7 +3649,7 @@ export enum EnvoyFilterSpecConfigPatchesMatchContext {
   /** SIDECAR_OUTBOUND */
   SIDECAR_OUTBOUND = 'SIDECAR_OUTBOUND',
   /** GATEWAY */
-  GATEWAY = 'GATEWAY',
+  GATEWAY = 'GATEWAY'
 }
 
 /**
@@ -3445,23 +3681,26 @@ export interface EnvoyFilterSpecConfigPatchesMatchListener {
    * @schema EnvoyFilterSpecConfigPatchesMatchListener#portNumber
    */
   readonly portNumber?: number;
-
 }
 
 /**
  * Converts an object of type 'EnvoyFilterSpecConfigPatchesMatchListener' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_EnvoyFilterSpecConfigPatchesMatchListener(obj: EnvoyFilterSpecConfigPatchesMatchListener | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_EnvoyFilterSpecConfigPatchesMatchListener(
+  obj: EnvoyFilterSpecConfigPatchesMatchListener | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'filterChain': toJson_EnvoyFilterSpecConfigPatchesMatchListenerFilterChain(obj.filterChain),
-    'name': obj.name,
-    'portName': obj.portName,
-    'portNumber': obj.portNumber,
+    filterChain: toJson_EnvoyFilterSpecConfigPatchesMatchListenerFilterChain(obj.filterChain),
+    name: obj.name,
+    portName: obj.portName,
+    portNumber: obj.portNumber
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -3480,21 +3719,27 @@ export interface EnvoyFilterSpecConfigPatchesMatchProxy {
    * @schema EnvoyFilterSpecConfigPatchesMatchProxy#proxyVersion
    */
   readonly proxyVersion?: string;
-
 }
 
 /**
  * Converts an object of type 'EnvoyFilterSpecConfigPatchesMatchProxy' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_EnvoyFilterSpecConfigPatchesMatchProxy(obj: EnvoyFilterSpecConfigPatchesMatchProxy | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_EnvoyFilterSpecConfigPatchesMatchProxy(
+  obj: EnvoyFilterSpecConfigPatchesMatchProxy | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'metadata': ((obj.metadata) === undefined) ? undefined : (Object.entries(obj.metadata).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
-    'proxyVersion': obj.proxyVersion,
+    metadata:
+      obj.metadata === undefined
+        ? undefined
+        : Object.entries(obj.metadata).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {}),
+    proxyVersion: obj.proxyVersion
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -3532,24 +3777,27 @@ export interface EnvoyFilterSpecConfigPatchesMatchRouteConfiguration {
    * @schema EnvoyFilterSpecConfigPatchesMatchRouteConfiguration#vhost
    */
   readonly vhost?: EnvoyFilterSpecConfigPatchesMatchRouteConfigurationVhost;
-
 }
 
 /**
  * Converts an object of type 'EnvoyFilterSpecConfigPatchesMatchRouteConfiguration' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_EnvoyFilterSpecConfigPatchesMatchRouteConfiguration(obj: EnvoyFilterSpecConfigPatchesMatchRouteConfiguration | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_EnvoyFilterSpecConfigPatchesMatchRouteConfiguration(
+  obj: EnvoyFilterSpecConfigPatchesMatchRouteConfiguration | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'gateway': obj.gateway,
-    'name': obj.name,
-    'portName': obj.portName,
-    'portNumber': obj.portNumber,
-    'vhost': toJson_EnvoyFilterSpecConfigPatchesMatchRouteConfigurationVhost(obj.vhost),
+    gateway: obj.gateway,
+    name: obj.name,
+    portName: obj.portName,
+    portNumber: obj.portNumber,
+    vhost: toJson_EnvoyFilterSpecConfigPatchesMatchRouteConfigurationVhost(obj.vhost)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -3566,7 +3814,7 @@ export enum EnvoyFilterSpecConfigPatchesPatchFilterClass {
   /** AUTHZ */
   AUTHZ = 'AUTHZ',
   /** STATS */
-  STATS = 'STATS',
+  STATS = 'STATS'
 }
 
 /**
@@ -3590,7 +3838,7 @@ export enum EnvoyFilterSpecConfigPatchesPatchOperation {
   /** INSERT_FIRST */
   INSERT_FIRST = 'INSERT_FIRST',
   /** REPLACE */
-  REPLACE = 'REPLACE',
+  REPLACE = 'REPLACE'
 }
 
 /**
@@ -3640,25 +3888,28 @@ export interface EnvoyFilterSpecConfigPatchesMatchListenerFilterChain {
    * @schema EnvoyFilterSpecConfigPatchesMatchListenerFilterChain#transportProtocol
    */
   readonly transportProtocol?: string;
-
 }
 
 /**
  * Converts an object of type 'EnvoyFilterSpecConfigPatchesMatchListenerFilterChain' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_EnvoyFilterSpecConfigPatchesMatchListenerFilterChain(obj: EnvoyFilterSpecConfigPatchesMatchListenerFilterChain | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_EnvoyFilterSpecConfigPatchesMatchListenerFilterChain(
+  obj: EnvoyFilterSpecConfigPatchesMatchListenerFilterChain | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'applicationProtocols': obj.applicationProtocols,
-    'destinationPort': obj.destinationPort,
-    'filter': toJson_EnvoyFilterSpecConfigPatchesMatchListenerFilterChainFilter(obj.filter),
-    'name': obj.name,
-    'sni': obj.sni,
-    'transportProtocol': obj.transportProtocol,
+    applicationProtocols: obj.applicationProtocols,
+    destinationPort: obj.destinationPort,
+    filter: toJson_EnvoyFilterSpecConfigPatchesMatchListenerFilterChainFilter(obj.filter),
+    name: obj.name,
+    sni: obj.sni,
+    transportProtocol: obj.transportProtocol
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -3677,21 +3928,24 @@ export interface EnvoyFilterSpecConfigPatchesMatchRouteConfigurationVhost {
    * @schema EnvoyFilterSpecConfigPatchesMatchRouteConfigurationVhost#route
    */
   readonly route?: EnvoyFilterSpecConfigPatchesMatchRouteConfigurationVhostRoute;
-
 }
 
 /**
  * Converts an object of type 'EnvoyFilterSpecConfigPatchesMatchRouteConfigurationVhost' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_EnvoyFilterSpecConfigPatchesMatchRouteConfigurationVhost(obj: EnvoyFilterSpecConfigPatchesMatchRouteConfigurationVhost | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_EnvoyFilterSpecConfigPatchesMatchRouteConfigurationVhost(
+  obj: EnvoyFilterSpecConfigPatchesMatchRouteConfigurationVhost | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'name': obj.name,
-    'route': toJson_EnvoyFilterSpecConfigPatchesMatchRouteConfigurationVhostRoute(obj.route),
+    name: obj.name,
+    route: toJson_EnvoyFilterSpecConfigPatchesMatchRouteConfigurationVhostRoute(obj.route)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -3712,21 +3966,24 @@ export interface EnvoyFilterSpecConfigPatchesMatchListenerFilterChainFilter {
    * @schema EnvoyFilterSpecConfigPatchesMatchListenerFilterChainFilter#subFilter
    */
   readonly subFilter?: EnvoyFilterSpecConfigPatchesMatchListenerFilterChainFilterSubFilter;
-
 }
 
 /**
  * Converts an object of type 'EnvoyFilterSpecConfigPatchesMatchListenerFilterChainFilter' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_EnvoyFilterSpecConfigPatchesMatchListenerFilterChainFilter(obj: EnvoyFilterSpecConfigPatchesMatchListenerFilterChainFilter | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_EnvoyFilterSpecConfigPatchesMatchListenerFilterChainFilter(
+  obj: EnvoyFilterSpecConfigPatchesMatchListenerFilterChainFilter | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'name': obj.name,
-    'subFilter': toJson_EnvoyFilterSpecConfigPatchesMatchListenerFilterChainFilterSubFilter(obj.subFilter),
+    name: obj.name,
+    subFilter: toJson_EnvoyFilterSpecConfigPatchesMatchListenerFilterChainFilterSubFilter(obj.subFilter)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -3747,21 +4004,24 @@ export interface EnvoyFilterSpecConfigPatchesMatchRouteConfigurationVhostRoute {
    * @schema EnvoyFilterSpecConfigPatchesMatchRouteConfigurationVhostRoute#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'EnvoyFilterSpecConfigPatchesMatchRouteConfigurationVhostRoute' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_EnvoyFilterSpecConfigPatchesMatchRouteConfigurationVhostRoute(obj: EnvoyFilterSpecConfigPatchesMatchRouteConfigurationVhostRoute | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_EnvoyFilterSpecConfigPatchesMatchRouteConfigurationVhostRoute(
+  obj: EnvoyFilterSpecConfigPatchesMatchRouteConfigurationVhostRoute | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'action': obj.action,
-    'name': obj.name,
+    action: obj.action,
+    name: obj.name
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -3775,20 +4035,23 @@ export interface EnvoyFilterSpecConfigPatchesMatchListenerFilterChainFilterSubFi
    * @schema EnvoyFilterSpecConfigPatchesMatchListenerFilterChainFilterSubFilter#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'EnvoyFilterSpecConfigPatchesMatchListenerFilterChainFilterSubFilter' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_EnvoyFilterSpecConfigPatchesMatchListenerFilterChainFilterSubFilter(obj: EnvoyFilterSpecConfigPatchesMatchListenerFilterChainFilterSubFilter | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_EnvoyFilterSpecConfigPatchesMatchListenerFilterChainFilterSubFilter(
+  obj: EnvoyFilterSpecConfigPatchesMatchListenerFilterChainFilterSubFilter | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'name': obj.name,
+    name: obj.name
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -3805,9 +4068,8 @@ export enum EnvoyFilterSpecConfigPatchesMatchRouteConfigurationVhostRouteAction 
   /** REDIRECT */
   REDIRECT = 'REDIRECT',
   /** DIRECT_RESPONSE */
-  DIRECT_RESPONSE = 'DIRECT_RESPONSE',
+  DIRECT_RESPONSE = 'DIRECT_RESPONSE'
 }
-
 
 /**
  *
@@ -3820,8 +4082,8 @@ export class Gateway extends ApiObject {
    */
   public static readonly GVK: GroupVersionKind = {
     apiVersion: 'networking.istio.io/v1alpha3',
-    kind: 'Gateway',
-  }
+    kind: 'Gateway'
+  };
 
   /**
    * Renders a Kubernetes manifest for "Gateway".
@@ -3833,7 +4095,7 @@ export class Gateway extends ApiObject {
   public static manifest(props: GatewayProps = {}): any {
     return {
       ...Gateway.GVK,
-      ...toJson_GatewayProps(props),
+      ...toJson_GatewayProps(props)
     };
   }
 
@@ -3846,7 +4108,7 @@ export class Gateway extends ApiObject {
   public constructor(scope: Construct, id: string, props: GatewayProps = {}) {
     super(scope, id, {
       ...Gateway.GVK,
-      ...props,
+      ...props
     });
   }
 
@@ -3858,7 +4120,7 @@ export class Gateway extends ApiObject {
 
     return {
       ...Gateway.GVK,
-      ...toJson_GatewayProps(resolved),
+      ...toJson_GatewayProps(resolved)
     };
   }
 }
@@ -3878,7 +4140,6 @@ export interface GatewayProps {
    * @schema Gateway#metadata
    */
   readonly metadata?: ApiObjectMetadata;
-
 }
 
 /**
@@ -3886,13 +4147,15 @@ export interface GatewayProps {
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_GatewayProps(obj: GatewayProps | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'spec': toJson_GatewaySpec(obj.spec),
-    'metadata': obj.metadata,
+    spec: toJson_GatewaySpec(obj.spec),
+    metadata: obj.metadata
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -3913,7 +4176,6 @@ export interface GatewaySpec {
    * @schema GatewaySpec#servers
    */
   readonly servers?: GatewaySpecServers[];
-
 }
 
 /**
@@ -3921,13 +4183,18 @@ export interface GatewaySpec {
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_GatewaySpec(obj: GatewaySpec | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'selector': ((obj.selector) === undefined) ? undefined : (Object.entries(obj.selector).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
-    'servers': obj.servers?.map(y => toJson_GatewaySpecServers(y)),
+    selector:
+      obj.selector === undefined
+        ? undefined
+        : Object.entries(obj.selector).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {}),
+    servers: obj.servers?.map((y) => toJson_GatewaySpecServers(y))
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -3970,7 +4237,6 @@ export interface GatewaySpecServers {
    * @schema GatewaySpecServers#tls
    */
   readonly tls?: GatewaySpecServersTls;
-
 }
 
 /**
@@ -3978,17 +4244,19 @@ export interface GatewaySpecServers {
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_GatewaySpecServers(obj: GatewaySpecServers | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'bind': obj.bind,
-    'defaultEndpoint': obj.defaultEndpoint,
-    'hosts': obj.hosts?.map(y => y),
-    'name': obj.name,
-    'port': toJson_GatewaySpecServersPort(obj.port),
-    'tls': toJson_GatewaySpecServersTls(obj.tls),
+    bind: obj.bind,
+    defaultEndpoint: obj.defaultEndpoint,
+    hosts: obj.hosts?.map((y) => y),
+    name: obj.name,
+    port: toJson_GatewaySpecServersPort(obj.port),
+    tls: toJson_GatewaySpecServersTls(obj.tls)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -4021,23 +4289,26 @@ export interface GatewaySpecServersPort {
    * @schema GatewaySpecServersPort#targetPort
    */
   readonly targetPort?: number;
-
 }
 
 /**
  * Converts an object of type 'GatewaySpecServersPort' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_GatewaySpecServersPort(obj: GatewaySpecServersPort | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_GatewaySpecServersPort(
+  obj: GatewaySpecServersPort | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'name': obj.name,
-    'number': obj.number,
-    'protocol': obj.protocol,
-    'targetPort': obj.targetPort,
+    name: obj.name,
+    number: obj.number,
+    protocol: obj.protocol,
+    targetPort: obj.targetPort
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -4118,7 +4389,6 @@ export interface GatewaySpecServersTls {
    * @schema GatewaySpecServersTls#verifyCertificateSpki
    */
   readonly verifyCertificateSpki?: string[];
-
 }
 
 /**
@@ -4126,23 +4396,25 @@ export interface GatewaySpecServersTls {
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_GatewaySpecServersTls(obj: GatewaySpecServersTls | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'caCertificates': obj.caCertificates,
-    'cipherSuites': obj.cipherSuites?.map(y => y),
-    'credentialName': obj.credentialName,
-    'httpsRedirect': obj.httpsRedirect,
-    'maxProtocolVersion': obj.maxProtocolVersion,
-    'minProtocolVersion': obj.minProtocolVersion,
-    'mode': obj.mode,
-    'privateKey': obj.privateKey,
-    'serverCertificate': obj.serverCertificate,
-    'subjectAltNames': obj.subjectAltNames?.map(y => y),
-    'verifyCertificateHash': obj.verifyCertificateHash?.map(y => y),
-    'verifyCertificateSpki': obj.verifyCertificateSpki?.map(y => y),
+    caCertificates: obj.caCertificates,
+    cipherSuites: obj.cipherSuites?.map((y) => y),
+    credentialName: obj.credentialName,
+    httpsRedirect: obj.httpsRedirect,
+    maxProtocolVersion: obj.maxProtocolVersion,
+    minProtocolVersion: obj.minProtocolVersion,
+    mode: obj.mode,
+    privateKey: obj.privateKey,
+    serverCertificate: obj.serverCertificate,
+    subjectAltNames: obj.subjectAltNames?.map((y) => y),
+    verifyCertificateHash: obj.verifyCertificateHash?.map((y) => y),
+    verifyCertificateSpki: obj.verifyCertificateSpki?.map((y) => y)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -4161,7 +4433,7 @@ export enum GatewaySpecServersTlsMaxProtocolVersion {
   /** TLSV1_2 */
   TLSV1_2 = 'TLSV1_2',
   /** TLSV1_3 */
-  TLSV1_3 = 'TLSV1_3',
+  TLSV1_3 = 'TLSV1_3'
 }
 
 /**
@@ -4179,7 +4451,7 @@ export enum GatewaySpecServersTlsMinProtocolVersion {
   /** TLSV1_2 */
   TLSV1_2 = 'TLSV1_2',
   /** TLSV1_3 */
-  TLSV1_3 = 'TLSV1_3',
+  TLSV1_3 = 'TLSV1_3'
 }
 
 /**
@@ -4195,9 +4467,8 @@ export enum GatewaySpecServersTlsMode {
   /** AUTO_PASSTHROUGH */
   AUTO_PASSTHROUGH = 'AUTO_PASSTHROUGH',
   /** ISTIO_MUTUAL */
-  ISTIO_MUTUAL = 'ISTIO_MUTUAL',
+  ISTIO_MUTUAL = 'ISTIO_MUTUAL'
 }
-
 
 /**
  *
@@ -4210,8 +4481,8 @@ export class ServiceEntry extends ApiObject {
    */
   public static readonly GVK: GroupVersionKind = {
     apiVersion: 'networking.istio.io/v1alpha3',
-    kind: 'ServiceEntry',
-  }
+    kind: 'ServiceEntry'
+  };
 
   /**
    * Renders a Kubernetes manifest for "ServiceEntry".
@@ -4223,7 +4494,7 @@ export class ServiceEntry extends ApiObject {
   public static manifest(props: ServiceEntryProps = {}): any {
     return {
       ...ServiceEntry.GVK,
-      ...toJson_ServiceEntryProps(props),
+      ...toJson_ServiceEntryProps(props)
     };
   }
 
@@ -4236,7 +4507,7 @@ export class ServiceEntry extends ApiObject {
   public constructor(scope: Construct, id: string, props: ServiceEntryProps = {}) {
     super(scope, id, {
       ...ServiceEntry.GVK,
-      ...props,
+      ...props
     });
   }
 
@@ -4248,7 +4519,7 @@ export class ServiceEntry extends ApiObject {
 
     return {
       ...ServiceEntry.GVK,
-      ...toJson_ServiceEntryProps(resolved),
+      ...toJson_ServiceEntryProps(resolved)
     };
   }
 }
@@ -4268,7 +4539,6 @@ export interface ServiceEntryProps {
    * @schema ServiceEntry#metadata
    */
   readonly metadata?: ApiObjectMetadata;
-
 }
 
 /**
@@ -4276,13 +4546,15 @@ export interface ServiceEntryProps {
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_ServiceEntryProps(obj: ServiceEntryProps | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'spec': toJson_ServiceEntrySpec(obj.spec),
-    'metadata': obj.metadata,
+    spec: toJson_ServiceEntrySpec(obj.spec),
+    metadata: obj.metadata
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -4350,7 +4622,6 @@ export interface ServiceEntrySpec {
    * @schema ServiceEntrySpec#workloadSelector
    */
   readonly workloadSelector?: ServiceEntrySpecWorkloadSelector;
-
 }
 
 /**
@@ -4358,20 +4629,22 @@ export interface ServiceEntrySpec {
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_ServiceEntrySpec(obj: ServiceEntrySpec | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'addresses': obj.addresses?.map(y => y),
-    'endpoints': obj.endpoints?.map(y => toJson_ServiceEntrySpecEndpoints(y)),
-    'exportTo': obj.exportTo?.map(y => y),
-    'hosts': obj.hosts?.map(y => y),
-    'location': obj.location,
-    'ports': obj.ports?.map(y => toJson_ServiceEntrySpecPorts(y)),
-    'resolution': obj.resolution,
-    'subjectAltNames': obj.subjectAltNames?.map(y => y),
-    'workloadSelector': toJson_ServiceEntrySpecWorkloadSelector(obj.workloadSelector),
+    addresses: obj.addresses?.map((y) => y),
+    endpoints: obj.endpoints?.map((y) => toJson_ServiceEntrySpecEndpoints(y)),
+    exportTo: obj.exportTo?.map((y) => y),
+    hosts: obj.hosts?.map((y) => y),
+    location: obj.location,
+    ports: obj.ports?.map((y) => toJson_ServiceEntrySpecPorts(y)),
+    resolution: obj.resolution,
+    subjectAltNames: obj.subjectAltNames?.map((y) => y),
+    workloadSelector: toJson_ServiceEntrySpecWorkloadSelector(obj.workloadSelector)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -4421,26 +4694,35 @@ export interface ServiceEntrySpecEndpoints {
    * @schema ServiceEntrySpecEndpoints#weight
    */
   readonly weight?: number;
-
 }
 
 /**
  * Converts an object of type 'ServiceEntrySpecEndpoints' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_ServiceEntrySpecEndpoints(obj: ServiceEntrySpecEndpoints | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_ServiceEntrySpecEndpoints(
+  obj: ServiceEntrySpecEndpoints | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'address': obj.address,
-    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
-    'locality': obj.locality,
-    'network': obj.network,
-    'ports': ((obj.ports) === undefined) ? undefined : (Object.entries(obj.ports).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
-    'serviceAccount': obj.serviceAccount,
-    'weight': obj.weight,
+    address: obj.address,
+    labels:
+      obj.labels === undefined
+        ? undefined
+        : Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {}),
+    locality: obj.locality,
+    network: obj.network,
+    ports:
+      obj.ports === undefined
+        ? undefined
+        : Object.entries(obj.ports).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {}),
+    serviceAccount: obj.serviceAccount,
+    weight: obj.weight
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -4451,7 +4733,7 @@ export enum ServiceEntrySpecLocation {
   /** MESH_EXTERNAL */
   MESH_EXTERNAL = 'MESH_EXTERNAL',
   /** MESH_INTERNAL */
-  MESH_INTERNAL = 'MESH_INTERNAL',
+  MESH_INTERNAL = 'MESH_INTERNAL'
 }
 
 /**
@@ -4483,7 +4765,6 @@ export interface ServiceEntrySpecPorts {
    * @schema ServiceEntrySpecPorts#targetPort
    */
   readonly targetPort?: number;
-
 }
 
 /**
@@ -4491,15 +4772,17 @@ export interface ServiceEntrySpecPorts {
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_ServiceEntrySpecPorts(obj: ServiceEntrySpecPorts | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'name': obj.name,
-    'number': obj.number,
-    'protocol': obj.protocol,
-    'targetPort': obj.targetPort,
+    name: obj.name,
+    number: obj.number,
+    protocol: obj.protocol,
+    targetPort: obj.targetPort
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -4514,7 +4797,7 @@ export enum ServiceEntrySpecResolution {
   /** STATIC */
   STATIC = 'STATIC',
   /** DNS */
-  DNS = 'DNS',
+  DNS = 'DNS'
 }
 
 /**
@@ -4527,23 +4810,28 @@ export interface ServiceEntrySpecWorkloadSelector {
    * @schema ServiceEntrySpecWorkloadSelector#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'ServiceEntrySpecWorkloadSelector' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_ServiceEntrySpecWorkloadSelector(obj: ServiceEntrySpecWorkloadSelector | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_ServiceEntrySpecWorkloadSelector(
+  obj: ServiceEntrySpecWorkloadSelector | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    labels:
+      obj.labels === undefined
+        ? undefined
+        : Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {})
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
-
 
 /**
  *
@@ -4556,8 +4844,8 @@ export class Sidecar extends ApiObject {
    */
   public static readonly GVK: GroupVersionKind = {
     apiVersion: 'networking.istio.io/v1alpha3',
-    kind: 'Sidecar',
-  }
+    kind: 'Sidecar'
+  };
 
   /**
    * Renders a Kubernetes manifest for "Sidecar".
@@ -4569,7 +4857,7 @@ export class Sidecar extends ApiObject {
   public static manifest(props: SidecarProps = {}): any {
     return {
       ...Sidecar.GVK,
-      ...toJson_SidecarProps(props),
+      ...toJson_SidecarProps(props)
     };
   }
 
@@ -4582,7 +4870,7 @@ export class Sidecar extends ApiObject {
   public constructor(scope: Construct, id: string, props: SidecarProps = {}) {
     super(scope, id, {
       ...Sidecar.GVK,
-      ...props,
+      ...props
     });
   }
 
@@ -4594,7 +4882,7 @@ export class Sidecar extends ApiObject {
 
     return {
       ...Sidecar.GVK,
-      ...toJson_SidecarProps(resolved),
+      ...toJson_SidecarProps(resolved)
     };
   }
 }
@@ -4614,7 +4902,6 @@ export interface SidecarProps {
    * @schema Sidecar#metadata
    */
   readonly metadata?: ApiObjectMetadata;
-
 }
 
 /**
@@ -4622,13 +4909,15 @@ export interface SidecarProps {
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_SidecarProps(obj: SidecarProps | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'spec': toJson_SidecarSpec(obj.spec),
-    'metadata': obj.metadata,
+    spec: toJson_SidecarSpec(obj.spec),
+    metadata: obj.metadata
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -4659,7 +4948,6 @@ export interface SidecarSpec {
    * @schema SidecarSpec#workloadSelector
    */
   readonly workloadSelector?: SidecarSpecWorkloadSelector;
-
 }
 
 /**
@@ -4667,15 +4955,17 @@ export interface SidecarSpec {
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_SidecarSpec(obj: SidecarSpec | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'egress': obj.egress?.map(y => toJson_SidecarSpecEgress(y)),
-    'ingress': obj.ingress?.map(y => toJson_SidecarSpecIngress(y)),
-    'outboundTrafficPolicy': toJson_SidecarSpecOutboundTrafficPolicy(obj.outboundTrafficPolicy),
-    'workloadSelector': toJson_SidecarSpecWorkloadSelector(obj.workloadSelector),
+    egress: obj.egress?.map((y) => toJson_SidecarSpecEgress(y)),
+    ingress: obj.ingress?.map((y) => toJson_SidecarSpecIngress(y)),
+    outboundTrafficPolicy: toJson_SidecarSpecOutboundTrafficPolicy(obj.outboundTrafficPolicy),
+    workloadSelector: toJson_SidecarSpecWorkloadSelector(obj.workloadSelector)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -4704,7 +4994,6 @@ export interface SidecarSpecEgress {
    * @schema SidecarSpecEgress#port
    */
   readonly port?: SidecarSpecEgressPort;
-
 }
 
 /**
@@ -4712,15 +5001,17 @@ export interface SidecarSpecEgress {
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_SidecarSpecEgress(obj: SidecarSpecEgress | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'bind': obj.bind,
-    'captureMode': obj.captureMode,
-    'hosts': obj.hosts?.map(y => y),
-    'port': toJson_SidecarSpecEgressPort(obj.port),
+    bind: obj.bind,
+    captureMode: obj.captureMode,
+    hosts: obj.hosts?.map((y) => y),
+    port: toJson_SidecarSpecEgressPort(obj.port)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -4751,7 +5042,6 @@ export interface SidecarSpecIngress {
    * @schema SidecarSpecIngress#port
    */
   readonly port?: SidecarSpecIngressPort;
-
 }
 
 /**
@@ -4759,15 +5049,17 @@ export interface SidecarSpecIngress {
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_SidecarSpecIngress(obj: SidecarSpecIngress | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'bind': obj.bind,
-    'captureMode': obj.captureMode,
-    'defaultEndpoint': obj.defaultEndpoint,
-    'port': toJson_SidecarSpecIngressPort(obj.port),
+    bind: obj.bind,
+    captureMode: obj.captureMode,
+    defaultEndpoint: obj.defaultEndpoint,
+    port: toJson_SidecarSpecIngressPort(obj.port)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -4786,21 +5078,24 @@ export interface SidecarSpecOutboundTrafficPolicy {
    * @schema SidecarSpecOutboundTrafficPolicy#mode
    */
   readonly mode?: SidecarSpecOutboundTrafficPolicyMode;
-
 }
 
 /**
  * Converts an object of type 'SidecarSpecOutboundTrafficPolicy' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_SidecarSpecOutboundTrafficPolicy(obj: SidecarSpecOutboundTrafficPolicy | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_SidecarSpecOutboundTrafficPolicy(
+  obj: SidecarSpecOutboundTrafficPolicy | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'egressProxy': toJson_SidecarSpecOutboundTrafficPolicyEgressProxy(obj.egressProxy),
-    'mode': obj.mode,
+    egressProxy: toJson_SidecarSpecOutboundTrafficPolicyEgressProxy(obj.egressProxy),
+    mode: obj.mode
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -4812,20 +5107,26 @@ export interface SidecarSpecWorkloadSelector {
    * @schema SidecarSpecWorkloadSelector#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'SidecarSpecWorkloadSelector' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_SidecarSpecWorkloadSelector(obj: SidecarSpecWorkloadSelector | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_SidecarSpecWorkloadSelector(
+  obj: SidecarSpecWorkloadSelector | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    labels:
+      obj.labels === undefined
+        ? undefined
+        : Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {})
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -4838,7 +5139,7 @@ export enum SidecarSpecEgressCaptureMode {
   /** IPTABLES */
   IPTABLES = 'IPTABLES',
   /** NONE */
-  NONE = 'NONE',
+  NONE = 'NONE'
 }
 
 /**
@@ -4872,7 +5173,6 @@ export interface SidecarSpecEgressPort {
    * @schema SidecarSpecEgressPort#targetPort
    */
   readonly targetPort?: number;
-
 }
 
 /**
@@ -4880,15 +5180,17 @@ export interface SidecarSpecEgressPort {
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_SidecarSpecEgressPort(obj: SidecarSpecEgressPort | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'name': obj.name,
-    'number': obj.number,
-    'protocol': obj.protocol,
-    'targetPort': obj.targetPort,
+    name: obj.name,
+    number: obj.number,
+    protocol: obj.protocol,
+    targetPort: obj.targetPort
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -4901,7 +5203,7 @@ export enum SidecarSpecIngressCaptureMode {
   /** IPTABLES */
   IPTABLES = 'IPTABLES',
   /** NONE */
-  NONE = 'NONE',
+  NONE = 'NONE'
 }
 
 /**
@@ -4935,23 +5237,26 @@ export interface SidecarSpecIngressPort {
    * @schema SidecarSpecIngressPort#targetPort
    */
   readonly targetPort?: number;
-
 }
 
 /**
  * Converts an object of type 'SidecarSpecIngressPort' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_SidecarSpecIngressPort(obj: SidecarSpecIngressPort | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_SidecarSpecIngressPort(
+  obj: SidecarSpecIngressPort | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'name': obj.name,
-    'number': obj.number,
-    'protocol': obj.protocol,
-    'targetPort': obj.targetPort,
+    name: obj.name,
+    number: obj.number,
+    protocol: obj.protocol,
+    targetPort: obj.targetPort
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -4979,22 +5284,25 @@ export interface SidecarSpecOutboundTrafficPolicyEgressProxy {
    * @schema SidecarSpecOutboundTrafficPolicyEgressProxy#subset
    */
   readonly subset?: string;
-
 }
 
 /**
  * Converts an object of type 'SidecarSpecOutboundTrafficPolicyEgressProxy' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_SidecarSpecOutboundTrafficPolicyEgressProxy(obj: SidecarSpecOutboundTrafficPolicyEgressProxy | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_SidecarSpecOutboundTrafficPolicyEgressProxy(
+  obj: SidecarSpecOutboundTrafficPolicyEgressProxy | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'host': obj.host,
-    'port': toJson_SidecarSpecOutboundTrafficPolicyEgressProxyPort(obj.port),
-    'subset': obj.subset,
+    host: obj.host,
+    port: toJson_SidecarSpecOutboundTrafficPolicyEgressProxyPort(obj.port),
+    subset: obj.subset
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -5005,7 +5313,7 @@ export enum SidecarSpecOutboundTrafficPolicyMode {
   /** REGISTRY_ONLY */
   REGISTRY_ONLY = 'REGISTRY_ONLY',
   /** ALLOW_ANY */
-  ALLOW_ANY = 'ALLOW_ANY',
+  ALLOW_ANY = 'ALLOW_ANY'
 }
 
 /**
@@ -5018,23 +5326,25 @@ export interface SidecarSpecOutboundTrafficPolicyEgressProxyPort {
    * @schema SidecarSpecOutboundTrafficPolicyEgressProxyPort#number
    */
   readonly number?: number;
-
 }
 
 /**
  * Converts an object of type 'SidecarSpecOutboundTrafficPolicyEgressProxyPort' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_SidecarSpecOutboundTrafficPolicyEgressProxyPort(obj: SidecarSpecOutboundTrafficPolicyEgressProxyPort | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_SidecarSpecOutboundTrafficPolicyEgressProxyPort(
+  obj: SidecarSpecOutboundTrafficPolicyEgressProxyPort | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'number': obj.number,
+    number: obj.number
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
-
 
 /**
  *
@@ -5047,8 +5357,8 @@ export class VirtualService extends ApiObject {
    */
   public static readonly GVK: GroupVersionKind = {
     apiVersion: 'networking.istio.io/v1alpha3',
-    kind: 'VirtualService',
-  }
+    kind: 'VirtualService'
+  };
 
   /**
    * Renders a Kubernetes manifest for "VirtualService".
@@ -5060,7 +5370,7 @@ export class VirtualService extends ApiObject {
   public static manifest(props: VirtualServiceProps = {}): any {
     return {
       ...VirtualService.GVK,
-      ...toJson_VirtualServiceProps(props),
+      ...toJson_VirtualServiceProps(props)
     };
   }
 
@@ -5073,7 +5383,7 @@ export class VirtualService extends ApiObject {
   public constructor(scope: Construct, id: string, props: VirtualServiceProps = {}) {
     super(scope, id, {
       ...VirtualService.GVK,
-      ...props,
+      ...props
     });
   }
 
@@ -5085,7 +5395,7 @@ export class VirtualService extends ApiObject {
 
     return {
       ...VirtualService.GVK,
-      ...toJson_VirtualServiceProps(resolved),
+      ...toJson_VirtualServiceProps(resolved)
     };
   }
 }
@@ -5105,7 +5415,6 @@ export interface VirtualServiceProps {
    * @schema VirtualService#metadata
    */
   readonly metadata?: ApiObjectMetadata;
-
 }
 
 /**
@@ -5113,13 +5422,15 @@ export interface VirtualServiceProps {
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_VirtualServiceProps(obj: VirtualServiceProps | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'spec': toJson_VirtualServiceSpec(obj.spec),
-    'metadata': obj.metadata,
+    spec: toJson_VirtualServiceSpec(obj.spec),
+    metadata: obj.metadata
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -5168,7 +5479,6 @@ export interface VirtualServiceSpec {
    * @schema VirtualServiceSpec#tls
    */
   readonly tls?: VirtualServiceSpecTls[];
-
 }
 
 /**
@@ -5176,17 +5486,19 @@ export interface VirtualServiceSpec {
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_VirtualServiceSpec(obj: VirtualServiceSpec | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'exportTo': obj.exportTo?.map(y => y),
-    'gateways': obj.gateways?.map(y => y),
-    'hosts': obj.hosts?.map(y => y),
-    'http': obj.http?.map(y => toJson_VirtualServiceSpecHttp(y)),
-    'tcp': obj.tcp?.map(y => toJson_VirtualServiceSpecTcp(y)),
-    'tls': obj.tls?.map(y => toJson_VirtualServiceSpecTls(y)),
+    exportTo: obj.exportTo?.map((y) => y),
+    gateways: obj.gateways?.map((y) => y),
+    hosts: obj.hosts?.map((y) => y),
+    http: obj.http?.map((y) => toJson_VirtualServiceSpecHttp(y)),
+    tcp: obj.tcp?.map((y) => toJson_VirtualServiceSpecTcp(y)),
+    tls: obj.tls?.map((y) => toJson_VirtualServiceSpecTls(y))
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -5283,34 +5595,37 @@ export interface VirtualServiceSpecHttp {
    * @schema VirtualServiceSpecHttp#timeout
    */
   readonly timeout?: string;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttp' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttp(obj: VirtualServiceSpecHttp | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttp(
+  obj: VirtualServiceSpecHttp | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'corsPolicy': toJson_VirtualServiceSpecHttpCorsPolicy(obj.corsPolicy),
-    'delegate': toJson_VirtualServiceSpecHttpDelegate(obj.delegate),
-    'fault': toJson_VirtualServiceSpecHttpFault(obj.fault),
-    'headers': toJson_VirtualServiceSpecHttpHeaders(obj.headers),
-    'match': obj.match?.map(y => toJson_VirtualServiceSpecHttpMatch(y)),
-    'mirror': toJson_VirtualServiceSpecHttpMirror(obj.mirror),
-    'mirror_percent': obj.mirrorPercent,
-    'mirrorPercent': obj.mirrorPercent,
-    'mirrorPercentage': toJson_VirtualServiceSpecHttpMirrorPercentage(obj.mirrorPercentage),
-    'name': obj.name,
-    'redirect': toJson_VirtualServiceSpecHttpRedirect(obj.redirect),
-    'retries': toJson_VirtualServiceSpecHttpRetries(obj.retries),
-    'rewrite': toJson_VirtualServiceSpecHttpRewrite(obj.rewrite),
-    'route': obj.route?.map(y => toJson_VirtualServiceSpecHttpRoute(y)),
-    'timeout': obj.timeout,
+    corsPolicy: toJson_VirtualServiceSpecHttpCorsPolicy(obj.corsPolicy),
+    delegate: toJson_VirtualServiceSpecHttpDelegate(obj.delegate),
+    fault: toJson_VirtualServiceSpecHttpFault(obj.fault),
+    headers: toJson_VirtualServiceSpecHttpHeaders(obj.headers),
+    match: obj.match?.map((y) => toJson_VirtualServiceSpecHttpMatch(y)),
+    mirror: toJson_VirtualServiceSpecHttpMirror(obj.mirror),
+    mirror_percent: obj.mirrorPercent,
+    mirrorPercent: obj.mirrorPercent,
+    mirrorPercentage: toJson_VirtualServiceSpecHttpMirrorPercentage(obj.mirrorPercentage),
+    name: obj.name,
+    redirect: toJson_VirtualServiceSpecHttpRedirect(obj.redirect),
+    retries: toJson_VirtualServiceSpecHttpRetries(obj.retries),
+    rewrite: toJson_VirtualServiceSpecHttpRewrite(obj.rewrite),
+    route: obj.route?.map((y) => toJson_VirtualServiceSpecHttpRoute(y)),
+    timeout: obj.timeout
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -5329,7 +5644,6 @@ export interface VirtualServiceSpecTcp {
    * @schema VirtualServiceSpecTcp#route
    */
   readonly route?: VirtualServiceSpecTcpRoute[];
-
 }
 
 /**
@@ -5337,13 +5651,15 @@ export interface VirtualServiceSpecTcp {
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_VirtualServiceSpecTcp(obj: VirtualServiceSpecTcp | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'match': obj.match?.map(y => toJson_VirtualServiceSpecTcpMatch(y)),
-    'route': obj.route?.map(y => toJson_VirtualServiceSpecTcpRoute(y)),
+    match: obj.match?.map((y) => toJson_VirtualServiceSpecTcpMatch(y)),
+    route: obj.route?.map((y) => toJson_VirtualServiceSpecTcpRoute(y))
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -5362,7 +5678,6 @@ export interface VirtualServiceSpecTls {
    * @schema VirtualServiceSpecTls#route
    */
   readonly route?: VirtualServiceSpecTlsRoute[];
-
 }
 
 /**
@@ -5370,13 +5685,15 @@ export interface VirtualServiceSpecTls {
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_VirtualServiceSpecTls(obj: VirtualServiceSpecTls | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'match': obj.match?.map(y => toJson_VirtualServiceSpecTlsMatch(y)),
-    'route': obj.route?.map(y => toJson_VirtualServiceSpecTlsRoute(y)),
+    match: obj.match?.map((y) => toJson_VirtualServiceSpecTlsMatch(y)),
+    route: obj.route?.map((y) => toJson_VirtualServiceSpecTlsRoute(y))
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -5426,26 +5743,29 @@ export interface VirtualServiceSpecHttpCorsPolicy {
    * @schema VirtualServiceSpecHttpCorsPolicy#maxAge
    */
   readonly maxAge?: string;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpCorsPolicy' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpCorsPolicy(obj: VirtualServiceSpecHttpCorsPolicy | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpCorsPolicy(
+  obj: VirtualServiceSpecHttpCorsPolicy | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'allowCredentials': obj.allowCredentials,
-    'allowHeaders': obj.allowHeaders?.map(y => y),
-    'allowMethods': obj.allowMethods?.map(y => y),
-    'allowOrigin': obj.allowOrigin?.map(y => y),
-    'allowOrigins': obj.allowOrigins?.map(y => toJson_VirtualServiceSpecHttpCorsPolicyAllowOrigins(y)),
-    'exposeHeaders': obj.exposeHeaders?.map(y => y),
-    'maxAge': obj.maxAge,
+    allowCredentials: obj.allowCredentials,
+    allowHeaders: obj.allowHeaders?.map((y) => y),
+    allowMethods: obj.allowMethods?.map((y) => y),
+    allowOrigin: obj.allowOrigin?.map((y) => y),
+    allowOrigins: obj.allowOrigins?.map((y) => toJson_VirtualServiceSpecHttpCorsPolicyAllowOrigins(y)),
+    exposeHeaders: obj.exposeHeaders?.map((y) => y),
+    maxAge: obj.maxAge
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -5466,21 +5786,24 @@ export interface VirtualServiceSpecHttpDelegate {
    * @schema VirtualServiceSpecHttpDelegate#namespace
    */
   readonly namespace?: string;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpDelegate' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpDelegate(obj: VirtualServiceSpecHttpDelegate | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpDelegate(
+  obj: VirtualServiceSpecHttpDelegate | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'name': obj.name,
-    'namespace': obj.namespace,
+    name: obj.name,
+    namespace: obj.namespace
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -5499,21 +5822,24 @@ export interface VirtualServiceSpecHttpFault {
    * @schema VirtualServiceSpecHttpFault#delay
    */
   readonly delay?: VirtualServiceSpecHttpFaultDelay;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpFault' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpFault(obj: VirtualServiceSpecHttpFault | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpFault(
+  obj: VirtualServiceSpecHttpFault | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'abort': toJson_VirtualServiceSpecHttpFaultAbort(obj.abort),
-    'delay': toJson_VirtualServiceSpecHttpFaultDelay(obj.delay),
+    abort: toJson_VirtualServiceSpecHttpFaultAbort(obj.abort),
+    delay: toJson_VirtualServiceSpecHttpFaultDelay(obj.delay)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -5530,21 +5856,24 @@ export interface VirtualServiceSpecHttpHeaders {
    * @schema VirtualServiceSpecHttpHeaders#response
    */
   readonly response?: VirtualServiceSpecHttpHeadersResponse;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpHeaders' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpHeaders(obj: VirtualServiceSpecHttpHeaders | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpHeaders(
+  obj: VirtualServiceSpecHttpHeaders | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'request': toJson_VirtualServiceSpecHttpHeadersRequest(obj.request),
-    'response': toJson_VirtualServiceSpecHttpHeadersResponse(obj.response),
+    request: toJson_VirtualServiceSpecHttpHeadersRequest(obj.request),
+    response: toJson_VirtualServiceSpecHttpHeadersResponse(obj.response)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -5630,32 +5959,57 @@ export interface VirtualServiceSpecHttpMatch {
    * @schema VirtualServiceSpecHttpMatch#withoutHeaders
    */
   readonly withoutHeaders?: { [key: string]: VirtualServiceSpecHttpMatchWithoutHeaders };
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpMatch' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpMatch(obj: VirtualServiceSpecHttpMatch | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpMatch(
+  obj: VirtualServiceSpecHttpMatch | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'authority': toJson_VirtualServiceSpecHttpMatchAuthority(obj.authority),
-    'gateways': obj.gateways?.map(y => y),
-    'headers': ((obj.headers) === undefined) ? undefined : (Object.entries(obj.headers).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_VirtualServiceSpecHttpMatchHeaders(i[1]) }), {})),
-    'ignoreUriCase': obj.ignoreUriCase,
-    'method': toJson_VirtualServiceSpecHttpMatchMethod(obj.method),
-    'name': obj.name,
-    'port': obj.port,
-    'queryParams': ((obj.queryParams) === undefined) ? undefined : (Object.entries(obj.queryParams).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_VirtualServiceSpecHttpMatchQueryParams(i[1]) }), {})),
-    'scheme': toJson_VirtualServiceSpecHttpMatchScheme(obj.scheme),
-    'sourceLabels': ((obj.sourceLabels) === undefined) ? undefined : (Object.entries(obj.sourceLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
-    'sourceNamespace': obj.sourceNamespace,
-    'uri': toJson_VirtualServiceSpecHttpMatchUri(obj.uri),
-    'withoutHeaders': ((obj.withoutHeaders) === undefined) ? undefined : (Object.entries(obj.withoutHeaders).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_VirtualServiceSpecHttpMatchWithoutHeaders(i[1]) }), {})),
+    authority: toJson_VirtualServiceSpecHttpMatchAuthority(obj.authority),
+    gateways: obj.gateways?.map((y) => y),
+    headers:
+      obj.headers === undefined
+        ? undefined
+        : Object.entries(obj.headers).reduce(
+            (r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: toJson_VirtualServiceSpecHttpMatchHeaders(i[1]) }),
+            {}
+          ),
+    ignoreUriCase: obj.ignoreUriCase,
+    method: toJson_VirtualServiceSpecHttpMatchMethod(obj.method),
+    name: obj.name,
+    port: obj.port,
+    queryParams:
+      obj.queryParams === undefined
+        ? undefined
+        : Object.entries(obj.queryParams).reduce(
+            (r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: toJson_VirtualServiceSpecHttpMatchQueryParams(i[1]) }),
+            {}
+          ),
+    scheme: toJson_VirtualServiceSpecHttpMatchScheme(obj.scheme),
+    sourceLabels:
+      obj.sourceLabels === undefined
+        ? undefined
+        : Object.entries(obj.sourceLabels).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {}),
+    sourceNamespace: obj.sourceNamespace,
+    uri: toJson_VirtualServiceSpecHttpMatchUri(obj.uri),
+    withoutHeaders:
+      obj.withoutHeaders === undefined
+        ? undefined
+        : Object.entries(obj.withoutHeaders).reduce(
+            (r, i) =>
+              i[1] === undefined ? r : { ...r, [i[0]]: toJson_VirtualServiceSpecHttpMatchWithoutHeaders(i[1]) },
+            {}
+          )
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -5683,22 +6037,25 @@ export interface VirtualServiceSpecHttpMirror {
    * @schema VirtualServiceSpecHttpMirror#subset
    */
   readonly subset?: string;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpMirror' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpMirror(obj: VirtualServiceSpecHttpMirror | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpMirror(
+  obj: VirtualServiceSpecHttpMirror | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'host': obj.host,
-    'port': toJson_VirtualServiceSpecHttpMirrorPort(obj.port),
-    'subset': obj.subset,
+    host: obj.host,
+    port: toJson_VirtualServiceSpecHttpMirrorPort(obj.port),
+    subset: obj.subset
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -5712,20 +6069,23 @@ export interface VirtualServiceSpecHttpMirrorPercentage {
    * @schema VirtualServiceSpecHttpMirrorPercentage#value
    */
   readonly value?: number;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpMirrorPercentage' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpMirrorPercentage(obj: VirtualServiceSpecHttpMirrorPercentage | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpMirrorPercentage(
+  obj: VirtualServiceSpecHttpMirrorPercentage | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'value': obj.value,
+    value: obj.value
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -5749,22 +6109,25 @@ export interface VirtualServiceSpecHttpRedirect {
    * @schema VirtualServiceSpecHttpRedirect#uri
    */
   readonly uri?: string;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpRedirect' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpRedirect(obj: VirtualServiceSpecHttpRedirect | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpRedirect(
+  obj: VirtualServiceSpecHttpRedirect | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'authority': obj.authority,
-    'redirectCode': obj.redirectCode,
-    'uri': obj.uri,
+    authority: obj.authority,
+    redirectCode: obj.redirectCode,
+    uri: obj.uri
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -5801,23 +6164,26 @@ export interface VirtualServiceSpecHttpRetries {
    * @schema VirtualServiceSpecHttpRetries#retryRemoteLocalities
    */
   readonly retryRemoteLocalities?: boolean;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpRetries' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpRetries(obj: VirtualServiceSpecHttpRetries | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpRetries(
+  obj: VirtualServiceSpecHttpRetries | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'attempts': obj.attempts,
-    'perTryTimeout': obj.perTryTimeout,
-    'retryOn': obj.retryOn,
-    'retryRemoteLocalities': obj.retryRemoteLocalities,
+    attempts: obj.attempts,
+    perTryTimeout: obj.perTryTimeout,
+    retryOn: obj.retryOn,
+    retryRemoteLocalities: obj.retryRemoteLocalities
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -5838,21 +6204,24 @@ export interface VirtualServiceSpecHttpRewrite {
    * @schema VirtualServiceSpecHttpRewrite#uri
    */
   readonly uri?: string;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpRewrite' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpRewrite(obj: VirtualServiceSpecHttpRewrite | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpRewrite(
+  obj: VirtualServiceSpecHttpRewrite | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'authority': obj.authority,
-    'uri': obj.uri,
+    authority: obj.authority,
+    uri: obj.uri
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -5874,22 +6243,25 @@ export interface VirtualServiceSpecHttpRoute {
    * @schema VirtualServiceSpecHttpRoute#weight
    */
   readonly weight?: number;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpRoute' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpRoute(obj: VirtualServiceSpecHttpRoute | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpRoute(
+  obj: VirtualServiceSpecHttpRoute | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'destination': toJson_VirtualServiceSpecHttpRouteDestination(obj.destination),
-    'headers': toJson_VirtualServiceSpecHttpRouteHeaders(obj.headers),
-    'weight': obj.weight,
+    destination: toJson_VirtualServiceSpecHttpRouteDestination(obj.destination),
+    headers: toJson_VirtualServiceSpecHttpRouteHeaders(obj.headers),
+    weight: obj.weight
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -5936,25 +6308,31 @@ export interface VirtualServiceSpecTcpMatch {
    * @schema VirtualServiceSpecTcpMatch#sourceSubnet
    */
   readonly sourceSubnet?: string;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecTcpMatch' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecTcpMatch(obj: VirtualServiceSpecTcpMatch | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecTcpMatch(
+  obj: VirtualServiceSpecTcpMatch | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'destinationSubnets': obj.destinationSubnets?.map(y => y),
-    'gateways': obj.gateways?.map(y => y),
-    'port': obj.port,
-    'sourceLabels': ((obj.sourceLabels) === undefined) ? undefined : (Object.entries(obj.sourceLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
-    'sourceNamespace': obj.sourceNamespace,
-    'sourceSubnet': obj.sourceSubnet,
+    destinationSubnets: obj.destinationSubnets?.map((y) => y),
+    gateways: obj.gateways?.map((y) => y),
+    port: obj.port,
+    sourceLabels:
+      obj.sourceLabels === undefined
+        ? undefined
+        : Object.entries(obj.sourceLabels).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {}),
+    sourceNamespace: obj.sourceNamespace,
+    sourceSubnet: obj.sourceSubnet
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -5971,21 +6349,24 @@ export interface VirtualServiceSpecTcpRoute {
    * @schema VirtualServiceSpecTcpRoute#weight
    */
   readonly weight?: number;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecTcpRoute' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecTcpRoute(obj: VirtualServiceSpecTcpRoute | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecTcpRoute(
+  obj: VirtualServiceSpecTcpRoute | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'destination': toJson_VirtualServiceSpecTcpRouteDestination(obj.destination),
-    'weight': obj.weight,
+    destination: toJson_VirtualServiceSpecTcpRouteDestination(obj.destination),
+    weight: obj.weight
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -6032,25 +6413,31 @@ export interface VirtualServiceSpecTlsMatch {
    * @schema VirtualServiceSpecTlsMatch#sourceNamespace
    */
   readonly sourceNamespace?: string;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecTlsMatch' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecTlsMatch(obj: VirtualServiceSpecTlsMatch | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecTlsMatch(
+  obj: VirtualServiceSpecTlsMatch | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'destinationSubnets': obj.destinationSubnets?.map(y => y),
-    'gateways': obj.gateways?.map(y => y),
-    'port': obj.port,
-    'sniHosts': obj.sniHosts?.map(y => y),
-    'sourceLabels': ((obj.sourceLabels) === undefined) ? undefined : (Object.entries(obj.sourceLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
-    'sourceNamespace': obj.sourceNamespace,
+    destinationSubnets: obj.destinationSubnets?.map((y) => y),
+    gateways: obj.gateways?.map((y) => y),
+    port: obj.port,
+    sniHosts: obj.sniHosts?.map((y) => y),
+    sourceLabels:
+      obj.sourceLabels === undefined
+        ? undefined
+        : Object.entries(obj.sourceLabels).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {}),
+    sourceNamespace: obj.sourceNamespace
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -6067,21 +6454,24 @@ export interface VirtualServiceSpecTlsRoute {
    * @schema VirtualServiceSpecTlsRoute#weight
    */
   readonly weight?: number;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecTlsRoute' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecTlsRoute(obj: VirtualServiceSpecTlsRoute | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecTlsRoute(
+  obj: VirtualServiceSpecTlsRoute | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'destination': toJson_VirtualServiceSpecTlsRouteDestination(obj.destination),
-    'weight': obj.weight,
+    destination: toJson_VirtualServiceSpecTlsRouteDestination(obj.destination),
+    weight: obj.weight
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -6105,22 +6495,25 @@ export interface VirtualServiceSpecHttpCorsPolicyAllowOrigins {
    * @schema VirtualServiceSpecHttpCorsPolicyAllowOrigins#regex
    */
   readonly regex?: string;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpCorsPolicyAllowOrigins' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpCorsPolicyAllowOrigins(obj: VirtualServiceSpecHttpCorsPolicyAllowOrigins | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpCorsPolicyAllowOrigins(
+  obj: VirtualServiceSpecHttpCorsPolicyAllowOrigins | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'exact': obj.exact,
-    'prefix': obj.prefix,
-    'regex': obj.regex,
+    exact: obj.exact,
+    prefix: obj.prefix,
+    regex: obj.regex
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -6151,23 +6544,26 @@ export interface VirtualServiceSpecHttpFaultAbort {
    * @schema VirtualServiceSpecHttpFaultAbort#percentage
    */
   readonly percentage?: VirtualServiceSpecHttpFaultAbortPercentage;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpFaultAbort' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpFaultAbort(obj: VirtualServiceSpecHttpFaultAbort | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpFaultAbort(
+  obj: VirtualServiceSpecHttpFaultAbort | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'grpcStatus': obj.grpcStatus,
-    'http2Error': obj.http2Error,
-    'httpStatus': obj.httpStatus,
-    'percentage': toJson_VirtualServiceSpecHttpFaultAbortPercentage(obj.percentage),
+    grpcStatus: obj.grpcStatus,
+    http2Error: obj.http2Error,
+    httpStatus: obj.httpStatus,
+    percentage: toJson_VirtualServiceSpecHttpFaultAbortPercentage(obj.percentage)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -6200,23 +6596,26 @@ export interface VirtualServiceSpecHttpFaultDelay {
    * @schema VirtualServiceSpecHttpFaultDelay#percentage
    */
   readonly percentage?: VirtualServiceSpecHttpFaultDelayPercentage;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpFaultDelay' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpFaultDelay(obj: VirtualServiceSpecHttpFaultDelay | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpFaultDelay(
+  obj: VirtualServiceSpecHttpFaultDelay | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'exponentialDelay': obj.exponentialDelay,
-    'fixedDelay': obj.fixedDelay,
-    'percent': obj.percent,
-    'percentage': toJson_VirtualServiceSpecHttpFaultDelayPercentage(obj.percentage),
+    exponentialDelay: obj.exponentialDelay,
+    fixedDelay: obj.fixedDelay,
+    percent: obj.percent,
+    percentage: toJson_VirtualServiceSpecHttpFaultDelayPercentage(obj.percentage)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -6238,22 +6637,31 @@ export interface VirtualServiceSpecHttpHeadersRequest {
    * @schema VirtualServiceSpecHttpHeadersRequest#set
    */
   readonly set?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpHeadersRequest' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpHeadersRequest(obj: VirtualServiceSpecHttpHeadersRequest | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpHeadersRequest(
+  obj: VirtualServiceSpecHttpHeadersRequest | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'add': ((obj.add) === undefined) ? undefined : (Object.entries(obj.add).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
-    'remove': obj.remove?.map(y => y),
-    'set': ((obj.set) === undefined) ? undefined : (Object.entries(obj.set).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    add:
+      obj.add === undefined
+        ? undefined
+        : Object.entries(obj.add).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {}),
+    remove: obj.remove?.map((y) => y),
+    set:
+      obj.set === undefined
+        ? undefined
+        : Object.entries(obj.set).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {})
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -6275,22 +6683,31 @@ export interface VirtualServiceSpecHttpHeadersResponse {
    * @schema VirtualServiceSpecHttpHeadersResponse#set
    */
   readonly set?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpHeadersResponse' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpHeadersResponse(obj: VirtualServiceSpecHttpHeadersResponse | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpHeadersResponse(
+  obj: VirtualServiceSpecHttpHeadersResponse | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'add': ((obj.add) === undefined) ? undefined : (Object.entries(obj.add).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
-    'remove': obj.remove?.map(y => y),
-    'set': ((obj.set) === undefined) ? undefined : (Object.entries(obj.set).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    add:
+      obj.add === undefined
+        ? undefined
+        : Object.entries(obj.add).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {}),
+    remove: obj.remove?.map((y) => y),
+    set:
+      obj.set === undefined
+        ? undefined
+        : Object.entries(obj.set).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {})
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -6314,22 +6731,25 @@ export interface VirtualServiceSpecHttpMatchAuthority {
    * @schema VirtualServiceSpecHttpMatchAuthority#regex
    */
   readonly regex?: string;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpMatchAuthority' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpMatchAuthority(obj: VirtualServiceSpecHttpMatchAuthority | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpMatchAuthority(
+  obj: VirtualServiceSpecHttpMatchAuthority | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'exact': obj.exact,
-    'prefix': obj.prefix,
-    'regex': obj.regex,
+    exact: obj.exact,
+    prefix: obj.prefix,
+    regex: obj.regex
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -6353,22 +6773,25 @@ export interface VirtualServiceSpecHttpMatchHeaders {
    * @schema VirtualServiceSpecHttpMatchHeaders#regex
    */
   readonly regex?: string;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpMatchHeaders' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpMatchHeaders(obj: VirtualServiceSpecHttpMatchHeaders | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpMatchHeaders(
+  obj: VirtualServiceSpecHttpMatchHeaders | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'exact': obj.exact,
-    'prefix': obj.prefix,
-    'regex': obj.regex,
+    exact: obj.exact,
+    prefix: obj.prefix,
+    regex: obj.regex
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -6392,22 +6815,25 @@ export interface VirtualServiceSpecHttpMatchMethod {
    * @schema VirtualServiceSpecHttpMatchMethod#regex
    */
   readonly regex?: string;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpMatchMethod' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpMatchMethod(obj: VirtualServiceSpecHttpMatchMethod | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpMatchMethod(
+  obj: VirtualServiceSpecHttpMatchMethod | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'exact': obj.exact,
-    'prefix': obj.prefix,
-    'regex': obj.regex,
+    exact: obj.exact,
+    prefix: obj.prefix,
+    regex: obj.regex
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -6431,22 +6857,25 @@ export interface VirtualServiceSpecHttpMatchQueryParams {
    * @schema VirtualServiceSpecHttpMatchQueryParams#regex
    */
   readonly regex?: string;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpMatchQueryParams' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpMatchQueryParams(obj: VirtualServiceSpecHttpMatchQueryParams | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpMatchQueryParams(
+  obj: VirtualServiceSpecHttpMatchQueryParams | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'exact': obj.exact,
-    'prefix': obj.prefix,
-    'regex': obj.regex,
+    exact: obj.exact,
+    prefix: obj.prefix,
+    regex: obj.regex
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -6470,22 +6899,25 @@ export interface VirtualServiceSpecHttpMatchScheme {
    * @schema VirtualServiceSpecHttpMatchScheme#regex
    */
   readonly regex?: string;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpMatchScheme' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpMatchScheme(obj: VirtualServiceSpecHttpMatchScheme | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpMatchScheme(
+  obj: VirtualServiceSpecHttpMatchScheme | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'exact': obj.exact,
-    'prefix': obj.prefix,
-    'regex': obj.regex,
+    exact: obj.exact,
+    prefix: obj.prefix,
+    regex: obj.regex
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -6509,22 +6941,25 @@ export interface VirtualServiceSpecHttpMatchUri {
    * @schema VirtualServiceSpecHttpMatchUri#regex
    */
   readonly regex?: string;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpMatchUri' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpMatchUri(obj: VirtualServiceSpecHttpMatchUri | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpMatchUri(
+  obj: VirtualServiceSpecHttpMatchUri | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'exact': obj.exact,
-    'prefix': obj.prefix,
-    'regex': obj.regex,
+    exact: obj.exact,
+    prefix: obj.prefix,
+    regex: obj.regex
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -6548,22 +6983,25 @@ export interface VirtualServiceSpecHttpMatchWithoutHeaders {
    * @schema VirtualServiceSpecHttpMatchWithoutHeaders#regex
    */
   readonly regex?: string;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpMatchWithoutHeaders' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpMatchWithoutHeaders(obj: VirtualServiceSpecHttpMatchWithoutHeaders | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpMatchWithoutHeaders(
+  obj: VirtualServiceSpecHttpMatchWithoutHeaders | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'exact': obj.exact,
-    'prefix': obj.prefix,
-    'regex': obj.regex,
+    exact: obj.exact,
+    prefix: obj.prefix,
+    regex: obj.regex
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -6577,20 +7015,23 @@ export interface VirtualServiceSpecHttpMirrorPort {
    * @schema VirtualServiceSpecHttpMirrorPort#number
    */
   readonly number?: number;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpMirrorPort' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpMirrorPort(obj: VirtualServiceSpecHttpMirrorPort | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpMirrorPort(
+  obj: VirtualServiceSpecHttpMirrorPort | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'number': obj.number,
+    number: obj.number
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -6618,22 +7059,25 @@ export interface VirtualServiceSpecHttpRouteDestination {
    * @schema VirtualServiceSpecHttpRouteDestination#subset
    */
   readonly subset?: string;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpRouteDestination' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpRouteDestination(obj: VirtualServiceSpecHttpRouteDestination | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpRouteDestination(
+  obj: VirtualServiceSpecHttpRouteDestination | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'host': obj.host,
-    'port': toJson_VirtualServiceSpecHttpRouteDestinationPort(obj.port),
-    'subset': obj.subset,
+    host: obj.host,
+    port: toJson_VirtualServiceSpecHttpRouteDestinationPort(obj.port),
+    subset: obj.subset
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -6650,21 +7094,24 @@ export interface VirtualServiceSpecHttpRouteHeaders {
    * @schema VirtualServiceSpecHttpRouteHeaders#response
    */
   readonly response?: VirtualServiceSpecHttpRouteHeadersResponse;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpRouteHeaders' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpRouteHeaders(obj: VirtualServiceSpecHttpRouteHeaders | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpRouteHeaders(
+  obj: VirtualServiceSpecHttpRouteHeaders | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'request': toJson_VirtualServiceSpecHttpRouteHeadersRequest(obj.request),
-    'response': toJson_VirtualServiceSpecHttpRouteHeadersResponse(obj.response),
+    request: toJson_VirtualServiceSpecHttpRouteHeadersRequest(obj.request),
+    response: toJson_VirtualServiceSpecHttpRouteHeadersResponse(obj.response)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -6692,22 +7139,25 @@ export interface VirtualServiceSpecTcpRouteDestination {
    * @schema VirtualServiceSpecTcpRouteDestination#subset
    */
   readonly subset?: string;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecTcpRouteDestination' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecTcpRouteDestination(obj: VirtualServiceSpecTcpRouteDestination | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecTcpRouteDestination(
+  obj: VirtualServiceSpecTcpRouteDestination | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'host': obj.host,
-    'port': toJson_VirtualServiceSpecTcpRouteDestinationPort(obj.port),
-    'subset': obj.subset,
+    host: obj.host,
+    port: toJson_VirtualServiceSpecTcpRouteDestinationPort(obj.port),
+    subset: obj.subset
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -6735,22 +7185,25 @@ export interface VirtualServiceSpecTlsRouteDestination {
    * @schema VirtualServiceSpecTlsRouteDestination#subset
    */
   readonly subset?: string;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecTlsRouteDestination' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecTlsRouteDestination(obj: VirtualServiceSpecTlsRouteDestination | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecTlsRouteDestination(
+  obj: VirtualServiceSpecTlsRouteDestination | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'host': obj.host,
-    'port': toJson_VirtualServiceSpecTlsRouteDestinationPort(obj.port),
-    'subset': obj.subset,
+    host: obj.host,
+    port: toJson_VirtualServiceSpecTlsRouteDestinationPort(obj.port),
+    subset: obj.subset
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -6764,20 +7217,23 @@ export interface VirtualServiceSpecHttpFaultAbortPercentage {
    * @schema VirtualServiceSpecHttpFaultAbortPercentage#value
    */
   readonly value?: number;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpFaultAbortPercentage' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpFaultAbortPercentage(obj: VirtualServiceSpecHttpFaultAbortPercentage | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpFaultAbortPercentage(
+  obj: VirtualServiceSpecHttpFaultAbortPercentage | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'value': obj.value,
+    value: obj.value
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -6791,20 +7247,23 @@ export interface VirtualServiceSpecHttpFaultDelayPercentage {
    * @schema VirtualServiceSpecHttpFaultDelayPercentage#value
    */
   readonly value?: number;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpFaultDelayPercentage' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpFaultDelayPercentage(obj: VirtualServiceSpecHttpFaultDelayPercentage | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpFaultDelayPercentage(
+  obj: VirtualServiceSpecHttpFaultDelayPercentage | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'value': obj.value,
+    value: obj.value
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -6818,20 +7277,23 @@ export interface VirtualServiceSpecHttpRouteDestinationPort {
    * @schema VirtualServiceSpecHttpRouteDestinationPort#number
    */
   readonly number?: number;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpRouteDestinationPort' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpRouteDestinationPort(obj: VirtualServiceSpecHttpRouteDestinationPort | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpRouteDestinationPort(
+  obj: VirtualServiceSpecHttpRouteDestinationPort | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'number': obj.number,
+    number: obj.number
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -6853,22 +7315,31 @@ export interface VirtualServiceSpecHttpRouteHeadersRequest {
    * @schema VirtualServiceSpecHttpRouteHeadersRequest#set
    */
   readonly set?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpRouteHeadersRequest' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpRouteHeadersRequest(obj: VirtualServiceSpecHttpRouteHeadersRequest | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpRouteHeadersRequest(
+  obj: VirtualServiceSpecHttpRouteHeadersRequest | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'add': ((obj.add) === undefined) ? undefined : (Object.entries(obj.add).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
-    'remove': obj.remove?.map(y => y),
-    'set': ((obj.set) === undefined) ? undefined : (Object.entries(obj.set).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    add:
+      obj.add === undefined
+        ? undefined
+        : Object.entries(obj.add).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {}),
+    remove: obj.remove?.map((y) => y),
+    set:
+      obj.set === undefined
+        ? undefined
+        : Object.entries(obj.set).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {})
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -6890,22 +7361,31 @@ export interface VirtualServiceSpecHttpRouteHeadersResponse {
    * @schema VirtualServiceSpecHttpRouteHeadersResponse#set
    */
   readonly set?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecHttpRouteHeadersResponse' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecHttpRouteHeadersResponse(obj: VirtualServiceSpecHttpRouteHeadersResponse | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecHttpRouteHeadersResponse(
+  obj: VirtualServiceSpecHttpRouteHeadersResponse | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'add': ((obj.add) === undefined) ? undefined : (Object.entries(obj.add).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
-    'remove': obj.remove?.map(y => y),
-    'set': ((obj.set) === undefined) ? undefined : (Object.entries(obj.set).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    add:
+      obj.add === undefined
+        ? undefined
+        : Object.entries(obj.add).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {}),
+    remove: obj.remove?.map((y) => y),
+    set:
+      obj.set === undefined
+        ? undefined
+        : Object.entries(obj.set).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {})
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -6919,20 +7399,23 @@ export interface VirtualServiceSpecTcpRouteDestinationPort {
    * @schema VirtualServiceSpecTcpRouteDestinationPort#number
    */
   readonly number?: number;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecTcpRouteDestinationPort' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecTcpRouteDestinationPort(obj: VirtualServiceSpecTcpRouteDestinationPort | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecTcpRouteDestinationPort(
+  obj: VirtualServiceSpecTcpRouteDestinationPort | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'number': obj.number,
+    number: obj.number
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -6946,23 +7429,25 @@ export interface VirtualServiceSpecTlsRouteDestinationPort {
    * @schema VirtualServiceSpecTlsRouteDestinationPort#number
    */
   readonly number?: number;
-
 }
 
 /**
  * Converts an object of type 'VirtualServiceSpecTlsRouteDestinationPort' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_VirtualServiceSpecTlsRouteDestinationPort(obj: VirtualServiceSpecTlsRouteDestinationPort | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_VirtualServiceSpecTlsRouteDestinationPort(
+  obj: VirtualServiceSpecTlsRouteDestinationPort | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'number': obj.number,
+    number: obj.number
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
-
 
 /**
  *
@@ -6975,8 +7460,8 @@ export class WorkloadEntry extends ApiObject {
    */
   public static readonly GVK: GroupVersionKind = {
     apiVersion: 'networking.istio.io/v1alpha3',
-    kind: 'WorkloadEntry',
-  }
+    kind: 'WorkloadEntry'
+  };
 
   /**
    * Renders a Kubernetes manifest for "WorkloadEntry".
@@ -6988,7 +7473,7 @@ export class WorkloadEntry extends ApiObject {
   public static manifest(props: WorkloadEntryProps = {}): any {
     return {
       ...WorkloadEntry.GVK,
-      ...toJson_WorkloadEntryProps(props),
+      ...toJson_WorkloadEntryProps(props)
     };
   }
 
@@ -7001,7 +7486,7 @@ export class WorkloadEntry extends ApiObject {
   public constructor(scope: Construct, id: string, props: WorkloadEntryProps = {}) {
     super(scope, id, {
       ...WorkloadEntry.GVK,
-      ...props,
+      ...props
     });
   }
 
@@ -7013,7 +7498,7 @@ export class WorkloadEntry extends ApiObject {
 
     return {
       ...WorkloadEntry.GVK,
-      ...toJson_WorkloadEntryProps(resolved),
+      ...toJson_WorkloadEntryProps(resolved)
     };
   }
 }
@@ -7033,7 +7518,6 @@ export interface WorkloadEntryProps {
    * @schema WorkloadEntry#metadata
    */
   readonly metadata?: ApiObjectMetadata;
-
 }
 
 /**
@@ -7041,13 +7525,15 @@ export interface WorkloadEntryProps {
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_WorkloadEntryProps(obj: WorkloadEntryProps | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'spec': toJson_WorkloadEntrySpec(obj.spec),
-    'metadata': obj.metadata,
+    spec: toJson_WorkloadEntrySpec(obj.spec),
+    metadata: obj.metadata
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -7099,7 +7585,6 @@ export interface WorkloadEntrySpec {
    * @schema WorkloadEntrySpec#weight
    */
   readonly weight?: number;
-
 }
 
 /**
@@ -7107,21 +7592,28 @@ export interface WorkloadEntrySpec {
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_WorkloadEntrySpec(obj: WorkloadEntrySpec | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'address': obj.address,
-    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
-    'locality': obj.locality,
-    'network': obj.network,
-    'ports': ((obj.ports) === undefined) ? undefined : (Object.entries(obj.ports).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
-    'serviceAccount': obj.serviceAccount,
-    'weight': obj.weight,
+    address: obj.address,
+    labels:
+      obj.labels === undefined
+        ? undefined
+        : Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {}),
+    locality: obj.locality,
+    network: obj.network,
+    ports:
+      obj.ports === undefined
+        ? undefined
+        : Object.entries(obj.ports).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {}),
+    serviceAccount: obj.serviceAccount,
+    weight: obj.weight
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
-
 
 /**
  *
@@ -7134,8 +7626,8 @@ export class WorkloadGroup extends ApiObject {
    */
   public static readonly GVK: GroupVersionKind = {
     apiVersion: 'networking.istio.io/v1alpha3',
-    kind: 'WorkloadGroup',
-  }
+    kind: 'WorkloadGroup'
+  };
 
   /**
    * Renders a Kubernetes manifest for "WorkloadGroup".
@@ -7147,7 +7639,7 @@ export class WorkloadGroup extends ApiObject {
   public static manifest(props: WorkloadGroupProps = {}): any {
     return {
       ...WorkloadGroup.GVK,
-      ...toJson_WorkloadGroupProps(props),
+      ...toJson_WorkloadGroupProps(props)
     };
   }
 
@@ -7160,7 +7652,7 @@ export class WorkloadGroup extends ApiObject {
   public constructor(scope: Construct, id: string, props: WorkloadGroupProps = {}) {
     super(scope, id, {
       ...WorkloadGroup.GVK,
-      ...props,
+      ...props
     });
   }
 
@@ -7172,7 +7664,7 @@ export class WorkloadGroup extends ApiObject {
 
     return {
       ...WorkloadGroup.GVK,
-      ...toJson_WorkloadGroupProps(resolved),
+      ...toJson_WorkloadGroupProps(resolved)
     };
   }
 }
@@ -7192,7 +7684,6 @@ export interface WorkloadGroupProps {
    * @schema WorkloadGroup#metadata
    */
   readonly metadata?: ApiObjectMetadata;
-
 }
 
 /**
@@ -7200,13 +7691,15 @@ export interface WorkloadGroupProps {
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_WorkloadGroupProps(obj: WorkloadGroupProps | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'spec': toJson_WorkloadGroupSpec(obj.spec),
-    'metadata': obj.metadata,
+    spec: toJson_WorkloadGroupSpec(obj.spec),
+    metadata: obj.metadata
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -7236,7 +7729,6 @@ export interface WorkloadGroupSpec {
    * @schema WorkloadGroupSpec#template
    */
   readonly template?: WorkloadGroupSpecTemplate;
-
 }
 
 /**
@@ -7244,14 +7736,16 @@ export interface WorkloadGroupSpec {
  */
 /* eslint-disable max-len, quote-props */
 export function toJson_WorkloadGroupSpec(obj: WorkloadGroupSpec | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'metadata': toJson_WorkloadGroupSpecMetadata(obj.metadata),
-    'probe': toJson_WorkloadGroupSpecProbe(obj.probe),
-    'template': toJson_WorkloadGroupSpecTemplate(obj.template),
+    metadata: toJson_WorkloadGroupSpecMetadata(obj.metadata),
+    probe: toJson_WorkloadGroupSpecProbe(obj.probe),
+    template: toJson_WorkloadGroupSpecTemplate(obj.template)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -7270,21 +7764,30 @@ export interface WorkloadGroupSpecMetadata {
    * @schema WorkloadGroupSpecMetadata#labels
    */
   readonly labels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'WorkloadGroupSpecMetadata' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_WorkloadGroupSpecMetadata(obj: WorkloadGroupSpecMetadata | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_WorkloadGroupSpecMetadata(
+  obj: WorkloadGroupSpecMetadata | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'annotations': ((obj.annotations) === undefined) ? undefined : (Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
-    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    annotations:
+      obj.annotations === undefined
+        ? undefined
+        : Object.entries(obj.annotations).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {}),
+    labels:
+      obj.labels === undefined
+        ? undefined
+        : Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {})
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -7347,27 +7850,30 @@ export interface WorkloadGroupSpecProbe {
    * @schema WorkloadGroupSpecProbe#timeoutSeconds
    */
   readonly timeoutSeconds?: number;
-
 }
 
 /**
  * Converts an object of type 'WorkloadGroupSpecProbe' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_WorkloadGroupSpecProbe(obj: WorkloadGroupSpecProbe | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_WorkloadGroupSpecProbe(
+  obj: WorkloadGroupSpecProbe | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'exec': toJson_WorkloadGroupSpecProbeExec(obj.exec),
-    'failureThreshold': obj.failureThreshold,
-    'httpGet': toJson_WorkloadGroupSpecProbeHttpGet(obj.httpGet),
-    'initialDelaySeconds': obj.initialDelaySeconds,
-    'periodSeconds': obj.periodSeconds,
-    'successThreshold': obj.successThreshold,
-    'tcpSocket': toJson_WorkloadGroupSpecProbeTcpSocket(obj.tcpSocket),
-    'timeoutSeconds': obj.timeoutSeconds,
+    exec: toJson_WorkloadGroupSpecProbeExec(obj.exec),
+    failureThreshold: obj.failureThreshold,
+    httpGet: toJson_WorkloadGroupSpecProbeHttpGet(obj.httpGet),
+    initialDelaySeconds: obj.initialDelaySeconds,
+    periodSeconds: obj.periodSeconds,
+    successThreshold: obj.successThreshold,
+    tcpSocket: toJson_WorkloadGroupSpecProbeTcpSocket(obj.tcpSocket),
+    timeoutSeconds: obj.timeoutSeconds
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -7419,26 +7925,35 @@ export interface WorkloadGroupSpecTemplate {
    * @schema WorkloadGroupSpecTemplate#weight
    */
   readonly weight?: number;
-
 }
 
 /**
  * Converts an object of type 'WorkloadGroupSpecTemplate' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_WorkloadGroupSpecTemplate(obj: WorkloadGroupSpecTemplate | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_WorkloadGroupSpecTemplate(
+  obj: WorkloadGroupSpecTemplate | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'address': obj.address,
-    'labels': ((obj.labels) === undefined) ? undefined : (Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
-    'locality': obj.locality,
-    'network': obj.network,
-    'ports': ((obj.ports) === undefined) ? undefined : (Object.entries(obj.ports).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
-    'serviceAccount': obj.serviceAccount,
-    'weight': obj.weight,
+    address: obj.address,
+    labels:
+      obj.labels === undefined
+        ? undefined
+        : Object.entries(obj.labels).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {}),
+    locality: obj.locality,
+    network: obj.network,
+    ports:
+      obj.ports === undefined
+        ? undefined
+        : Object.entries(obj.ports).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {}),
+    serviceAccount: obj.serviceAccount,
+    weight: obj.weight
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -7454,20 +7969,23 @@ export interface WorkloadGroupSpecProbeExec {
    * @schema WorkloadGroupSpecProbeExec#command
    */
   readonly command?: string[];
-
 }
 
 /**
  * Converts an object of type 'WorkloadGroupSpecProbeExec' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_WorkloadGroupSpecProbeExec(obj: WorkloadGroupSpecProbeExec | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_WorkloadGroupSpecProbeExec(
+  obj: WorkloadGroupSpecProbeExec | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'command': obj.command?.map(y => y),
+    command: obj.command?.map((y) => y)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -7507,24 +8025,27 @@ export interface WorkloadGroupSpecProbeHttpGet {
    * @schema WorkloadGroupSpecProbeHttpGet#scheme
    */
   readonly scheme?: string;
-
 }
 
 /**
  * Converts an object of type 'WorkloadGroupSpecProbeHttpGet' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_WorkloadGroupSpecProbeHttpGet(obj: WorkloadGroupSpecProbeHttpGet | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_WorkloadGroupSpecProbeHttpGet(
+  obj: WorkloadGroupSpecProbeHttpGet | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'host': obj.host,
-    'httpHeaders': obj.httpHeaders?.map(y => toJson_WorkloadGroupSpecProbeHttpGetHttpHeaders(y)),
-    'path': obj.path,
-    'port': obj.port,
-    'scheme': obj.scheme,
+    host: obj.host,
+    httpHeaders: obj.httpHeaders?.map((y) => toJson_WorkloadGroupSpecProbeHttpGetHttpHeaders(y)),
+    path: obj.path,
+    port: obj.port,
+    scheme: obj.scheme
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -7543,21 +8064,24 @@ export interface WorkloadGroupSpecProbeTcpSocket {
    * @schema WorkloadGroupSpecProbeTcpSocket#port
    */
   readonly port?: number;
-
 }
 
 /**
  * Converts an object of type 'WorkloadGroupSpecProbeTcpSocket' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_WorkloadGroupSpecProbeTcpSocket(obj: WorkloadGroupSpecProbeTcpSocket | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_WorkloadGroupSpecProbeTcpSocket(
+  obj: WorkloadGroupSpecProbeTcpSocket | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'host': obj.host,
-    'port': obj.port,
+    host: obj.host,
+    port: obj.port
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -7574,21 +8098,23 @@ export interface WorkloadGroupSpecProbeHttpGetHttpHeaders {
    * @schema WorkloadGroupSpecProbeHttpGetHttpHeaders#value
    */
   readonly value?: string;
-
 }
 
 /**
  * Converts an object of type 'WorkloadGroupSpecProbeHttpGetHttpHeaders' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_WorkloadGroupSpecProbeHttpGetHttpHeaders(obj: WorkloadGroupSpecProbeHttpGetHttpHeaders | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_WorkloadGroupSpecProbeHttpGetHttpHeaders(
+  obj: WorkloadGroupSpecProbeHttpGetHttpHeaders | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'name': obj.name,
-    'value': obj.value,
+    name: obj.name,
+    value: obj.value
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
-

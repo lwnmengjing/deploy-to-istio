@@ -9,42 +9,37 @@ export class AppChart extends Chart {
 
     const cfg = config();
 
-    const port = cfg.port;
-    const portName = cfg.portName;
-    const version = cfg.version;
+    const { port, portName, version, imageName, imageTag, app } = cfg;
 
-    if (cfg.imageName == '') {
+    if (imageName == '') {
       throw new Error('ENV IMAGE_NAME Undefined');
     }
 
-    if (cfg.app == '') {
+    if (app == '') {
       throw new Error('ENV APP_NAME Undefined');
     }
 
-    let image =  cfg.imageName;
+    let image = imageName;
 
-    if (cfg.imageTag) {
-      image = image + ':' + cfg.imageTag;
+    if (imageTag) {
+      image = image + ':' + imageTag;
     }
 
-    const app = cfg.app;
-
-    new AppService(this, id, { 
+    new AppService(this, id, {
       app,
       image,
       ...props,
-      replicas: 1, 
+      replicas: 1,
       portName,
       port,
-      labels: {version, app: id},
+      labels: { version, app: id },
       metrics: cfg.metrics
     });
   }
 }
 
-
 const cfg = config();
 
 const app = new App();
-new AppChart(app, cfg.service, {namespace: cfg.namespace});
+new AppChart(app, cfg.service, { namespace: cfg.namespace });
 app.synth();

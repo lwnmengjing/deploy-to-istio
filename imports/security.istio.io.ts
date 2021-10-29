@@ -2,7 +2,6 @@
 import { ApiObject, ApiObjectMetadata, GroupVersionKind } from 'cdk8s';
 import { Construct } from 'constructs';
 
-
 /**
  *
  *
@@ -14,8 +13,8 @@ export class AuthorizationPolicy extends ApiObject {
    */
   public static readonly GVK: GroupVersionKind = {
     apiVersion: 'security.istio.io/v1beta1',
-    kind: 'AuthorizationPolicy',
-  }
+    kind: 'AuthorizationPolicy'
+  };
 
   /**
    * Renders a Kubernetes manifest for "AuthorizationPolicy".
@@ -27,7 +26,7 @@ export class AuthorizationPolicy extends ApiObject {
   public static manifest(props: AuthorizationPolicyProps = {}): any {
     return {
       ...AuthorizationPolicy.GVK,
-      ...toJson_AuthorizationPolicyProps(props),
+      ...toJson_AuthorizationPolicyProps(props)
     };
   }
 
@@ -40,7 +39,7 @@ export class AuthorizationPolicy extends ApiObject {
   public constructor(scope: Construct, id: string, props: AuthorizationPolicyProps = {}) {
     super(scope, id, {
       ...AuthorizationPolicy.GVK,
-      ...props,
+      ...props
     });
   }
 
@@ -52,7 +51,7 @@ export class AuthorizationPolicy extends ApiObject {
 
     return {
       ...AuthorizationPolicy.GVK,
-      ...toJson_AuthorizationPolicyProps(resolved),
+      ...toJson_AuthorizationPolicyProps(resolved)
     };
   }
 }
@@ -72,21 +71,24 @@ export interface AuthorizationPolicyProps {
    * @schema AuthorizationPolicy#metadata
    */
   readonly metadata?: ApiObjectMetadata;
-
 }
 
 /**
  * Converts an object of type 'AuthorizationPolicyProps' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_AuthorizationPolicyProps(obj: AuthorizationPolicyProps | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_AuthorizationPolicyProps(
+  obj: AuthorizationPolicyProps | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'spec': toJson_AuthorizationPolicySpec(obj.spec),
-    'metadata': obj.metadata,
+    spec: toJson_AuthorizationPolicySpec(obj.spec),
+    metadata: obj.metadata
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -123,23 +125,26 @@ export interface AuthorizationPolicySpec {
    * @schema AuthorizationPolicySpec#selector
    */
   readonly selector?: AuthorizationPolicySpecSelector;
-
 }
 
 /**
  * Converts an object of type 'AuthorizationPolicySpec' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_AuthorizationPolicySpec(obj: AuthorizationPolicySpec | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_AuthorizationPolicySpec(
+  obj: AuthorizationPolicySpec | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'action': obj.action,
-    'provider': toJson_AuthorizationPolicySpecProvider(obj.provider),
-    'rules': obj.rules?.map(y => toJson_AuthorizationPolicySpecRules(y)),
-    'selector': toJson_AuthorizationPolicySpecSelector(obj.selector),
+    action: obj.action,
+    provider: toJson_AuthorizationPolicySpecProvider(obj.provider),
+    rules: obj.rules?.map((y) => toJson_AuthorizationPolicySpecRules(y)),
+    selector: toJson_AuthorizationPolicySpecSelector(obj.selector)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -156,7 +161,7 @@ export enum AuthorizationPolicySpecAction {
   /** AUDIT */
   AUDIT = 'AUDIT',
   /** CUSTOM */
-  CUSTOM = 'CUSTOM',
+  CUSTOM = 'CUSTOM'
 }
 
 /**
@@ -171,20 +176,23 @@ export interface AuthorizationPolicySpecProvider {
    * @schema AuthorizationPolicySpecProvider#name
    */
   readonly name?: string;
-
 }
 
 /**
  * Converts an object of type 'AuthorizationPolicySpecProvider' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_AuthorizationPolicySpecProvider(obj: AuthorizationPolicySpecProvider | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_AuthorizationPolicySpecProvider(
+  obj: AuthorizationPolicySpecProvider | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'name': obj.name,
+    name: obj.name
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -212,22 +220,25 @@ export interface AuthorizationPolicySpecRules {
    * @schema AuthorizationPolicySpecRules#when
    */
   readonly when?: AuthorizationPolicySpecRulesWhen[];
-
 }
 
 /**
  * Converts an object of type 'AuthorizationPolicySpecRules' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_AuthorizationPolicySpecRules(obj: AuthorizationPolicySpecRules | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_AuthorizationPolicySpecRules(
+  obj: AuthorizationPolicySpecRules | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'from': obj.from?.map(y => toJson_AuthorizationPolicySpecRulesFrom(y)),
-    'to': obj.to?.map(y => toJson_AuthorizationPolicySpecRulesTo(y)),
-    'when': obj.when?.map(y => toJson_AuthorizationPolicySpecRulesWhen(y)),
+    from: obj.from?.map((y) => toJson_AuthorizationPolicySpecRulesFrom(y)),
+    to: obj.to?.map((y) => toJson_AuthorizationPolicySpecRulesTo(y)),
+    when: obj.when?.map((y) => toJson_AuthorizationPolicySpecRulesWhen(y))
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -241,20 +252,26 @@ export interface AuthorizationPolicySpecSelector {
    * @schema AuthorizationPolicySpecSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'AuthorizationPolicySpecSelector' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_AuthorizationPolicySpecSelector(obj: AuthorizationPolicySpecSelector | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_AuthorizationPolicySpecSelector(
+  obj: AuthorizationPolicySpecSelector | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    matchLabels:
+      obj.matchLabels === undefined
+        ? undefined
+        : Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {})
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -268,20 +285,23 @@ export interface AuthorizationPolicySpecRulesFrom {
    * @schema AuthorizationPolicySpecRulesFrom#source
    */
   readonly source?: AuthorizationPolicySpecRulesFromSource;
-
 }
 
 /**
  * Converts an object of type 'AuthorizationPolicySpecRulesFrom' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_AuthorizationPolicySpecRulesFrom(obj: AuthorizationPolicySpecRulesFrom | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_AuthorizationPolicySpecRulesFrom(
+  obj: AuthorizationPolicySpecRulesFrom | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'source': toJson_AuthorizationPolicySpecRulesFromSource(obj.source),
+    source: toJson_AuthorizationPolicySpecRulesFromSource(obj.source)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -295,20 +315,23 @@ export interface AuthorizationPolicySpecRulesTo {
    * @schema AuthorizationPolicySpecRulesTo#operation
    */
   readonly operation?: AuthorizationPolicySpecRulesToOperation;
-
 }
 
 /**
  * Converts an object of type 'AuthorizationPolicySpecRulesTo' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_AuthorizationPolicySpecRulesTo(obj: AuthorizationPolicySpecRulesTo | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_AuthorizationPolicySpecRulesTo(
+  obj: AuthorizationPolicySpecRulesTo | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'operation': toJson_AuthorizationPolicySpecRulesToOperation(obj.operation),
+    operation: toJson_AuthorizationPolicySpecRulesToOperation(obj.operation)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -336,22 +359,25 @@ export interface AuthorizationPolicySpecRulesWhen {
    * @schema AuthorizationPolicySpecRulesWhen#values
    */
   readonly values?: string[];
-
 }
 
 /**
  * Converts an object of type 'AuthorizationPolicySpecRulesWhen' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_AuthorizationPolicySpecRulesWhen(obj: AuthorizationPolicySpecRulesWhen | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_AuthorizationPolicySpecRulesWhen(
+  obj: AuthorizationPolicySpecRulesWhen | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'key': obj.key,
-    'notValues': obj.notValues?.map(y => y),
-    'values': obj.values?.map(y => y),
+    key: obj.key,
+    notValues: obj.notValues?.map((y) => y),
+    values: obj.values?.map((y) => y)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -430,29 +456,32 @@ export interface AuthorizationPolicySpecRulesFromSource {
    * @schema AuthorizationPolicySpecRulesFromSource#requestPrincipals
    */
   readonly requestPrincipals?: string[];
-
 }
 
 /**
  * Converts an object of type 'AuthorizationPolicySpecRulesFromSource' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_AuthorizationPolicySpecRulesFromSource(obj: AuthorizationPolicySpecRulesFromSource | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_AuthorizationPolicySpecRulesFromSource(
+  obj: AuthorizationPolicySpecRulesFromSource | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'ipBlocks': obj.ipBlocks?.map(y => y),
-    'namespaces': obj.namespaces?.map(y => y),
-    'notIpBlocks': obj.notIpBlocks?.map(y => y),
-    'notNamespaces': obj.notNamespaces?.map(y => y),
-    'notPrincipals': obj.notPrincipals?.map(y => y),
-    'notRemoteIpBlocks': obj.notRemoteIpBlocks?.map(y => y),
-    'notRequestPrincipals': obj.notRequestPrincipals?.map(y => y),
-    'principals': obj.principals?.map(y => y),
-    'remoteIpBlocks': obj.remoteIpBlocks?.map(y => y),
-    'requestPrincipals': obj.requestPrincipals?.map(y => y),
+    ipBlocks: obj.ipBlocks?.map((y) => y),
+    namespaces: obj.namespaces?.map((y) => y),
+    notIpBlocks: obj.notIpBlocks?.map((y) => y),
+    notNamespaces: obj.notNamespaces?.map((y) => y),
+    notPrincipals: obj.notPrincipals?.map((y) => y),
+    notRemoteIpBlocks: obj.notRemoteIpBlocks?.map((y) => y),
+    notRequestPrincipals: obj.notRequestPrincipals?.map((y) => y),
+    principals: obj.principals?.map((y) => y),
+    remoteIpBlocks: obj.remoteIpBlocks?.map((y) => y),
+    requestPrincipals: obj.requestPrincipals?.map((y) => y)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -517,30 +546,32 @@ export interface AuthorizationPolicySpecRulesToOperation {
    * @schema AuthorizationPolicySpecRulesToOperation#ports
    */
   readonly ports?: string[];
-
 }
 
 /**
  * Converts an object of type 'AuthorizationPolicySpecRulesToOperation' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_AuthorizationPolicySpecRulesToOperation(obj: AuthorizationPolicySpecRulesToOperation | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_AuthorizationPolicySpecRulesToOperation(
+  obj: AuthorizationPolicySpecRulesToOperation | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'hosts': obj.hosts?.map(y => y),
-    'methods': obj.methods?.map(y => y),
-    'notHosts': obj.notHosts?.map(y => y),
-    'notMethods': obj.notMethods?.map(y => y),
-    'notPaths': obj.notPaths?.map(y => y),
-    'notPorts': obj.notPorts?.map(y => y),
-    'paths': obj.paths?.map(y => y),
-    'ports': obj.ports?.map(y => y),
+    hosts: obj.hosts?.map((y) => y),
+    methods: obj.methods?.map((y) => y),
+    notHosts: obj.notHosts?.map((y) => y),
+    notMethods: obj.notMethods?.map((y) => y),
+    notPaths: obj.notPaths?.map((y) => y),
+    notPorts: obj.notPorts?.map((y) => y),
+    paths: obj.paths?.map((y) => y),
+    ports: obj.ports?.map((y) => y)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
-
 
 /**
  *
@@ -553,8 +584,8 @@ export class PeerAuthentication extends ApiObject {
    */
   public static readonly GVK: GroupVersionKind = {
     apiVersion: 'security.istio.io/v1beta1',
-    kind: 'PeerAuthentication',
-  }
+    kind: 'PeerAuthentication'
+  };
 
   /**
    * Renders a Kubernetes manifest for "PeerAuthentication".
@@ -566,7 +597,7 @@ export class PeerAuthentication extends ApiObject {
   public static manifest(props: PeerAuthenticationProps = {}): any {
     return {
       ...PeerAuthentication.GVK,
-      ...toJson_PeerAuthenticationProps(props),
+      ...toJson_PeerAuthenticationProps(props)
     };
   }
 
@@ -579,7 +610,7 @@ export class PeerAuthentication extends ApiObject {
   public constructor(scope: Construct, id: string, props: PeerAuthenticationProps = {}) {
     super(scope, id, {
       ...PeerAuthentication.GVK,
-      ...props,
+      ...props
     });
   }
 
@@ -591,7 +622,7 @@ export class PeerAuthentication extends ApiObject {
 
     return {
       ...PeerAuthentication.GVK,
-      ...toJson_PeerAuthenticationProps(resolved),
+      ...toJson_PeerAuthenticationProps(resolved)
     };
   }
 }
@@ -611,21 +642,24 @@ export interface PeerAuthenticationProps {
    * @schema PeerAuthentication#metadata
    */
   readonly metadata?: ApiObjectMetadata;
-
 }
 
 /**
  * Converts an object of type 'PeerAuthenticationProps' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_PeerAuthenticationProps(obj: PeerAuthenticationProps | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_PeerAuthenticationProps(
+  obj: PeerAuthenticationProps | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'spec': toJson_PeerAuthenticationSpec(obj.spec),
-    'metadata': obj.metadata,
+    spec: toJson_PeerAuthenticationSpec(obj.spec),
+    metadata: obj.metadata
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -655,22 +689,31 @@ export interface PeerAuthenticationSpec {
    * @schema PeerAuthenticationSpec#selector
    */
   readonly selector?: PeerAuthenticationSpecSelector;
-
 }
 
 /**
  * Converts an object of type 'PeerAuthenticationSpec' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_PeerAuthenticationSpec(obj: PeerAuthenticationSpec | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_PeerAuthenticationSpec(
+  obj: PeerAuthenticationSpec | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'mtls': toJson_PeerAuthenticationSpecMtls(obj.mtls),
-    'portLevelMtls': ((obj.portLevelMtls) === undefined) ? undefined : (Object.entries(obj.portLevelMtls).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: toJson_PeerAuthenticationSpecPortLevelMtls(i[1]) }), {})),
-    'selector': toJson_PeerAuthenticationSpecSelector(obj.selector),
+    mtls: toJson_PeerAuthenticationSpecMtls(obj.mtls),
+    portLevelMtls:
+      obj.portLevelMtls === undefined
+        ? undefined
+        : Object.entries(obj.portLevelMtls).reduce(
+            (r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: toJson_PeerAuthenticationSpecPortLevelMtls(i[1]) }),
+            {}
+          ),
+    selector: toJson_PeerAuthenticationSpecSelector(obj.selector)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -686,20 +729,23 @@ export interface PeerAuthenticationSpecMtls {
    * @schema PeerAuthenticationSpecMtls#mode
    */
   readonly mode?: PeerAuthenticationSpecMtlsMode;
-
 }
 
 /**
  * Converts an object of type 'PeerAuthenticationSpecMtls' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_PeerAuthenticationSpecMtls(obj: PeerAuthenticationSpecMtls | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_PeerAuthenticationSpecMtls(
+  obj: PeerAuthenticationSpecMtls | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'mode': obj.mode,
+    mode: obj.mode
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -713,20 +759,23 @@ export interface PeerAuthenticationSpecPortLevelMtls {
    * @schema PeerAuthenticationSpecPortLevelMtls#mode
    */
   readonly mode?: PeerAuthenticationSpecPortLevelMtlsMode;
-
 }
 
 /**
  * Converts an object of type 'PeerAuthenticationSpecPortLevelMtls' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_PeerAuthenticationSpecPortLevelMtls(obj: PeerAuthenticationSpecPortLevelMtls | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_PeerAuthenticationSpecPortLevelMtls(
+  obj: PeerAuthenticationSpecPortLevelMtls | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'mode': obj.mode,
+    mode: obj.mode
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -740,20 +789,26 @@ export interface PeerAuthenticationSpecSelector {
    * @schema PeerAuthenticationSpecSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'PeerAuthenticationSpecSelector' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_PeerAuthenticationSpecSelector(obj: PeerAuthenticationSpecSelector | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_PeerAuthenticationSpecSelector(
+  obj: PeerAuthenticationSpecSelector | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    matchLabels:
+      obj.matchLabels === undefined
+        ? undefined
+        : Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {})
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -770,7 +825,7 @@ export enum PeerAuthenticationSpecMtlsMode {
   /** PERMISSIVE */
   PERMISSIVE = 'PERMISSIVE',
   /** STRICT */
-  STRICT = 'STRICT',
+  STRICT = 'STRICT'
 }
 
 /**
@@ -786,9 +841,8 @@ export enum PeerAuthenticationSpecPortLevelMtlsMode {
   /** PERMISSIVE */
   PERMISSIVE = 'PERMISSIVE',
   /** STRICT */
-  STRICT = 'STRICT',
+  STRICT = 'STRICT'
 }
-
 
 /**
  *
@@ -801,8 +855,8 @@ export class RequestAuthentication extends ApiObject {
    */
   public static readonly GVK: GroupVersionKind = {
     apiVersion: 'security.istio.io/v1beta1',
-    kind: 'RequestAuthentication',
-  }
+    kind: 'RequestAuthentication'
+  };
 
   /**
    * Renders a Kubernetes manifest for "RequestAuthentication".
@@ -814,7 +868,7 @@ export class RequestAuthentication extends ApiObject {
   public static manifest(props: RequestAuthenticationProps = {}): any {
     return {
       ...RequestAuthentication.GVK,
-      ...toJson_RequestAuthenticationProps(props),
+      ...toJson_RequestAuthenticationProps(props)
     };
   }
 
@@ -827,7 +881,7 @@ export class RequestAuthentication extends ApiObject {
   public constructor(scope: Construct, id: string, props: RequestAuthenticationProps = {}) {
     super(scope, id, {
       ...RequestAuthentication.GVK,
-      ...props,
+      ...props
     });
   }
 
@@ -839,7 +893,7 @@ export class RequestAuthentication extends ApiObject {
 
     return {
       ...RequestAuthentication.GVK,
-      ...toJson_RequestAuthenticationProps(resolved),
+      ...toJson_RequestAuthenticationProps(resolved)
     };
   }
 }
@@ -859,21 +913,24 @@ export interface RequestAuthenticationProps {
    * @schema RequestAuthentication#metadata
    */
   readonly metadata?: ApiObjectMetadata;
-
 }
 
 /**
  * Converts an object of type 'RequestAuthenticationProps' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_RequestAuthenticationProps(obj: RequestAuthenticationProps | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_RequestAuthenticationProps(
+  obj: RequestAuthenticationProps | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'spec': toJson_RequestAuthenticationSpec(obj.spec),
-    'metadata': obj.metadata,
+    spec: toJson_RequestAuthenticationSpec(obj.spec),
+    metadata: obj.metadata
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -896,21 +953,24 @@ export interface RequestAuthenticationSpec {
    * @schema RequestAuthenticationSpec#selector
    */
   readonly selector?: RequestAuthenticationSpecSelector;
-
 }
 
 /**
  * Converts an object of type 'RequestAuthenticationSpec' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_RequestAuthenticationSpec(obj: RequestAuthenticationSpec | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_RequestAuthenticationSpec(
+  obj: RequestAuthenticationSpec | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'jwtRules': obj.jwtRules?.map(y => toJson_RequestAuthenticationSpecJwtRules(y)),
-    'selector': toJson_RequestAuthenticationSpecSelector(obj.selector),
+    jwtRules: obj.jwtRules?.map((y) => toJson_RequestAuthenticationSpecJwtRules(y)),
+    selector: toJson_RequestAuthenticationSpecSelector(obj.selector)
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -967,28 +1027,31 @@ export interface RequestAuthenticationSpecJwtRules {
    * @schema RequestAuthenticationSpecJwtRules#outputPayloadToHeader
    */
   readonly outputPayloadToHeader?: string;
-
 }
 
 /**
  * Converts an object of type 'RequestAuthenticationSpecJwtRules' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_RequestAuthenticationSpecJwtRules(obj: RequestAuthenticationSpecJwtRules | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_RequestAuthenticationSpecJwtRules(
+  obj: RequestAuthenticationSpecJwtRules | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'audiences': obj.audiences?.map(y => y),
-    'forwardOriginalToken': obj.forwardOriginalToken,
-    'fromHeaders': obj.fromHeaders?.map(y => toJson_RequestAuthenticationSpecJwtRulesFromHeaders(y)),
-    'fromParams': obj.fromParams?.map(y => y),
-    'issuer': obj.issuer,
-    'jwks': obj.jwks,
-    'jwks_uri': obj.jwksUri,
-    'jwksUri': obj.jwksUri,
-    'outputPayloadToHeader': obj.outputPayloadToHeader,
+    audiences: obj.audiences?.map((y) => y),
+    forwardOriginalToken: obj.forwardOriginalToken,
+    fromHeaders: obj.fromHeaders?.map((y) => toJson_RequestAuthenticationSpecJwtRulesFromHeaders(y)),
+    fromParams: obj.fromParams?.map((y) => y),
+    issuer: obj.issuer,
+    jwks: obj.jwks,
+    jwks_uri: obj.jwksUri,
+    jwksUri: obj.jwksUri,
+    outputPayloadToHeader: obj.outputPayloadToHeader
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -1002,20 +1065,26 @@ export interface RequestAuthenticationSpecSelector {
    * @schema RequestAuthenticationSpecSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
 }
 
 /**
  * Converts an object of type 'RequestAuthenticationSpecSelector' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_RequestAuthenticationSpecSelector(obj: RequestAuthenticationSpecSelector | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_RequestAuthenticationSpecSelector(
+  obj: RequestAuthenticationSpecSelector | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    matchLabels:
+      obj.matchLabels === undefined
+        ? undefined
+        : Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {})
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
 
@@ -1036,21 +1105,23 @@ export interface RequestAuthenticationSpecJwtRulesFromHeaders {
    * @schema RequestAuthenticationSpecJwtRulesFromHeaders#prefix
    */
   readonly prefix?: string;
-
 }
 
 /**
  * Converts an object of type 'RequestAuthenticationSpecJwtRulesFromHeaders' to JSON representation.
  */
 /* eslint-disable max-len, quote-props */
-export function toJson_RequestAuthenticationSpecJwtRulesFromHeaders(obj: RequestAuthenticationSpecJwtRulesFromHeaders | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
+export function toJson_RequestAuthenticationSpecJwtRulesFromHeaders(
+  obj: RequestAuthenticationSpecJwtRulesFromHeaders | undefined
+): Record<string, any> | undefined {
+  if (obj === undefined) {
+    return undefined;
+  }
   const result = {
-    'name': obj.name,
-    'prefix': obj.prefix,
+    name: obj.name,
+    prefix: obj.prefix
   };
   // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined ? r : { ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, quote-props */
-

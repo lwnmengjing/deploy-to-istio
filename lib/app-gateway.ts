@@ -1,75 +1,72 @@
-import { Construct } from "constructs";
-import { Gateway, VirtualService, VirtualServiceSpecHttp, GatewaySpecServersTls } from "../imports/networking.istio.io";
-
+import { Construct } from 'constructs';
+import { Gateway, VirtualService, VirtualServiceSpecHttp, GatewaySpecServersTls } from '../imports/networking.istio.io';
 
 export interface AppGatewayProps {
-    /**
-     * String namespace
-     */
-     readonly namespace?: string;
+  /**
+   * String namespace
+   */
+  readonly namespace?: string;
 
-    /**
-     * Gateway hosts
-     */
-    readonly hosts: string[];
+  /**
+   * Gateway hosts
+   */
+  readonly hosts: string[];
 
-    /**
-     * port number @default 80
-     */
-    readonly port?: number;
+  /**
+   * port number @default 80
+   */
+  readonly port?: number;
 
-    /**
-     * protocol of port @default HTTP
-     */
-    readonly protocol?: string;
+  /**
+   * protocol of port @default HTTP
+   */
+  readonly protocol?: string;
 
-    readonly http?: VirtualServiceSpecHttp[];
+  readonly http?: VirtualServiceSpecHttp[];
 
-    readonly tls?: GatewaySpecServersTls;
+  readonly tls?: GatewaySpecServersTls;
 }
 
 export class AppGateway extends Construct {
-    constructor(scope: Construct, id: string, props: AppGatewayProps) {
-        super(scope, id)
+  constructor(scope: Construct, id: string, props: AppGatewayProps) {
+    super(scope, id);
 
-        const namespace = props.namespace;
-        const protocol = props.protocol || 'HTTP';
-        const number = props.port || 80;
-        const http = props.http;
-        const tls = props.tls;
+    const { namespace, protocol = 'HTTP', port: number = 80, http, tls, hosts } = props;
 
-        new Gateway(this, 'gateway', {
-            metadata: {
-                name: id + '-gateway',
-                namespace
+    const gatewayName = `${id}-gateway`;
+
+    new Gateway(this, 'gateway', {
+      metadata: {
+        name: gatewayName,
+        namespace
+      },
+      spec: {
+        selector: {
+          istio: 'ingressgateway'
+        },
+        servers: [
+          {
+            hosts,
+            port: {
+              number,
+              name: protocol.toLocaleLowerCase(),
+              protocol: protocol.toLocaleUpperCase()
             },
-            spec: {
-                selector: {
-                    'istio': 'ingressgateway'
-                },
-                servers: [
-                    {
-                        hosts: props.hosts,
-                        port: {
-                            number,
-                            name: protocol.toLocaleLowerCase(),
-                            protocol: protocol.toLocaleUpperCase()
-                        },
-                        tls
-                    }
-                ]
-            }
-        })
-        new VirtualService(this, 'virtualService', {
-            metadata: {
-                name: id,
-                namespace
-            },
-            spec: {
-                hosts: props.hosts,
-                gateways: [ id + '-gateway' ],
-                http
-            }
-        })
-    }
+            tls
+          }
+        ]
+      }
+    });
+    new VirtualService(this, 'virtualService', {
+      metadata: {
+        name: id,
+        namespace
+      },
+      spec: {
+        hosts,
+        gateways: [gatewayName],
+        http
+      }
+    });
+  }
 }

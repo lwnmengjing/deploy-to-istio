@@ -1,4 +1,4 @@
-import { AppServiceMetricsProps } from "../lib/app-service";
+import { AppServiceMetricsProps } from '../lib/app-service';
 
 export interface IConfig {
   importEnvNames: string[];
@@ -12,9 +12,8 @@ export interface IConfig {
   replicas: number;
   namespace: string;
   stage: string;
-  metrics?: AppServiceMetricsProps
+  metrics?: AppServiceMetricsProps;
 }
-
 
 const stage = process.env.STAGE || 'beta';
 const replicas = stage == 'prod' ? 3 : 1;
@@ -26,19 +25,19 @@ let metrics = {
 };
 switch (process.env.METRICS_SCRAPE) {
   case 'true':
-    metrics.scrape = true
+    metrics.scrape = true;
     break;
   case 't':
-    metrics.scrape = true
+    metrics.scrape = true;
     break;
   case 'TRUE':
-    metrics.scrape = true
+    metrics.scrape = true;
     break;
   case 'T':
-    metrics.scrape = true
+    metrics.scrape = true;
     break;
   case '1':
-    metrics.scrape = true
+    metrics.scrape = true;
     break;
   default:
     break;

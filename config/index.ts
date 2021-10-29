@@ -1,8 +1,5 @@
-import {
-  Config,
-  IConfig,
-} from './keys';
+import { Config, IConfig } from './keys';
 
 export default function config(): IConfig {
-  return Config
+  return Config;
 }
