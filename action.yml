@@ -43,8 +43,7 @@ runs:
     - uses: actions/setup-node@v2
     - run: yarn && tsc
       shell: bash
-    - run: node main.js
-      shell: bash
+    - uses: ./
       with:
         import-env-names: ${{ inputs.import-env-names }}
         app: ${{ inputs.app }}
@@ -54,6 +53,7 @@ runs:
         image-name: ${{ inputs.image-name }}
         image-tag: ${{ inputs.image-tag }}
         deploy-namespace: ${{ inputs.deploy-namespace }}
+      run: node main.js
     - uses: canastro/copy-file-action@master
       with:
         source: dist
