@@ -1,6 +1,6 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'Matrix CD Template'
+description: 'Matrix CD Template'
+author: 'lwnmengjing'
 inputs:
   import-env-names:
     required: true
