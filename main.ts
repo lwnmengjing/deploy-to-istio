@@ -9,7 +9,7 @@ export class AppChart extends Chart {
 
     const cfg = config();
 
-    const { port, portName, version, imageName, imageTag, app } = cfg;
+    const { port, portName, version, imageName, imageTag, app, env } = cfg;
 
     if (imageName == '') {
       throw new Error('ENV IMAGE_NAME Undefined');
@@ -28,6 +28,7 @@ export class AppChart extends Chart {
     new AppService(this, id, {
       app,
       image,
+      env,
       ...props,
       replicas: 1,
       portName,

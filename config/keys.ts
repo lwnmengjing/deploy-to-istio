@@ -1,4 +1,6 @@
 import { AppServiceMetricsProps } from '../lib/app-service';
+import * as core from '@actions/core';
+import { EnvVar } from '../imports/k8s';
 
 export interface IConfig {
   importEnvNames: string[];
@@ -13,50 +15,40 @@ export interface IConfig {
   namespace: string;
   stage: string;
   metrics?: AppServiceMetricsProps;
+  env: EnvVar[];
 }
 
-const stage = process.env.STAGE || 'beta';
+const stage = core.getInput('stage') || 'beta';
 const replicas = stage == 'prod' ? 3 : 1;
-const importEnvNames = process.env.IMPORT_ENV_NAMES ? process.env.IMPORT_ENV_NAMES.split(',') : ['STAGE'];
-let metrics = {
-  scrape: false,
-  path: '',
-  port: 0
-};
-switch (process.env.METRICS_SCRAPE) {
-  case 'true':
-    metrics.scrape = true;
-    break;
-  case 't':
-    metrics.scrape = true;
-    break;
-  case 'TRUE':
-    metrics.scrape = true;
-    break;
-  case 'T':
-    metrics.scrape = true;
-    break;
-  case '1':
-    metrics.scrape = true;
-    break;
-  default:
-    break;
-}
+const importEnvNames = core.getInput('import-env-names') ? core.getInput('import-env-names').split(',') : ['STAGE'];
 
-metrics.path = process.env.METRICS_PATH || metrics.path;
-metrics.port = process.env.METRICS_PORT ? parseInt(process.env.METRICS_PORT) : metrics.port;
+let metrics = {
+  scrape: ['true', 't', 'TRUE', 'T', '1'].includes(core.getInput('metrics-scrape')),
+  path: core.getInput('metrics-path') || '',
+  port: core.getInput('metrics-port') ? parseInt(core.getInput('metrics-port')) : 0
+};
+
+let env: EnvVar[] = [];
+
+importEnvNames.forEach((k) => {
+  env.push({
+    name: k,
+    value: process.env[k] || ''
+  });
+});
 
 export const Config: IConfig = {
   importEnvNames,
-  app: process.env.APP || 'matrixworld',
-  service: process.env.SERVICE || 'test',
-  port: parseInt(process.env.PORT || '8000'),
-  portName: process.env.PORT_NAME || 'http',
-  version: process.env.VERSION || 'version',
-  imageName: process.env.IMAGE_NAME || '',
-  imageTag: process.env.IMAGE_TAG || '',
+  app: core.getInput('app') || 'matrixworld',
+  service: core.getInput('service') || 'test',
+  port: parseInt(core.getInput('port') || '8000'),
+  portName: core.getInput('port-name') || 'http',
+  version: core.getInput('version') || 'version',
+  imageName: core.getInput('image-name') || '',
+  imageTag: core.getInput('image-tag') || '',
   replicas,
-  namespace: process.env.DEPLOY_NAMESPACE || 'default',
-  stage: process.env.STAGE || 'beta',
-  metrics: metrics
+  namespace: core.getInput('deploy-namespace') || 'default',
+  stage: core.getInput('stage') || 'beta',
+  metrics,
+  env
 };

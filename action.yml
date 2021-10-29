@@ -1,0 +1,39 @@
+name: 'Your name here'
+description: 'Provide a description here'
+author: 'Your name or organization here'
+inputs:
+  import-env-names:
+    required: true
+    description: 'envs need to pass to container'
+    default: '["STAGE"]'
+  app:
+    required: true
+    description: 'app name'
+    default: 'matrixworld'
+  service:
+    required: true
+    description: 'service name'
+    default: 'account'
+  port:
+    required: true
+    description: 'http port'
+    default: '8000'
+  version:
+    required: true
+    description: 'app version'
+    default: 'v1'
+  image-name:
+    required: true
+    description: 'image name'
+    default: 'image'
+  image-tag:
+    required: true
+    description: 'image tag'
+    default: 'latest'
+  deploy-namespace:
+    required: true
+    description: 'namespace'
+    default: 'default'
+runs:
+  using: 'node12'
+  main: 'main.js'

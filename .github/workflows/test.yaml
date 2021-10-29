@@ -5,37 +5,40 @@ name: Node.js TEST
 
 on:
   push:
-    branches: [ main ]
+    branches: [feat/refactor]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x]
+        node-version: [12.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: |
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: |
           npm i
-          npm run test
-      env: 
-        STAGE: beta
-        IMPORT_ENV_NAMES: STAGE
-        APP: matrixworld
-        SERVICE: account
-        PORT: '8000'
-        VERSION: v1
-        IMAGE_NAME: image
-        IMAGE_TAG: latest
-        DEPLOY_NAMESPACE: default
+          tsc
+      - uses: ./
+        with:
+          import-env-names: STAGE
+          app: matrixworld
+          service: account
+          port: '8000'
+          version: v1
+          image-name: image
+          image-tag: latest
+          deploy-namespace: default
+        env:
+          STAGE: beta
+      - run: |
+          cat dist/account.k8s.yaml
