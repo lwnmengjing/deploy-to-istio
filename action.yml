@@ -35,11 +35,17 @@ inputs:
     description: 'namespace'
     default: 'default'
 runs:
-  using: "composite"
-  steps:
-    - uses: actions/setup-node@v2
-      run: 'yarn && tsc'
-    - uses: canastro/copy-file-action@master
-      with:
-        source: dist
-        target: ${{ github.workspace }}/
+  using: 'node12'
+  pre: 'setup.js'
+  main: 'main.js'
+#  using: "composite"
+#  steps:
+#    - uses: actions/setup-node@v2
+#    - run: yarn && tsc
+#      shell: bash
+#    - run: node main.js
+#      shell: bash
+#    - uses: canastro/copy-file-action@master
+#      with:
+#        source: dist
+#        target: ${{ github.workspace }}/
