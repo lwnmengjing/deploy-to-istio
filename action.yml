@@ -45,6 +45,15 @@ runs:
       shell: bash
     - run: node main.js
       shell: bash
+      with:
+        import-env-names: ${{ inputs.import-env-names }}
+        app: ${{ inputs.app }}
+        service: ${{ inputs.service }}
+        port: ${{ inputs.port }}
+        version: ${{ inputs.version }}
+        image-name: ${{ inputs.image-name }}
+        image-tag: ${{ inputs.image-tag }}
+        deploy-namespace: ${{ inputs.deploy-namespace }}
     - uses: canastro/copy-file-action@master
       with:
         source: dist
